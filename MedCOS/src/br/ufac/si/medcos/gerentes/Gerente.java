@@ -2,7 +2,7 @@ package br.ufac.si.medcos.gerentes;
 
 import javax.persistence.*;
 
-public abstract class Gerente
+public class Gerente
 {
     protected EntityManagerFactory emf;
     protected EntityManager em;

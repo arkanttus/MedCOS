@@ -25,27 +25,25 @@ public class Paciente
     private String cpf;
     @Column(nullable=false, length=10)
     private Date dataNascimento;
-    @Column(nullable=false, length=20)
+    @Column(nullable=true, length=20)
     private String estadoCivil;
-    @Column(nullable=false, length=12)
+    @Column(nullable=true, length=12)
     private String fone;
-    @Column(nullable=false, length=20)
+    @Column(nullable=true, length=20)
     private String email;
-    @Column(nullable=false, length=25)
+    @Column(nullable=true, length=25)
     private String profissao;
-    @Column(nullable=false, length=30)
+    @Column(nullable=true, length=30)
     private String obs;
     
     @ManyToOne()
     @JoinColumn(name="endereco", nullable=false)
     private Endereco endereco;
     
-    @OneToMany(cascade=CascadeType.ALL, orphanRemoval=true)
-    @JoinColumn(name="consulta")
+    @OneToMany(mappedBy="paciente")
     private ArrayList<Consulta> consultas;
     
-    @OneToMany(cascade=CascadeType.ALL, orphanRemoval=true)
-    @JoinColumn(name="anamnese")
+    @OneToMany(mappedBy="paciente")
     private ArrayList<Anamnese> anamneses;
 
     public Integer getId()

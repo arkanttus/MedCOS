@@ -19,10 +19,6 @@ public class Pergunta
     private String descricao;
     @Column(nullable=false, length=5)
     private Integer tipo;
-    
-    @ManyToOne(cascade=CascadeType.ALL)
-    @JoinColumn(name="molde", nullable=false)
-    private Molde molde;
 
     public Integer getId()
     {
@@ -53,15 +49,4 @@ public class Pergunta
     {
 	this.tipo = tipo;
     }
-
-    public Molde getMolde()
-    {
-	return molde;
-    }
-
-    public void setMolde(Molde molde)
-    {
-	this.molde = molde;
-    }
-
 }

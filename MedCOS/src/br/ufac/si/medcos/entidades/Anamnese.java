@@ -21,19 +21,20 @@ public class Anamnese
     @Column(nullable=false, length=19)
     private Date data;
     
-    @ManyToOne(cascade=CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name="paciente", nullable=false)
     private Paciente paciente;
     
-    @ManyToOne(cascade=CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name="molde", nullable=false)
     private Molde molde;
     
-    @OneToMany(cascade=CascadeType.ALL, orphanRemoval=true)
-    @JoinColumn(name="resposta", nullable=false)
+    @OneToMany(mappedBy="anamnese", orphanRemoval=true)
     private ArrayList<Resposta> respostas;
     
-    @ManyToMany(cascade=CascadeType.ALL)
+    @ManyToMany()
+    @JoinTable(name="anmneses_responsaveis", joinColumns=@JoinColumn(name="anamnese"), 
+    inverseJoinColumns=@JoinColumn(name="funcionario"))
     private ArrayList<Funcionario> responsaveis;
 
     public Integer getId()

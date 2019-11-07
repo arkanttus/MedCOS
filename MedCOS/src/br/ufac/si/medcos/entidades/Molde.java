@@ -26,9 +26,13 @@ public class Molde
     private Date criacao;
     
     @ManyToMany(cascade=CascadeType.ALL)
+    @JoinTable(name="moldes_perguntas", joinColumns=@JoinColumn(name="molde"), 
+    inverseJoinColumns=@JoinColumn(name="pergunta"))
     private ArrayList<Pergunta> perguntas;
     
     @ManyToMany(cascade=CascadeType.ALL)
+    @JoinTable(name="moldes_responsaveis", joinColumns=@JoinColumn(name="molde"), 
+    inverseJoinColumns=@JoinColumn(name="funcionario"))
     private ArrayList<Funcionario> responsaveis;
     
     public Integer getId()

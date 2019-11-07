@@ -26,19 +26,20 @@ public class Consulta
     @Column(nullable=false, length=20)
     private String status;
     
-    @ManyToOne(cascade=CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name="paciente", nullable=false)
     private Paciente paciente;
     
-    @ManyToOne(cascade=CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name="medico", nullable=false)
     private Medico medico;
 
-    @OneToMany(cascade=CascadeType.ALL, orphanRemoval=true)
-    @JoinColumn(name="procedimento", nullable=true)
+    @OneToMany(mappedBy="consulta", orphanRemoval=true)
     private ArrayList<Procedimento> procedimentos;
     
-    @ManyToMany(cascade=CascadeType.ALL)
+    @ManyToMany()
+    @JoinTable(name="consultas_responsaveis", joinColumns=@JoinColumn(name="consulta"), 
+    inverseJoinColumns=@JoinColumn(name="funcionario"))
     private ArrayList<Funcionario> responsaveis;
 
     public Integer getId()
