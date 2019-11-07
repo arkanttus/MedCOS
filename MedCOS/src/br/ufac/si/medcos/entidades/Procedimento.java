@@ -24,57 +24,68 @@ public class Procedimento
     @Column(nullable=false, length=10)
     private String tipo;
     
-    @ManyToOne(cascade=CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name="consulta", nullable=false)
     private Consulta consulta;
+    
+    public Procedimento() {}
 
-    public Integer getId()
-    {
-	return id;
-    }
+	public Procedimento(String nome, String descricao, String tipo, Consulta consulta)
+	{
+		super();
+		this.nome = nome;
+		this.descricao = descricao;
+		this.tipo = tipo;
+		this.consulta = consulta;
+	}
 
-    public void setId(Integer id)
-    {
-	this.id = id;
-    }
+	public Integer getId()
+	{
+		return id;
+	}
 
-    public String getNome()
-    {
-	return nome;
-    }
+	public void setId(Integer id)
+	{
+		this.id = id;
+	}
 
-    public void setNome(String nome)
-    {
-	this.nome = nome;
-    }
+	public String getNome()
+	{
+		return nome;
+	}
 
-    public String getDescricao()
-    {
-	return descricao;
-    }
+	public void setNome(String nome)
+	{
+		this.nome = nome;
+	}
 
-    public void setDescricao(String descricao)
-    {
-	this.descricao = descricao;
-    }
+	public String getDescricao()
+	{
+		return descricao;
+	}
 
-    public String getTipo()
-    {
-	return tipo;
-    }
+	public void setDescricao(String descricao)
+	{
+		this.descricao = descricao;
+	}
 
-    public void setTipo(String tipo)
-    {
-	this.tipo = tipo;
-    }
+	public String getTipo()
+	{
+		return tipo;
+	}
 
-    public Consulta getConsulta()
-    {
-	return consulta;
-    }
+	public void setTipo(String tipo)
+	{
+		this.tipo = tipo;
+	}
 
-    public void setConsulta(Consulta consulta)
-    {
-	this.consulta = consulta;
-    }
+	public Consulta getConsulta()
+	{
+		return consulta;
+	}
+
+	public void setConsulta(Consulta consulta)
+	{
+		this.consulta = consulta;
+	}
 }

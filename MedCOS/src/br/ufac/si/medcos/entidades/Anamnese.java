@@ -1,9 +1,12 @@
 package br.ufac.si.medcos.entidades;
 
+import java.util.List;
 import java.util.ArrayList;
 import java.util.Date;
 
 import javax.persistence.*;
+
+import br.ufac.si.medcos.entidades.Funcionario;
 
 @Entity
 @Table(name="anamneses")
@@ -15,7 +18,7 @@ import javax.persistence.*;
 })
 public class Anamnese
 {
-    @Id
+	@Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer id;
     @Column(nullable=false, length=19)
@@ -29,71 +32,103 @@ public class Anamnese
     @JoinColumn(name="molde", nullable=false)
     private Molde molde;
     
-    @OneToMany(mappedBy="anamnese", orphanRemoval=true)
-    private ArrayList<Resposta> respostas;
+    @OneToMany(mappedBy="anamnese", cascade=CascadeType.REMOVE, orphanRemoval=true)
+    private List<Resposta> respostas;
     
-    @ManyToMany()
+    @ManyToMany(cascade=CascadeType.REMOVE)
     @JoinTable(name="anmneses_responsaveis", joinColumns=@JoinColumn(name="anamnese"), 
     inverseJoinColumns=@JoinColumn(name="funcionario"))
-    private ArrayList<Funcionario> responsaveis;
+    private List<Funcionario> responsaveis;
 
-    public Integer getId()
-    {
-	return id;
-    }
+    public Anamnese() {}
+	
+    public Anamnese(Date data, Paciente paciente, Molde molde)
+	{
+		super();
+		this.data = data;
+		this.paciente = paciente;
+		this.molde = molde;
+		this.respostas = new ArrayList<Resposta>();
+		this.responsaveis = new ArrayList<Funcionario>();
+	}
+    
+	public Integer getId()
+	{
+		return id;
+	}
 
-    public void setId(Integer id)
-    {
-	this.id = id;
-    }
+	public void setId(Integer id)
+	{
+		this.id = id;
+	}
 
-    public Date getData()
-    {
-	return data;
-    }
+	public Date getData()
+	{
+		return data;
+	}
 
-    public void setData(Date data)
-    {
-	this.data = data;
-    }
+	public void setData(Date data)
+	{
+		this.data = data;
+	}
 
-    public Paciente getPaciente()
-    {
-	return paciente;
-    }
+	public Paciente getPaciente()
+	{
+		return paciente;
+	}
 
-    public void setPaciente(Paciente paciente)
-    {
-	this.paciente = paciente;
-    }
+	public void setPaciente(Paciente paciente)
+	{
+		this.paciente = paciente;
+	}
 
-    public Molde getMolde()
-    {
-	return molde;
-    }
+	public Molde getMolde()
+	{
+		return molde;
+	}
 
-    public void setMolde(Molde molde)
-    {
-	this.molde = molde;
-    }
+	public void setMolde(Molde molde)
+	{
+		this.molde = molde;
+	}
 
-    public ArrayList<Resposta> getRespostas()
-    {
-	return respostas;
-    }
+	public List<Resposta> getRespostas()
+	{
+		return respostas;
+	}
+	
+	public void adicionarResposta(Resposta r)
+	{
+		this.respostas.add(r);
+	}
+	
+	public void removerResposta(Resposta r)
+	{
+		this.respostas.remove(r);
+	}
 
-    public void setRespostas(ArrayList<Resposta> respostas)
-    {
-	this.respostas = respostas;
-    }
+	public void setRespostas(List<Resposta> respostas)
+	{
+		this.respostas = respostas;
+	}
 
-    public ArrayList<Funcionario> getResponsaveis()
-    {
-	return responsaveis;
-    }
+	public List<Funcionario> getResponsaveis()
+	{
+		return responsaveis;
+	}
+	
+	public void adicionarResponsavel(Funcionario f)
+	{
+		this.responsaveis.add(f);
+	}
+	
+	public void removerResponsavel(Funcionario f)
+	{
+		this.responsaveis.remove(f);
+	}
 
-    public void setResponsaveis(ArrayList<Funcionario> responsaveis)
-    {
-	this.responsaveis = responsaveis;
-    }
+	public void setResponsaveis(List<Funcionario> responsaveis)
+	{
+		this.responsaveis = responsaveis;
+	}
 }

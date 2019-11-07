@@ -7,8 +7,8 @@ import javax.persistence.*;
 @NamedQueries({
 	@NamedQuery(name="Pergunta.todos", 
 		query="SELECT a FROM Pergunta a"), 
-	@NamedQuery(name="Pergunta.todosPorNome", 
-		query="SELECT a FROM Pergunta a ORDER BY a.nome")
+	@NamedQuery(name="Pergunta.todosPorDescricao", 
+		query="SELECT a FROM Pergunta a ORDER BY a.descricao")
 })
 public class Pergunta
 {
@@ -19,34 +19,43 @@ public class Pergunta
     private String descricao;
     @Column(nullable=false, length=5)
     private Integer tipo;
+    
+    public Pergunta() {}
 
-    public Integer getId()
-    {
-	return id;
-    }
+	public Pergunta(String descricao, Integer tipo)
+	{
+		super();
+		this.descricao = descricao;
+		this.tipo = tipo;
+	}
 
-    public void setId(Integer id)
-    {
-	this.id = id;
-    }
+	public Integer getId()
+	{
+		return id;
+	}
 
-    public String getDescricao()
-    {
-	return descricao;
-    }
+	public void setId(Integer id)
+	{
+		this.id = id;
+	}
 
-    public void setDescricao(String descricao)
-    {
-	this.descricao = descricao;
-    }
+	public String getDescricao()
+	{
+		return descricao;
+	}
 
-    public Integer getTipo()
-    {
-	return tipo;
-    }
+	public void setDescricao(String descricao)
+	{
+		this.descricao = descricao;
+	}
 
-    public void setTipo(Integer tipo)
-    {
-	this.tipo = tipo;
-    }
+	public Integer getTipo()
+	{
+		return tipo;
+	}
+
+	public void setTipo(Integer tipo)
+	{
+		this.tipo = tipo;
+	}
 }

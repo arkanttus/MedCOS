@@ -1,6 +1,6 @@
 package br.ufac.si.medcos.entidades;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Date;
 import javax.persistence.*;
 
@@ -40,129 +40,148 @@ public class Paciente
     @JoinColumn(name="endereco", nullable=false)
     private Endereco endereco;
     
-    @OneToMany(mappedBy="paciente")
-    private ArrayList<Consulta> consultas;
+    @OneToMany(cascade=CascadeType.REMOVE, mappedBy="paciente")
+    private List<Consulta> consultas;
     
-    @OneToMany(mappedBy="paciente")
-    private ArrayList<Anamnese> anamneses;
+    @OneToMany(cascade=CascadeType.REMOVE, mappedBy="paciente")
+    private List<Anamnese> anamneses;
+    
+    public Paciente() {}
 
-    public Integer getId()
-    {
-	return id;
-    }
+	public Paciente(String nome, String cpf, Date dataNascimento, String estadoCivil, String fone, String email,
+			String profissao, String obs, Endereco endereco, List<Consulta> consultas, List<Anamnese> anamneses)
+	{
+		super();
+		this.nome = nome;
+		this.cpf = cpf;
+		this.dataNascimento = dataNascimento;
+		this.estadoCivil = estadoCivil;
+		this.fone = fone;
+		this.email = email;
+		this.profissao = profissao;
+		this.obs = obs;
+		this.endereco = endereco;
+		this.consultas = consultas;
+		this.anamneses = anamneses;
+	}
 
-    public void setId(Integer id)
-    {
-	this.id = id;
-    }
+	public Integer getId()
+	{
+		return id;
+	}
 
-    public String getNome()
-    {
-	return nome;
-    }
+	public void setId(Integer id)
+	{
+		this.id = id;
+	}
 
-    public void setNome(String nome)
-    {
-	this.nome = nome;
-    }
+	public String getNome()
+	{
+		return nome;
+	}
 
-    public String getCpf()
-    {
-	return cpf;
-    }
+	public void setNome(String nome)
+	{
+		this.nome = nome;
+	}
 
-    public void setCpf(String cpf)
-    {
-	this.cpf = cpf;
-    }
+	public String getCpf()
+	{
+		return cpf;
+	}
 
-    public Date getDataNascimento()
-    {
-	return dataNascimento;
-    }
+	public void setCpf(String cpf)
+	{
+		this.cpf = cpf;
+	}
 
-    public void setDataNascimento(Date dataNascimento)
-    {
-	this.dataNascimento = dataNascimento;
-    }
+	public Date getDataNascimento()
+	{
+		return dataNascimento;
+	}
 
-    public String getEstadoCivil()
-    {
-	return estadoCivil;
-    }
+	public void setDataNascimento(Date dataNascimento)
+	{
+		this.dataNascimento = dataNascimento;
+	}
 
-    public void setEstadoCivil(String estadoCivil)
-    {
-	this.estadoCivil = estadoCivil;
-    }
+	public String getEstadoCivil()
+	{
+		return estadoCivil;
+	}
 
-    public String getFone()
-    {
-	return fone;
-    }
+	public void setEstadoCivil(String estadoCivil)
+	{
+		this.estadoCivil = estadoCivil;
+	}
 
-    public void setFone(String fone)
-    {
-	this.fone = fone;
-    }
+	public String getFone()
+	{
+		return fone;
+	}
 
-    public String getEmail()
-    {
-	return email;
-    }
+	public void setFone(String fone)
+	{
+		this.fone = fone;
+	}
 
-    public void setEmail(String email)
-    {
-	this.email = email;
-    }
+	public String getEmail()
+	{
+		return email;
+	}
 
-    public String getProfissao()
-    {
-	return profissao;
-    }
+	public void setEmail(String email)
+	{
+		this.email = email;
+	}
 
-    public void setProfissao(String profissao)
-    {
-	this.profissao = profissao;
-    }
+	public String getProfissao()
+	{
+		return profissao;
+	}
 
-    public String getObs()
-    {
-	return obs;
-    }
+	public void setProfissao(String profissao)
+	{
+		this.profissao = profissao;
+	}
 
-    public void setObs(String obs)
-    {
-	this.obs = obs;
-    }
+	public String getObs()
+	{
+		return obs;
+	}
 
-    public Endereco getEndereco()
-    {
-	return endereco;
-    }
+	public void setObs(String obs)
+	{
+		this.obs = obs;
+	}
 
-    public void setEndereco(Endereco endereco)
-    {
-	this.endereco = endereco;
-    }
+	public Endereco getEndereco()
+	{
+		return endereco;
+	}
 
-    public ArrayList<Consulta> getConsultas()
-    {
-	return consultas;
-    }
+	public void setEndereco(Endereco endereco)
+	{
+		this.endereco = endereco;
+	}
 
-    public void setConsultas(ArrayList<Consulta> consultas)
-    {
-	this.consultas = consultas;
-    }
+	public List<Consulta> getConsultas()
+	{
+		return consultas;
+	}
 
-    public ArrayList<Anamnese> getAnamneses()
-    {
-	return anamneses;
-    }
+	public void setConsultas(List<Consulta> consultas)
+	{
+		this.consultas = consultas;
+	}
 
-    public void setAnamneses(ArrayList<Anamnese> anamneses)
-    {
-	this.anamneses = anamneses;
-    }
+	public List<Anamnese> getAnamneses()
+	{
+		return anamneses;
+	}
+
+	public void setAnamneses(List<Anamnese> anamneses)
+	{
+		this.anamneses = anamneses;
+	}
 }

@@ -1,8 +1,11 @@
 package br.ufac.si.medcos.entidades;
 
+import java.util.List;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.persistence.*;
+
+import br.ufac.si.medcos.entidades.Funcionario;
 
 @Entity
 @Table(name="consultas")
@@ -26,7 +29,7 @@ public class Consulta
     @Column(nullable=false, length=20)
     private String status;
     
-    @ManyToOne()
+	@ManyToOne()
     @JoinColumn(name="paciente", nullable=false)
     private Paciente paciente;
     
@@ -34,101 +37,136 @@ public class Consulta
     @JoinColumn(name="medico", nullable=false)
     private Medico medico;
 
-    @OneToMany(mappedBy="consulta", orphanRemoval=true)
-    private ArrayList<Procedimento> procedimentos;
+    @OneToMany(mappedBy="consulta", cascade=CascadeType.ALL, orphanRemoval=true)
+    private List<Procedimento> procedimentos;
     
     @ManyToMany()
     @JoinTable(name="consultas_responsaveis", joinColumns=@JoinColumn(name="consulta"), 
     inverseJoinColumns=@JoinColumn(name="funcionario"))
-    private ArrayList<Funcionario> responsaveis;
+    private List<Funcionario> responsaveis;
+    
+    public Consulta() {}
+    
+    public Consulta(String sintomas, Date dataHora, String obs, String status, Paciente paciente, Medico medico)
+	{
+		super();
+		this.sintomas = sintomas;
+		this.dataHora = dataHora;
+		this.obs = obs;
+		this.status = status;
+		this.paciente = paciente;
+		this.medico = medico;
+		this.procedimentos = new ArrayList<Procedimento>();
+		this.responsaveis = new ArrayList<Funcionario>();
+	}
 
-    public Integer getId()
-    {
-	return id;
-    }
+	public Integer getId()
+	{
+		return id;
+	}
 
-    public void setId(Integer id)
-    {
-	this.id = id;
-    }
+	public void setId(Integer id)
+	{
+		this.id = id;
+	}
 
-    public String getSintomas()
-    {
-	return sintomas;
-    }
+	public String getSintomas()
+	{
+		return sintomas;
+	}
 
-    public void setSintomas(String sintomas)
-    {
-	this.sintomas = sintomas;
-    }
+	public void setSintomas(String sintomas)
+	{
+		this.sintomas = sintomas;
+	}
 
-    public Date getDataHora()
-    {
-	return dataHora;
-    }
+	public Date getDataHora()
+	{
+		return dataHora;
+	}
 
-    public void setDataHora(Date dataHora)
-    {
-	this.dataHora = dataHora;
-    }
+	public void setDataHora(Date dataHora)
+	{
+		this.dataHora = dataHora;
+	}
 
-    public String getObs()
-    {
-	return obs;
-    }
+	public String getObs()
+	{
+		return obs;
+	}
 
-    public void setObs(String obs)
-    {
-	this.obs = obs;
-    }
+	public void setObs(String obs)
+	{
+		this.obs = obs;
+	}
 
-    public String getStatus()
-    {
-	return status;
-    }
+	public String getStatus()
+	{
+		return status;
+	}
 
-    public void setStatus(String status)
-    {
-	this.status = status;
-    }
+	public void setStatus(String status)
+	{
+		this.status = status;
+	}
 
-    public Paciente getPaciente()
-    {
-	return paciente;
-    }
+	public Paciente getPaciente()
+	{
+		return paciente;
+	}
 
-    public void setPaciente(Paciente paciente)
-    {
-	this.paciente = paciente;
-    }
+	public void setPaciente(Paciente paciente)
+	{
+		this.paciente = paciente;
+	}
 
-    public ArrayList<Procedimento> getProcedimentos()
-    {
-	return procedimentos;
-    }
+	public List<Procedimento> getProcedimentos()
+	{
+		return procedimentos;
+	}
+	
+	public void adicionarProcedimento(Procedimento p)
+	{
+		this.procedimentos.add(p);
+	}
+	
+	public void removerProcedimento(Procedimento p)
+	{
+		this.procedimentos.remove(p);
+	}
 
-    public void setProcedimentos(ArrayList<Procedimento> procedimentos)
-    {
-	this.procedimentos = procedimentos;
-    }
+	public void setProcedimentos(List<Procedimento> procedimentos)
+	{
+		this.procedimentos = procedimentos;
+	}
 
-    public ArrayList<Funcionario> getResponsaveis()
-    {
-	return responsaveis;
-    }
+	public List<Funcionario> getResponsaveis()
+	{
+		return responsaveis;
+	}
 
-    public void setResponsaveis(ArrayList<Funcionario> responsaveis)
-    {
-	this.responsaveis = responsaveis;
-    }
+	public void setResponsaveis(List<Funcionario> responsaveis)
+	{
+		this.responsaveis = responsaveis;
+	}
+	
+	public void adicionarResponsavel(Funcionario f)
+	{
+		this.responsaveis.add(f);
+	}
+	
+	public void removerResponsavel(Funcionario f)
+	{
+		this.responsaveis.remove(f);
+	}
 
-    public Medico getMedico()
-    {
-	return medico;
-    }
+	public Medico getMedico()
+	{
+		return medico;
+	}
 
-    public void setMedico(Medico medico)
-    {
-	this.medico = medico;
-    }
+	public void setMedico(Medico medico)
+	{
+		this.medico = medico;
+	}
 }

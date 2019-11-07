@@ -1,13 +1,6 @@
 package br.ufac.si.medcos.entidades;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name="enderecos")
@@ -33,73 +26,86 @@ public class Endereco
     @Column(nullable=false)
     private Integer numero;
 
-    public Integer getId()
-    {
-	return id;
-    }
+    public Endereco() {}
+    
+	public Endereco(String logradouro, String bairro, String cidade, String estado, String cep, Integer numero)
+	{
+		super();
+		this.logradouro = logradouro;
+		this.bairro = bairro;
+		this.cidade = cidade;
+		this.estado = estado;
+		this.cep = cep;
+		this.numero = numero;
+	}
 
-    public void setId(Integer id)
-    {
-	this.id = id;
-    }
+	public Integer getId()
+	{
+		return id;
+	}
 
-    public String getLogradouro()
-    {
-	return logradouro;
-    }
+	public void setId(Integer id)
+	{
+		this.id = id;
+	}
 
-    public void setLogradouro(String logradouro)
-    {
-	this.logradouro = logradouro;
-    }
+	public String getLogradouro()
+	{
+		return logradouro;
+	}
 
-    public String getBairro()
-    {
-	return bairro;
-    }
+	public void setLogradouro(String logradouro)
+	{
+		this.logradouro = logradouro;
+	}
 
-    public void setBairro(String bairro)
-    {
-	this.bairro = bairro;
-    }
+	public String getBairro()
+	{
+		return bairro;
+	}
 
-    public String getCidade()
-    {
-	return cidade;
-    }
+	public void setBairro(String bairro)
+	{
+		this.bairro = bairro;
+	}
 
-    public void setCidade(String cidade)
-    {
-	this.cidade = cidade;
-    }
+	public String getCidade()
+	{
+		return cidade;
+	}
 
-    public String getEstado()
-    {
-	return estado;
-    }
+	public void setCidade(String cidade)
+	{
+		this.cidade = cidade;
+	}
 
-    public void setEstado(String estado)
-    {
-	this.estado = estado;
-    }
+	public String getEstado()
+	{
+		return estado;
+	}
 
-    public String getCep()
-    {
-	return cep;
-    }
+	public void setEstado(String estado)
+	{
+		this.estado = estado;
+	}
 
-    public void setCep(String cep)
-    {
-	this.cep = cep;
-    }
+	public String getCep()
+	{
+		return cep;
+	}
 
-    public Integer getNumero()
-    {
-	return numero;
-    }
+	public void setCep(String cep)
+	{
+		this.cep = cep;
+	}
 
-    public void setNumero(Integer numero)
-    {
-	this.numero = numero;
-    }
+	public Integer getNumero()
+	{
+		return numero;
+	}
+
+	public void setNumero(Integer numero)
+	{
+		this.numero = numero;
+	}
 }

@@ -2,8 +2,12 @@ package br.ufac.si.medcos.entidades;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.*;
+
+import br.ufac.si.medcos.entidades.Funcionario;
+import br.ufac.si.medcos.entidades.Pergunta;
 
 @Entity
 @Table(name="moldes")
@@ -28,60 +32,91 @@ public class Molde
     @ManyToMany(cascade=CascadeType.ALL)
     @JoinTable(name="moldes_perguntas", joinColumns=@JoinColumn(name="molde"), 
     inverseJoinColumns=@JoinColumn(name="pergunta"))
-    private ArrayList<Pergunta> perguntas;
+    private List<Pergunta> perguntas;
     
-    @ManyToMany(cascade=CascadeType.ALL)
+    @ManyToMany()
     @JoinTable(name="moldes_responsaveis", joinColumns=@JoinColumn(name="molde"), 
     inverseJoinColumns=@JoinColumn(name="funcionario"))
-    private ArrayList<Funcionario> responsaveis;
+    private List<Funcionario> responsaveis;
     
-    public Integer getId()
-    {
-	return id;
-    }
+    public Molde() {}
+    
+	public Molde(String descricao, Date criacao)
+	{
+		super();
+		this.descricao = descricao;
+		this.criacao = criacao;
+		this.perguntas = new ArrayList<Pergunta>();
+		this.responsaveis = new ArrayList<Funcionario>();
+	}
 
-    public void setId(Integer id)
-    {
-	this.id = id;
-    }
+	public Integer getId()
+	{
+		return id;
+	}
 
-    public String getDescricao()
-    {
-	return descricao;
-    }
+	public void setId(Integer id)
+	{
+		this.id = id;
+	}
 
-    public void setDescricao(String descricao)
-    {
-	this.descricao = descricao;
-    }
+	public String getDescricao()
+	{
+		return descricao;
+	}
 
-    public Date getCriacao()
-    {
-	return criacao;
-    }
+	public void setDescricao(String descricao)
+	{
+		this.descricao = descricao;
+	}
 
-    public void setCriacao(Date criacao)
-    {
-	this.criacao = criacao;
-    }
+	public Date getCriacao()
+	{
+		return criacao;
+	}
 
-    public ArrayList<Pergunta> getPerguntas()
-    {
-	return perguntas;
-    }
+	public void setCriacao(Date criacao)
+	{
+		this.criacao = criacao;
+	}
 
-    public void setPerguntas(ArrayList<Pergunta> perguntas)
-    {
-	this.perguntas = perguntas;
-    }
+	public List<Pergunta> getPerguntas()
+	{
+		return perguntas;
+	}
+	
+	public void adicionarPergunta(Pergunta p)
+	{
+		this.perguntas.add(p);
+	}
+	
+	public void removerPergunta(Pergunta p)
+	{
+		this.perguntas.remove(p);
+	}
 
-    public ArrayList<Funcionario> getResponsaveis()
-    {
-	return responsaveis;
-    }
+	public void setPerguntas(ArrayList<Pergunta> perguntas)
+	{
+		this.perguntas = perguntas;
+	}
 
-    public void setResponsaveis(ArrayList<Funcionario> responsaveis)
-    {
-	this.responsaveis = responsaveis;
-    }
+	public List<Funcionario> getResponsaveis()
+	{
+		return responsaveis;
+	}
+	
+	public void adicionarResponsavel(Funcionario f)
+	{
+		this.responsaveis.add(f);
+	}
+	
+	public void removerResponsavel(Funcionario f)
+	{
+		this.responsaveis.remove(f);
+	}
+
+	public void setResponsaveis(ArrayList<Funcionario> responsaveis)
+	{
+		this.responsaveis = responsaveis;
+	}
 }

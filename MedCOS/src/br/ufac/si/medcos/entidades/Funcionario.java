@@ -11,92 +11,118 @@ import javax.persistence.*;
 })
 public class Funcionario
 {
-    private Integer id;
-    private String nome;
+	@Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Integer id;
+    @Column(nullable=false, length=70)
+	private String nome;
+    @Column(nullable=false, length=14)
     private String cpf;
+    @Column(nullable=false, length=10)
     private Date dataNascimento;
+    @Column(nullable=true, length=20)
     private String funcao;
+    @Column(nullable=false, length=5)
     private Boolean ativo;
+    @Column(nullable=false)
     private Integer permissao;
+    
+    @ManyToOne()
+    @JoinColumn(name="endereco", nullable=false)
     private Endereco endereco;
+    
+    public Funcionario() {}
 
-    public Integer getId()
-    {
-	return id;
-    }
+	public Funcionario(String nome, String cpf, Date dataNascimento, String funcao, Boolean ativo, Integer permissao,
+			Endereco endereco)
+	{
+		super();
+		this.nome = nome;
+		this.cpf = cpf;
+		this.dataNascimento = dataNascimento;
+		this.funcao = funcao;
+		this.ativo = ativo;
+		this.permissao = permissao;
+		this.endereco = endereco;
+	}
 
-    public void setId(Integer id)
-    {
-	this.id = id;
-    }
+	public Integer getId()
+	{
+		return id;
+	}
 
-    public String getNome()
-    {
-	return nome;
-    }
+	public void setId(Integer id)
+	{
+		this.id = id;
+	}
 
-    public void setNome(String nome)
-    {
-	this.nome = nome;
-    }
+	public String getNome()
+	{
+		return nome;
+	}
 
-    public String getCpf()
-    {
-	return cpf;
-    }
+	public void setNome(String nome)
+	{
+		this.nome = nome;
+	}
 
-    public void setCpf(String cpf)
-    {
-	this.cpf = cpf;
-    }
+	public String getCpf()
+	{
+		return cpf;
+	}
 
-    public Date getDataNascimento()
-    {
-	return dataNascimento;
-    }
+	public void setCpf(String cpf)
+	{
+		this.cpf = cpf;
+	}
 
-    public void setDataNascimento(Date dataNascimento)
-    {
-	this.dataNascimento = dataNascimento;
-    }
+	public Date getDataNascimento()
+	{
+		return dataNascimento;
+	}
 
-    public String getFuncao()
-    {
-	return funcao;
-    }
+	public void setDataNascimento(Date dataNascimento)
+	{
+		this.dataNascimento = dataNascimento;
+	}
 
-    public void setFuncao(String funcao)
-    {
-	this.funcao = funcao;
-    }
+	public String getFuncao()
+	{
+		return funcao;
+	}
 
-    public Boolean getAtivo()
-    {
-	return ativo;
-    }
+	public void setFuncao(String funcao)
+	{
+		this.funcao = funcao;
+	}
 
-    public void setAtivo(Boolean ativo)
-    {
-	this.ativo = ativo;
-    }
+	public Boolean getAtivo()
+	{
+		return ativo;
+	}
 
-    public Integer getPermissao()
-    {
-	return permissao;
-    }
+	public void setAtivo(Boolean ativo)
+	{
+		this.ativo = ativo;
+	}
 
-    public void setPermissao(Integer permissao)
-    {
-	this.permissao = permissao;
-    }
+	public Integer getPermissao()
+	{
+		return permissao;
+	}
 
-    public Endereco getEndereco()
-    {
-	return endereco;
-    }
+	public void setPermissao(Integer permissao)
+	{
+		this.permissao = permissao;
+	}
 
-    public void setEndereco(Endereco endereco)
-    {
-	this.endereco = endereco;
-    }
+	public Endereco getEndereco()
+	{
+		return endereco;
+	}
+
+	public void setEndereco(Endereco endereco)
+	{
+		this.endereco = endereco;
+	}
 }
