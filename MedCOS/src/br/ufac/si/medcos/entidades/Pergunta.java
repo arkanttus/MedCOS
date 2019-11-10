@@ -22,40 +22,40 @@ public class Pergunta
     
     public Pergunta() {}
 
-	public Pergunta(String descricao, Integer tipo)
-	{
-		super();
-		this.descricao = descricao;
-		this.tipo = tipo;
-	}
+    public Pergunta(String descricao, Integer tipo)
+    {
+	super();
+	this.descricao = descricao;
+	this.tipo = tipo;
+    }
 
-	public Integer getId()
-	{
-		return id;
-	}
+    public Integer getId()
+    {
+	return id;
+    }
 
-	public void setId(Integer id)
-	{
-		this.id = id;
-	}
+    public void setId(Integer id)
+    {
+	this.id = id;
+    }
 
-	public String getDescricao()
-	{
-		return descricao;
-	}
+    public String getDescricao()
+    {
+	return descricao;
+    }
 
-	public void setDescricao(String descricao)
-	{
-		this.descricao = descricao;
-	}
+    public void setDescricao(String descricao)
+    {
+	this.descricao = descricao;
+    }
 
-	public Integer getTipo()
-	{
-		return tipo;
-	}
+    public Integer getTipo()
+    {
+	return tipo;
+    }
 
-	public void setTipo(Integer tipo)
-	{
-		this.tipo = tipo;
-	}
+    public void setTipo(Integer tipo)
+    {
+	this.tipo = tipo;
+    }
 }

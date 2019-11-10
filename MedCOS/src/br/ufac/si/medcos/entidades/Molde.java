@@ -41,82 +41,82 @@ public class Molde
     
     public Molde() {}
     
-	public Molde(String descricao, Date criacao)
-	{
-		super();
-		this.descricao = descricao;
-		this.criacao = criacao;
-		this.perguntas = new ArrayList<Pergunta>();
-		this.responsaveis = new ArrayList<Funcionario>();
-	}
+    public Molde(String descricao, Date criacao)
+    {
+	super();
+	this.descricao = descricao;
+	this.criacao = criacao;
+	this.perguntas = new ArrayList<Pergunta>();
+	this.responsaveis = new ArrayList<Funcionario>();
+    }
 
-	public Integer getId()
-	{
-		return id;
-	}
+    public Integer getId()
+    {
+	return id;
+    }
 
-	public void setId(Integer id)
-	{
-		this.id = id;
-	}
+    public void setId(Integer id)
+    {
+	this.id = id;
+    }
 
-	public String getDescricao()
-	{
-		return descricao;
-	}
+    public String getDescricao()
+    {
+	return descricao;
+    }
 
-	public void setDescricao(String descricao)
-	{
-		this.descricao = descricao;
-	}
+    public void setDescricao(String descricao)
+    {
+	this.descricao = descricao;
+    }
 
-	public Date getCriacao()
-	{
-		return criacao;
-	}
+    public Date getCriacao()
+    {
+	return criacao;
+    }
 
-	public void setCriacao(Date criacao)
-	{
-		this.criacao = criacao;
-	}
+    public void setCriacao(Date criacao)
+    {
+	this.criacao = criacao;
+    }
 
-	public List<Pergunta> getPerguntas()
-	{
-		return perguntas;
-	}
-	
-	public void adicionarPergunta(Pergunta p)
-	{
-		this.perguntas.add(p);
-	}
-	
-	public void removerPergunta(Pergunta p)
-	{
-		this.perguntas.remove(p);
-	}
+    public List<Pergunta> getPerguntas()
+    {
+	return perguntas;
+    }
 
-	public void setPerguntas(ArrayList<Pergunta> perguntas)
-	{
-		this.perguntas = perguntas;
-	}
+    public void adicionarPergunta(Pergunta p)
+    {
+	this.perguntas.add(p);
+    }
 
-	public List<Funcionario> getResponsaveis()
-	{
-		return responsaveis;
-	}
-	
-	public void adicionarResponsavel(Funcionario f)
-	{
-		this.responsaveis.add(f);
-	}
-	
-	public void removerResponsavel(Funcionario f)
-	{
-		this.responsaveis.remove(f);
-	}
+    public void removerPergunta(Pergunta p)
+    {
+	this.perguntas.remove(p);
+    }
 
-	public void setResponsaveis(ArrayList<Funcionario> responsaveis)
-	{
-		this.responsaveis = responsaveis;
-	}
+    public void setPerguntas(ArrayList<Pergunta> perguntas)
+    {
+	this.perguntas = perguntas;
+    }
+
+    public List<Funcionario> getResponsaveis()
+    {
+	return responsaveis;
+    }
+
+    public void adicionarResponsavel(Funcionario f)
+    {
+	this.responsaveis.add(f);
+    }
+
+    public void removerResponsavel(Funcionario f)
+    {
+	this.responsaveis.remove(f);
+    }
+
+    public void setResponsaveis(ArrayList<Funcionario> responsaveis)
+    {
+	this.responsaveis = responsaveis;
+    }
 }

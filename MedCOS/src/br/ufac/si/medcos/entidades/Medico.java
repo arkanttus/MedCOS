@@ -33,85 +33,85 @@ public class Medico
     private String especialidade;
 
     public Medico() {}
-    
-	public Medico(String nome, String cpf, Date dataNascimento, Boolean ativo, String crm, String especialidade)
-	{
-		super();
-		this.nome = nome;
-		this.cpf = cpf;
-		this.dataNascimento = dataNascimento;
-		this.ativo = ativo;
-		this.crm = crm;
-		this.especialidade = especialidade;
-	}
 
-	public Integer getId()
-	{
-		return id;
-	}
+    public Medico(String nome, String cpf, Date dataNascimento, Boolean ativo, String crm, String especialidade)
+    {
+	super();
+	this.nome = nome;
+	this.cpf = cpf;
+	this.dataNascimento = dataNascimento;
+	this.ativo = ativo;
+	this.crm = crm;
+	this.especialidade = especialidade;
+    }
 
-	public void setId(Integer id)
-	{
-		this.id = id;
-	}
+    public Integer getId()
+    {
+	return id;
+    }
 
-	public String getNome()
-	{
-		return nome;
-	}
+    public void setId(Integer id)
+    {
+	this.id = id;
+    }
 
-	public void setNome(String nome)
-	{
-		this.nome = nome;
-	}
+    public String getNome()
+    {
+	return nome;
+    }
 
-	public String getCpf()
-	{
-		return cpf;
-	}
+    public void setNome(String nome)
+    {
+	this.nome = nome;
+    }
 
-	public void setCpf(String cpf)
-	{
-		this.cpf = cpf;
-	}
+    public String getCpf()
+    {
+	return cpf;
+    }
 
-	public Date getDataNascimento()
-	{
-		return dataNascimento;
-	}
+    public void setCpf(String cpf)
+    {
+	this.cpf = cpf;
+    }
 
-	public void setDataNascimento(Date dataNascimento)
-	{
-		this.dataNascimento = dataNascimento;
-	}
+    public Date getDataNascimento()
+    {
+	return dataNascimento;
+    }
 
-	public Boolean getAtivo()
-	{
-		return ativo;
-	}
+    public void setDataNascimento(Date dataNascimento)
+    {
+	this.dataNascimento = dataNascimento;
+    }
 
-	public void setAtivo(Boolean ativo)
-	{
-		this.ativo = ativo;
-	}
+    public Boolean getAtivo()
+    {
+	return ativo;
+    }
 
-	public String getCrm()
-	{
-		return crm;
-	}
+    public void setAtivo(Boolean ativo)
+    {
+	this.ativo = ativo;
+    }
 
-	public void setCrm(String crm)
-	{
-		this.crm = crm;
-	}
+    public String getCrm()
+    {
+	return crm;
+    }
 
-	public String getEspecialidade()
-	{
-		return especialidade;
-	}
+    public void setCrm(String crm)
+    {
+	this.crm = crm;
+    }
 
-	public void setEspecialidade(String especialidade)
-	{
-		this.especialidade = especialidade;
-	}
+    public String getEspecialidade()
+    {
+	return especialidade;
+    }
+
+    public void setEspecialidade(String especialidade)
+    {
+	this.especialidade = especialidade;
+    }
 }

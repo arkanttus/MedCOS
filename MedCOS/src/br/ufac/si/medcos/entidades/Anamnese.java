@@ -43,92 +43,92 @@ public class Anamnese
     public Anamnese() {}
 	
     public Anamnese(Date data, Paciente paciente, Molde molde)
-	{
-		super();
-		this.data = data;
-		this.paciente = paciente;
-		this.molde = molde;
-		this.respostas = new ArrayList<Resposta>();
-		this.responsaveis = new ArrayList<Funcionario>();
-	}
-    
-	public Integer getId()
-	{
-		return id;
-	}
+    {
+	super();
+	this.data = data;
+	this.paciente = paciente;
+	this.molde = molde;
+	this.respostas = new ArrayList<Resposta>();
+	this.responsaveis = new ArrayList<Funcionario>();
+    }
 
-	public void setId(Integer id)
-	{
-		this.id = id;
-	}
+    public Integer getId()
+    {
+	return id;
+    }
 
-	public Date getData()
-	{
-		return data;
-	}
+    public void setId(Integer id)
+    {
+	this.id = id;
+    }
 
-	public void setData(Date data)
-	{
-		this.data = data;
-	}
+    public Date getData()
+    {
+	return data;
+    }
 
-	public Paciente getPaciente()
-	{
-		return paciente;
-	}
+    public void setData(Date data)
+    {
+	this.data = data;
+    }
 
-	public void setPaciente(Paciente paciente)
-	{
-		this.paciente = paciente;
-	}
+    public Paciente getPaciente()
+    {
+	return paciente;
+    }
 
-	public Molde getMolde()
-	{
-		return molde;
-	}
+    public void setPaciente(Paciente paciente)
+    {
+	this.paciente = paciente;
+    }
 
-	public void setMolde(Molde molde)
-	{
-		this.molde = molde;
-	}
+    public Molde getMolde()
+    {
+	return molde;
+    }
 
-	public List<Resposta> getRespostas()
-	{
-		return respostas;
-	}
-	
-	public void adicionarResposta(Resposta r)
-	{
-		this.respostas.add(r);
-	}
-	
-	public void removerResposta(Resposta r)
-	{
-		this.respostas.remove(r);
-	}
+    public void setMolde(Molde molde)
+    {
+	this.molde = molde;
+    }
 
-	public void setRespostas(List<Resposta> respostas)
-	{
-		this.respostas = respostas;
-	}
+    public List<Resposta> getRespostas()
+    {
+	return respostas;
+    }
 
-	public List<Funcionario> getResponsaveis()
-	{
-		return responsaveis;
-	}
-	
-	public void adicionarResponsavel(Funcionario f)
-	{
-		this.responsaveis.add(f);
-	}
-	
-	public void removerResponsavel(Funcionario f)
-	{
-		this.responsaveis.remove(f);
-	}
+    public void adicionarResposta(Resposta r)
+    {
+	this.respostas.add(r);
+    }
 
-	public void setResponsaveis(List<Funcionario> responsaveis)
-	{
-		this.responsaveis = responsaveis;
-	}
+    public void removerResposta(Resposta r)
+    {
+	this.respostas.remove(r);
+    }
+
+    public void setRespostas(List<Resposta> respostas)
+    {
+	this.respostas = respostas;
+    }
+
+    public List<Funcionario> getResponsaveis()
+    {
+	return responsaveis;
+    }
+
+    public void adicionarResponsavel(Funcionario f)
+    {
+	this.responsaveis.add(f);
+    }
+
+    public void removerResponsavel(Funcionario f)
+    {
+	this.responsaveis.remove(f);
+    }
+
+    public void setResponsaveis(List<Funcionario> responsaveis)
+    {
+	this.responsaveis = responsaveis;
+    }
 }

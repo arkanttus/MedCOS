@@ -48,125 +48,125 @@ public class Consulta
     public Consulta() {}
     
     public Consulta(String sintomas, Date dataHora, String obs, String status, Paciente paciente, Medico medico)
-	{
-		super();
-		this.sintomas = sintomas;
-		this.dataHora = dataHora;
-		this.obs = obs;
-		this.status = status;
-		this.paciente = paciente;
-		this.medico = medico;
-		this.procedimentos = new ArrayList<Procedimento>();
-		this.responsaveis = new ArrayList<Funcionario>();
-	}
+    {
+	super();
+	this.sintomas = sintomas;
+	this.dataHora = dataHora;
+	this.obs = obs;
+	this.status = status;
+	this.paciente = paciente;
+	this.medico = medico;
+	this.procedimentos = new ArrayList<Procedimento>();
+	this.responsaveis = new ArrayList<Funcionario>();
+    }
 
-	public Integer getId()
-	{
-		return id;
-	}
+    public Integer getId()
+    {
+	return id;
+    }
 
-	public void setId(Integer id)
-	{
-		this.id = id;
-	}
+    public void setId(Integer id)
+    {
+	this.id = id;
+    }
 
-	public String getSintomas()
-	{
-		return sintomas;
-	}
+    public String getSintomas()
+    {
+	return sintomas;
+    }
 
-	public void setSintomas(String sintomas)
-	{
-		this.sintomas = sintomas;
-	}
+    public void setSintomas(String sintomas)
+    {
+	this.sintomas = sintomas;
+    }
 
-	public Date getDataHora()
-	{
-		return dataHora;
-	}
+    public Date getDataHora()
+    {
+	return dataHora;
+    }
 
-	public void setDataHora(Date dataHora)
-	{
-		this.dataHora = dataHora;
-	}
+    public void setDataHora(Date dataHora)
+    {
+	this.dataHora = dataHora;
+    }
 
-	public String getObs()
-	{
-		return obs;
-	}
+    public String getObs()
+    {
+	return obs;
+    }
 
-	public void setObs(String obs)
-	{
-		this.obs = obs;
-	}
+    public void setObs(String obs)
+    {
+	this.obs = obs;
+    }
 
-	public String getStatus()
-	{
-		return status;
-	}
+    public String getStatus()
+    {
+	return status;
+    }
 
-	public void setStatus(String status)
-	{
-		this.status = status;
-	}
+    public void setStatus(String status)
+    {
+	this.status = status;
+    }
 
-	public Paciente getPaciente()
-	{
-		return paciente;
-	}
+    public Paciente getPaciente()
+    {
+	return paciente;
+    }
 
-	public void setPaciente(Paciente paciente)
-	{
-		this.paciente = paciente;
-	}
+    public void setPaciente(Paciente paciente)
+    {
+	this.paciente = paciente;
+    }
 
-	public List<Procedimento> getProcedimentos()
-	{
-		return procedimentos;
-	}
-	
-	public void adicionarProcedimento(Procedimento p)
-	{
-		this.procedimentos.add(p);
-	}
-	
-	public void removerProcedimento(Procedimento p)
-	{
-		this.procedimentos.remove(p);
-	}
+    public List<Procedimento> getProcedimentos()
+    {
+	return procedimentos;
+    }
 
-	public void setProcedimentos(List<Procedimento> procedimentos)
-	{
-		this.procedimentos = procedimentos;
-	}
+    public void adicionarProcedimento(Procedimento p)
+    {
+	this.procedimentos.add(p);
+    }
 
-	public List<Funcionario> getResponsaveis()
-	{
-		return responsaveis;
-	}
+    public void removerProcedimento(Procedimento p)
+    {
+	this.procedimentos.remove(p);
+    }
 
-	public void setResponsaveis(List<Funcionario> responsaveis)
-	{
-		this.responsaveis = responsaveis;
-	}
-	
-	public void adicionarResponsavel(Funcionario f)
-	{
-		this.responsaveis.add(f);
-	}
-	
-	public void removerResponsavel(Funcionario f)
-	{
-		this.responsaveis.remove(f);
-	}
+    public void setProcedimentos(List<Procedimento> procedimentos)
+    {
+	this.procedimentos = procedimentos;
+    }
 
-	public Medico getMedico()
-	{
-		return medico;
-	}
+    public List<Funcionario> getResponsaveis()
+    {
+	return responsaveis;
+    }
 
-	public void setMedico(Medico medico)
-	{
-		this.medico = medico;
-	}
+    public void setResponsaveis(List<Funcionario> responsaveis)
+    {
+	this.responsaveis = responsaveis;
+    }
+
+    public void adicionarResponsavel(Funcionario f)
+    {
+	this.responsaveis.add(f);
+    }
+
+    public void removerResponsavel(Funcionario f)
+    {
+	this.responsaveis.remove(f);
+    }
+
+    public Medico getMedico()
+    {
+	return medico;
+    }
+
+    public void setMedico(Medico medico)
+    {
+	this.medico = medico;
+    }
 }
