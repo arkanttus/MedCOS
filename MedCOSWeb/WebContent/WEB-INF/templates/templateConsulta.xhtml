@@ -1,0 +1,89 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+      
+  <ui:composition template="/WEB-INF/templates/templateEntidade.xhtml">
+  
+    <ui:define name="body">
+        <h:form>
+            <div class="form-group">
+                <h:outputLabel for="paciente" value="Paciente:"/>
+                <h:selectOneMenu class="form-control" id="paciente" value="#{consultaControlador.consulta.paciente}" converter="pacienteConversor" required="true" requiredMessage="Paciente é obrigatório!" converterMessage="O paciente deve ser válido.">
+	                <f:selectItem noSelectionOption="true" itemLabel="--Selecione--"/>
+	                <f:selectItems value="#{consultaControlador.pacientes}" var="paciente" itemValue="#{paciente}" itemLabel="#{paciente.nome} (#{paciente.cpf})"/>
+	            </h:selectOneMenu>  
+                    
+                <small class="form-text text-danger">
+                    <h:message for="paciente"/>
+                </small>
+            </div>
+            
+            <div class="form-group">
+                <h:outputLabel for="medico" value="Médico:"/>
+                <h:selectOneMenu class="form-control" id="medico" value="#{consultaControlador.consulta.medico}" converter="medicoConversor" required="true" requiredMessage="Médico é obrigatório!" converterMessage="O médico deve ser válido!" validateMessage="Médico inválido!">
+                    <f:selectItem noSelectionOption="true" itemLabel="--Selecione--"/>
+                    <f:selectItems value="#{consultaControlador.medicos}" var="medico" itemValue="#{medico}" itemLabel="#{medico.nome}"/>
+                </h:selectOneMenu>  
+                    
+                <small class="form-text text-danger">
+                    <h:message for="medico"/>
+                </small>
+            </div>
+            
+            <div class="form-group">
+                <h:outputLabel for="dataHora" value="Data e Horário:"/>
+                <h:inputText class="form-control" id="dataHora" value="#{consultaControlador.consulta.dataHora}" required="true" requiredMessage="O horário é obrigatório!" validateMessage="O horário deve estar no formato: dia/mês/ano horas:minutos!" converterMessage="O horário deve estar no formato: dia/mês/ano horas:minutos!">
+                     <f:convertDateTime type="date" pattern="dd/MM/yyyy HH:mm"/>
+                </h:inputText>
+                    
+                <small class="form-text text-danger">
+                    <h:message for="dataHora"/>
+                </small>
+            </div>
+            
+            <ui:insert name="foraInclusao">
+	            <div class="form-group">
+	                <h:outputLabel for="sintomas" value="Sintomas:"/>
+	                <h:inputTextarea class="form-control" id="sintomas" value="#{consultaControlador.consulta.sintomas}" validatorMessage="Os sintomas podem ter no máximo 100 caracteres!">
+	                    <f:validateLength minimum="0" maximum="100" />
+	                </h:inputTextarea>
+	                    
+	                <small class="form-text text-danger">
+	                    <h:message for="sintomas"/>
+	                </small>
+	            </div>
+	            
+	            <div class="form-group">
+	                <h:outputLabel for="status" value="Status:"/>
+	                <h:selectOneMenu class="form-control" id="status" value="#{consultaControlador.consulta.status}" required="true" requiredMessage="O status é obrigatório!" converterMessage="O status deve ser válido.">
+	                    <f:selectItem noSelectionOption="true" itemLabel="--Selecione--"/>
+	                    <f:selectItem itemLabel="Pendente"/>
+	                    <f:selectItem itemLabel="Atendida"/>
+	                    <f:selectItem itemLabel="Cancelada"/>
+	                </h:selectOneMenu>  
+	                    
+	                <small class="form-text text-danger">
+	                    <h:message for="status"/>
+	                </small>
+	            </div>
+	            
+	            <div class="form-group">
+	                <h:outputLabel for="obs" value="Observações:"/>
+	                <h:inputTextarea class="form-control" id="obs" value="#{consultaControlador.consulta.obs}" validatorMessage="As observações podem ter no máximo 40 caracteres!">
+	                    <f:validateLength minimum="0" maximum="40" />
+	                </h:inputTextarea>
+	                    
+	                <small class="form-text text-danger">
+	                    <h:message for="sintomas"/>
+	                </small>
+	            </div>
+	        </ui:insert>
+            
+            <h:link value="Cancelar" outcome="index" class="btn btn-danger"/>
+            <ui:insert name="botaoPrincipal"/>
+        </h:form>
+    </ui:define>
+    
+  </ui:composition>
+</html>

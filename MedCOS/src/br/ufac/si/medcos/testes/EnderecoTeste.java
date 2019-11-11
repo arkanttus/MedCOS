@@ -58,13 +58,24 @@ public class EnderecoTeste
 
 		Medico m = new Medico("Roberto", "4444", new Date(2000, 05, 03), true, "13632-2", "");
 		g.adicionar(m);
-
-		Consulta c = new Consulta("Dor de cabeça", new Date(2000, 05, 03), "", "Pendente", p, m);
-		Procedimento proc1 = new Procedimento("Exame", "Exame de coleta de DNA", "A", c);
+		
+		Calendar cal1 = Calendar.getInstance();
+		cal1.set(Calendar.HOUR, 20);
+		Consulta c = new Consulta("Dor de cabeça", cal1, "", "Pendente", p, m);
+		/*Procedimento proc1 = new Procedimento("Exame", "Exame de coleta de DNA", "A", c);
 		Procedimento proc2 = new Procedimento("Exame", "Exame de coleta de Sangue", "A", c);
 		c.adicionarProcedimento(proc1);
-		c.adicionarProcedimento(proc2);
+		c.adicionarProcedimento(proc2);*/
 		g.adicionar(c);
+		
+		Calendar cal2 = Calendar.getInstance();
+		cal2.set(Calendar.HOUR, 19);
+		Consulta c2 = new Consulta("Dor de cabeçaaaa", cal2, "", "Pendente", p, m);
+		/*Procedimento proc1 = new Procedimento("Exame", "Exame de coleta de DNA", "A", c);
+		Procedimento proc2 = new Procedimento("Exame", "Exame de coleta de Sangue", "A", c);
+		c.adicionarProcedimento(proc1);
+		c.adicionarProcedimento(proc2);*/
+		g.adicionar(c2);
 
 		g.encerrar();
 	}

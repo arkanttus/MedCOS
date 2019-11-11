@@ -3,6 +3,7 @@ package br.ufac.si.medcos.entidades;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Date;
+
 import javax.persistence.*;
 
 import br.ufac.si.medcos.entidades.Funcionario;
@@ -14,17 +15,26 @@ import br.ufac.si.medcos.entidades.Funcionario;
 		query="SELECT a FROM Consulta a"), 
 	@NamedQuery(name="Consulta.todosPorDataHora", 
 		query="SELECT a FROM Consulta a ORDER BY a.dataHora"),
+	@NamedQuery(name="Consulta.todosProximas", 
+		query="SELECT a FROM Consulta a WHERE a.status = 'Pendente' AND a.dataHora >= NOW() AND a.dataHora <= NOW()+60000 ORDER BY a.dataHora"),
+	@NamedQuery(name="Consulta.contarPendentes", 
+		query="SELECT COUNT(*) FROM Consulta a WHERE a.status = 'Pendente' AND a.dataHora >= CURDATE() AND a.dataHora < (CURDATE()+1)"),
+	@NamedQuery(name="Consulta.contarAtendidas", 
+		query="SELECT COUNT(*) FROM Consulta a WHERE a.status = 'Atendida' AND a.dataHora >= CURDATE() AND a.dataHora < (CURDATE()+1)"),
+	@NamedQuery(name="Consulta.contarMedicosAtendendo", 
+		query="SELECT COUNT(DISTINCT a.medico) FROM Consulta a WHERE a.dataHora >= CURDATE() AND a.dataHora < (CURDATE()+1)")
 })
 public class Consulta
 {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer id;
-    @Column(nullable=false, length=100)
+    @Column(nullable=true, length=100)
     private String sintomas;
     @Column(nullable=false, length=19)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date dataHora;
-    @Column(nullable=false, length=40)
+    @Column(nullable=true, length=40)
     private String obs;
     @Column(nullable=false, length=20)
     private String status;
@@ -47,126 +57,126 @@ public class Consulta
     
     public Consulta() {}
     
-    public Consulta(String sintomas, Date dataHora, String obs, String status, Paciente paciente, Medico medico)
-    {
-	super();
-	this.sintomas = sintomas;
-	this.dataHora = dataHora;
-	this.obs = obs;
-	this.status = status;
-	this.paciente = paciente;
-	this.medico = medico;
-	this.procedimentos = new ArrayList<Procedimento>();
-	this.responsaveis = new ArrayList<Funcionario>();
-    }
+	public Consulta(String sintomas, Date dataHora, String obs, String status, Paciente paciente, Medico medico)
+	{
+		super();
+		this.sintomas = sintomas;
+		this.dataHora = dataHora;
+		this.obs = obs;
+		this.status = status;
+		this.paciente = paciente;
+		this.medico = medico;
+		this.procedimentos = new ArrayList<Procedimento>();
+		this.responsaveis = new ArrayList<Funcionario>();
+	}
 
-    public Integer getId()
-    {
-	return id;
-    }
+	public Integer getId()
+	{
+		return id;
+	}
 
-    public void setId(Integer id)
-    {
-	this.id = id;
-    }
+	public void setId(Integer id)
+	{
+		this.id = id;
+	}
 
-    public String getSintomas()
-    {
-	return sintomas;
-    }
+	public String getSintomas()
+	{
+		return sintomas;
+	}
 
-    public void setSintomas(String sintomas)
-    {
-	this.sintomas = sintomas;
-    }
+	public void setSintomas(String sintomas)
+	{
+		this.sintomas = sintomas;
+	}
 
-    public Date getDataHora()
-    {
-	return dataHora;
-    }
+	public Date getDataHora()
+	{
+		return dataHora;
+	}
 
-    public void setDataHora(Date dataHora)
-    {
-	this.dataHora = dataHora;
-    }
+	public void setDataHora(Date dataHora)
+	{
+		this.dataHora = dataHora;
+	}
 
-    public String getObs()
-    {
-	return obs;
-    }
+	public String getObs()
+	{
+		return obs;
+	}
 
-    public void setObs(String obs)
-    {
-	this.obs = obs;
-    }
+	public void setObs(String obs)
+	{
+		this.obs = obs;
+	}
 
-    public String getStatus()
-    {
-	return status;
-    }
+	public String getStatus()
+	{
+		return status;
+	}
 
-    public void setStatus(String status)
-    {
-	this.status = status;
-    }
+	public void setStatus(String status)
+	{
+		this.status = status;
+	}
 
-    public Paciente getPaciente()
-    {
-	return paciente;
-    }
+	public Paciente getPaciente()
+	{
+		return paciente;
+	}
 
-    public void setPaciente(Paciente paciente)
-    {
-	this.paciente = paciente;
-    }
+	public void setPaciente(Paciente paciente)
+	{
+		this.paciente = paciente;
+	}
 
-    public List<Procedimento> getProcedimentos()
-    {
-	return procedimentos;
-    }
+	public List<Procedimento> getProcedimentos()
+	{
+		return procedimentos;
+	}
 
-    public void adicionarProcedimento(Procedimento p)
-    {
-	this.procedimentos.add(p);
-    }
+	public void adicionarProcedimento(Procedimento p)
+	{
+		this.procedimentos.add(p);
+	}
 
-    public void removerProcedimento(Procedimento p)
-    {
-	this.procedimentos.remove(p);
-    }
+	public void removerProcedimento(Procedimento p)
+	{
+		this.procedimentos.remove(p);
+	}
 
-    public void setProcedimentos(List<Procedimento> procedimentos)
-    {
-	this.procedimentos = procedimentos;
-    }
+	public void setProcedimentos(List<Procedimento> procedimentos)
+	{
+		this.procedimentos = procedimentos;
+	}
 
-    public List<Funcionario> getResponsaveis()
-    {
-	return responsaveis;
-    }
+	public List<Funcionario> getResponsaveis()
+	{
+		return responsaveis;
+	}
 
-    public void setResponsaveis(List<Funcionario> responsaveis)
-    {
-	this.responsaveis = responsaveis;
-    }
+	public void setResponsaveis(List<Funcionario> responsaveis)
+	{
+		this.responsaveis = responsaveis;
+	}
 
-    public void adicionarResponsavel(Funcionario f)
-    {
-	this.responsaveis.add(f);
-    }
+	public void adicionarResponsavel(Funcionario f)
+	{
+		this.responsaveis.add(f);
+	}
 
-    public void removerResponsavel(Funcionario f)
-    {
-	this.responsaveis.remove(f);
-    }
+	public void removerResponsavel(Funcionario f)
+	{
+		this.responsaveis.remove(f);
+	}
 
-    public Medico getMedico()
-    {
-	return medico;
-    }
+	public Medico getMedico()
+	{
+		return medico;
+	}
 
-    public void setMedico(Medico medico)
-    {
-	this.medico = medico;
-    }
+	public void setMedico(Medico medico)
+	{
+		this.medico = medico;
+	}
 }

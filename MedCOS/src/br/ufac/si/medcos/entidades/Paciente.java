@@ -24,6 +24,7 @@ public class Paciente
     @Column(nullable=false, length=14)
     private String cpf;
     @Column(nullable=false, length=10)
+    @Temporal(TemporalType.DATE)
     private Date dataNascimento;
     @Column(nullable=true, length=20)
     private String estadoCivil;
@@ -48,140 +49,152 @@ public class Paciente
     
     public Paciente() {}
 
-    public Paciente(String nome, String cpf, Date dataNascimento, String estadoCivil, String fone, String email,
-	    String profissao, String obs, Endereco endereco, List<Consulta> consultas, List<Anamnese> anamneses)
-    {
-	super();
-	this.nome = nome;
-	this.cpf = cpf;
-	this.dataNascimento = dataNascimento;
-	this.estadoCivil = estadoCivil;
-	this.fone = fone;
-	this.email = email;
-	this.profissao = profissao;
-	this.obs = obs;
-	this.endereco = endereco;
-	this.consultas = consultas;
-	this.anamneses = anamneses;
-    }
+	public Paciente(String nome, String cpf, Date dataNascimento, String estadoCivil, String fone, String email,
+			String profissao, String obs, Endereco endereco, List<Consulta> consultas, List<Anamnese> anamneses)
+	{
+		super();
+		this.nome = nome;
+		this.cpf = cpf;
+		this.dataNascimento = dataNascimento;
+		this.estadoCivil = estadoCivil;
+		this.fone = fone;
+		this.email = email;
+		this.profissao = profissao;
+		this.obs = obs;
+		this.endereco = endereco;
+		this.consultas = consultas;
+		this.anamneses = anamneses;
+	}
 
-    public Integer getId()
-    {
-	return id;
-    }
+	public Integer getId()
+	{
+		return id;
+	}
 
-    public void setId(Integer id)
-    {
-	this.id = id;
-    }
+	public void setId(Integer id)
+	{
+		this.id = id;
+	}
 
-    public String getNome()
-    {
-	return nome;
-    }
+	public String getNome()
+	{
+		return nome;
+	}
 
-    public void setNome(String nome)
-    {
-	this.nome = nome;
-    }
+	public void setNome(String nome)
+	{
+		this.nome = nome;
+	}
 
-    public String getCpf()
-    {
-	return cpf;
-    }
+	public String getCpf()
+	{
+		return cpf;
+	}
 
-    public void setCpf(String cpf)
-    {
-	this.cpf = cpf;
-    }
+	public void setCpf(String cpf)
+	{
+		this.cpf = cpf;
+	}
 
-    public Date getDataNascimento()
-    {
-	return dataNascimento;
-    }
+	public Date getDataNascimento()
+	{
+		return dataNascimento;
+	}
 
-    public void setDataNascimento(Date dataNascimento)
-    {
-	this.dataNascimento = dataNascimento;
-    }
+	public void setDataNascimento(Date dataNascimento)
+	{
+		this.dataNascimento = dataNascimento;
+	}
 
-    public String getEstadoCivil()
-    {
-	return estadoCivil;
-    }
+	public String getEstadoCivil()
+	{
+		return estadoCivil;
+	}
 
-    public void setEstadoCivil(String estadoCivil)
-    {
-	this.estadoCivil = estadoCivil;
-    }
+	public void setEstadoCivil(String estadoCivil)
+	{
+		this.estadoCivil = estadoCivil;
+	}
 
-    public String getFone()
-    {
-	return fone;
-    }
+	public String getFone()
+	{
+		return fone;
+	}
 
-    public void setFone(String fone)
-    {
-	this.fone = fone;
-    }
+	public void setFone(String fone)
+	{
+		this.fone = fone;
+	}
 
-    public String getEmail()
-    {
-	return email;
-    }
+	public String getEmail()
+	{
+		return email;
+	}
 
-    public void setEmail(String email)
-    {
-	this.email = email;
-    }
+	public void setEmail(String email)
+	{
+		this.email = email;
+	}
 
-    public String getProfissao()
-    {
-	return profissao;
-    }
+	public String getProfissao()
+	{
+		return profissao;
+	}
 
-    public void setProfissao(String profissao)
-    {
-	this.profissao = profissao;
-    }
+	public void setProfissao(String profissao)
+	{
+		this.profissao = profissao;
+	}
 
-    public String getObs()
-    {
-	return obs;
-    }
+	public String getObs()
+	{
+		return obs;
+	}
 
-    public void setObs(String obs)
-    {
-	this.obs = obs;
-    }
+	public void setObs(String obs)
+	{
+		this.obs = obs;
+	}
 
-    public Endereco getEndereco()
-    {
-	return endereco;
-    }
+	public Endereco getEndereco()
+	{
+		return endereco;
+	}
 
-    public void setEndereco(Endereco endereco)
-    {
-	this.endereco = endereco;
-    }
+	public void setEndereco(Endereco endereco)
+	{
+		this.endereco = endereco;
+	}
 
-    public List<Consulta> getConsultas()
-    {
-	return consultas;
-    }
+	public List<Consulta> getConsultas()
+	{
+		return consultas;
+	}
 
-    public void setConsultas(List<Consulta> consultas)
-    {
-	this.consultas = consultas;
-    }
+	public void setConsultas(List<Consulta> consultas)
+	{
+		this.consultas = consultas;
+	}
 
-    public List<Anamnese> getAnamneses()
-    {
-	return anamneses;
-    }
+	public List<Anamnese> getAnamneses()
+	{
+		return anamneses;
+	}
 
-    public void setAnamneses(List<Anamnese> anamneses)
-    {
-	this.anamneses = anamneses;
-    }
+	public void setAnamneses(List<Anamnese> anamneses)
+	{
+		this.anamneses = anamneses;
+	}
+
+	public boolean equals(Object obj)
+	{
+		if(obj == null || !(obj instanceof Paciente))
+			return false;
+
+		Paciente other = (Paciente) obj;
+		if(id == other.id)
+			return true;
+		
+		return false;
+	}
 }

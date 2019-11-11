@@ -24,6 +24,7 @@ public class Medico
     @Column(nullable=false, length=14)
     private String cpf;
     @Column(nullable=false, length=10)
+    @Temporal(TemporalType.DATE)
     private Date dataNascimento;
     @Column(nullable=false, length=1)
     private Boolean ativo;
@@ -34,84 +35,96 @@ public class Medico
 
     public Medico() {}
 
-    public Medico(String nome, String cpf, Date dataNascimento, Boolean ativo, String crm, String especialidade)
-    {
-	super();
-	this.nome = nome;
-	this.cpf = cpf;
-	this.dataNascimento = dataNascimento;
-	this.ativo = ativo;
-	this.crm = crm;
-	this.especialidade = especialidade;
-    }
+	public Medico(String nome, String cpf, Date dataNascimento, Boolean ativo, String crm, String especialidade)
+	{
+		super();
+		this.nome = nome;
+		this.cpf = cpf;
+		this.dataNascimento = dataNascimento;
+		this.ativo = ativo;
+		this.crm = crm;
+		this.especialidade = especialidade;
+	}
 
-    public Integer getId()
-    {
-	return id;
-    }
+	public Integer getId()
+	{
+		return id;
+	}
 
-    public void setId(Integer id)
-    {
-	this.id = id;
-    }
+	public void setId(Integer id)
+	{
+		this.id = id;
+	}
 
-    public String getNome()
-    {
-	return nome;
-    }
+	public String getNome()
+	{
+		return nome;
+	}
 
-    public void setNome(String nome)
-    {
-	this.nome = nome;
-    }
+	public void setNome(String nome)
+	{
+		this.nome = nome;
+	}
 
-    public String getCpf()
-    {
-	return cpf;
-    }
+	public String getCpf()
+	{
+		return cpf;
+	}
 
-    public void setCpf(String cpf)
-    {
-	this.cpf = cpf;
-    }
+	public void setCpf(String cpf)
+	{
+		this.cpf = cpf;
+	}
 
-    public Date getDataNascimento()
-    {
-	return dataNascimento;
-    }
+	public Date getDataNascimento()
+	{
+		return dataNascimento;
+	}
 
-    public void setDataNascimento(Date dataNascimento)
-    {
-	this.dataNascimento = dataNascimento;
-    }
+	public void setDataNascimento(Date dataNascimento)
+	{
+		this.dataNascimento = dataNascimento;
+	}
 
-    public Boolean getAtivo()
-    {
-	return ativo;
-    }
+	public Boolean getAtivo()
+	{
+		return ativo;
+	}
 
-    public void setAtivo(Boolean ativo)
-    {
-	this.ativo = ativo;
-    }
+	public void setAtivo(Boolean ativo)
+	{
+		this.ativo = ativo;
+	}
 
-    public String getCrm()
-    {
-	return crm;
-    }
+	public String getCrm()
+	{
+		return crm;
+	}
 
-    public void setCrm(String crm)
-    {
-	this.crm = crm;
-    }
+	public void setCrm(String crm)
+	{
+		this.crm = crm;
+	}
 
-    public String getEspecialidade()
-    {
-	return especialidade;
-    }
+	public String getEspecialidade()
+	{
+		return especialidade;
+	}
 
-    public void setEspecialidade(String especialidade)
-    {
-	this.especialidade = especialidade;
-    }
+	public void setEspecialidade(String especialidade)
+	{
+		this.especialidade = especialidade;
+	}
+	
+	public boolean equals(Object obj)
+	{
+		if(obj == null || !(obj instanceof Medico))
+			return false;
+
+		Medico other = (Medico) obj;
+		if(id == other.id)
+			return true;
+		
+		return false;
+	}
 }

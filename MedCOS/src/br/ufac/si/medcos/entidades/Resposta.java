@@ -34,62 +34,62 @@ public class Resposta
 
     public Resposta() {}
     
-    public Resposta(String conteudo, Pergunta pergunta, Paciente paciente, Anamnese anamnese)
-    {
-	super();
-	this.conteudo = conteudo;
-	this.pergunta = pergunta;
-	this.paciente = paciente;
-	this.anamnese = anamnese;
-    }
+	public Resposta(String conteudo, Pergunta pergunta, Paciente paciente, Anamnese anamnese)
+	{
+		super();
+		this.conteudo = conteudo;
+		this.pergunta = pergunta;
+		this.paciente = paciente;
+		this.anamnese = anamnese;
+	}
 
-    public Integer getId()
-    {
-	return id;
-    }
+	public Integer getId()
+	{
+		return id;
+	}
 
-    public void setId(Integer id)
-    {
-	this.id = id;
-    }
+	public void setId(Integer id)
+	{
+		this.id = id;
+	}
 
-    public String getConteudo()
-    {
-	return conteudo;
-    }
+	public String getConteudo()
+	{
+		return conteudo;
+	}
 
-    public void setConteudo(String conteudo)
-    {
-	this.conteudo = conteudo;
-    }
+	public void setConteudo(String conteudo)
+	{
+		this.conteudo = conteudo;
+	}
 
-    public Pergunta getPergunta()
-    {
-	return pergunta;
-    }
+	public Pergunta getPergunta()
+	{
+		return pergunta;
+	}
 
-    public void setPergunta(Pergunta pergunta)
-    {
-	this.pergunta = pergunta;
-    }
+	public void setPergunta(Pergunta pergunta)
+	{
+		this.pergunta = pergunta;
+	}
 
-    public Paciente getPaciente()
-    {
-	return paciente;
-    }
+	public Paciente getPaciente()
+	{
+		return paciente;
+	}
 
-    public void setPaciente(Paciente paciente)
-    {
-	this.paciente = paciente;
-    }
+	public void setPaciente(Paciente paciente)
+	{
+		this.paciente = paciente;
+	}
 
-    public Anamnese getAnamnese()
-    {
-	return anamnese;
-    }
+	public Anamnese getAnamnese()
+	{
+		return anamnese;
+	}
 
-    public void setAnamnese(Anamnese anamnese)
-    {
-	this.anamnese = anamnese;
-    }
+	public void setAnamnese(Anamnese anamnese)
+	{
+		this.anamnese = anamnese;
+	}
 }
