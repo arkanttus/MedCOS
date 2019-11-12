@@ -60,9 +60,9 @@
 	                            <h:commandLink action="#{consultaControlador.editar(consulta)}" class="btn btn-success">
 	                                <i class="fas fa-edit"></i>
 	                            </h:commandLink>
-	                            <h:link class="btn btn-danger ml-2" data-toggle="modal" data-target="#consultaModal#{consulta.id}" rendered="#{consulta.status ne 'Cancelada'}">
+	                            <a href="#" class="btn btn-danger ml-2" data-toggle="modal" data-target="#consultaModal#{consulta.id}" rendered="#{consulta.status ne 'Cancelada'}">
 	                               <i class="far fa-trash-alt"></i>
-	                            </h:link>
+	                            </a>
 	                        </h:column>
 					    </h:dataTable>
 					</div>

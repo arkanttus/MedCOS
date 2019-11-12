@@ -53,9 +53,9 @@
 	                            <h:commandLink action="#{pacienteControlador.editar(paciente)}" class="btn btn-success">
 	                                <i class="fas fa-edit"></i>
 	                            </h:commandLink>
-	                            <h:commandLink action="#{pacienteControlador.excluir(paciente)}" class="btn btn-danger ml-2">
-	                                <i class="fas fa-trash-alt"></i>
-	                            </h:commandLink>
+	                            <a href="#" class="btn btn-danger ml-2" data-toggle="modal" data-target="#pacienteModal#{paciente.id}">
+                                   <i class="far fa-trash-alt"></i>
+                                </a>
 	                        </h:column>
 					    </h:dataTable>
 					</div>
@@ -64,6 +64,72 @@
 					at 11:59 PM</div>
 			</div>
 		</h:form>
+		
+		<h:form>
+            <ui:repeat var="paciente" value="#{pacienteControlador.pacientes}" varStatus="status">
+                <!-- Cancelar Consulta Modal-->
+                <div class="modal fade" id="pacienteModal#{paciente.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="pacienteModalLabel">Deseja cancelar esta consulta?</h5>
+                                <button class="close" type="button" data-dismiss="modal"
+                                    aria-label="Close"><span aria-hidden="true">×</span></button>
+                            </div>
+                            <div class="modal-body">
+                                <p>Você deseja remover este paciente?</p>
+
+                                <div class="form-group">
+					                <h:outputLabel for="nome" value="Nome completo:"/>
+					                <h:inputText class="form-control" id="nome" value="#{paciente.nome}" disabled="true" requiredMessage="O nome é obrigatório!" validateMessage="O nome deve ter entre 5 e 70 caracteres.">
+					                     <f:validateLength minimum="5" maximum="70"/>
+					                </h:inputText>
+					                    
+					                <small class="form-text text-danger">
+					                    <h:message for="nome"/>
+					                </small>
+					            </div>
+					            
+					            <div class='row'>
+					                <div class='col-sm'>  
+					                    <div class="form-group">
+					                        <h:outputLabel for="cpf" value="CPF:"/>
+					                        <h:inputText class="form-control" id="cpf" value="#{paciente.cpf}" disabled="true" required="true" requiredMessage="O CPF é obrigatório!" validateMessage="O CPF pode ter no máximo 9 dígitos e sem pontuação.">
+					                             <f:validateLength minimum="9" maximum="11" />
+					                        </h:inputText>
+					                            
+					                        <small class="form-text text-danger">
+					                            <h:message for="cpf"/>
+					                        </small>
+					                    </div>
+					                </div>
+					                
+					                <div class='col-sm'>  
+					                    <div class="form-group">
+					                        <h:outputLabel for="dataNascimento" value="Data de Nascimento:"/>
+					                        <h:inputText class="form-control" id="dataHora" value="#{paciente.dataNascimento}" disabled="true" required="true" requiredMessage="A data de nascimento é obrigatória!" validateMessage="A data de nascimento deve estar no formato: dia/mês/ano!">
+					                             <f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
+					                        </h:inputText>
+					                            
+					                        <small class="form-text text-danger">
+					                            <h:message for="dataNascimento"/>
+					                        </small>
+					                    </div>
+					                </div>
+					            </div>
+
+                                <small class="form-text text-muted">Não é possível desfazer futuramente.</small>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button> 
+                                
+                                <h:commandButton class="btn btn-danger" action="#{pacienteControlador.excluir(paciente)}" value="Excluir"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ui:repeat>
+        </h:form>
     
     	<script>
 			document.getElementById("itemPacientes").classList.add("active");

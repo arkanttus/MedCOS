@@ -1,6 +1,7 @@
 package br.ufac.si.medcos.entidades;
 
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Date;
 import javax.persistence.*;
 
@@ -32,14 +33,15 @@ public class Paciente
     private String fone;
     @Column(nullable=true, length=10)
     private String sexo;
-    @Column(nullable=true, length=40)
+
+	@Column(nullable=true, length=40)
     private String email;
     @Column(nullable=true, length=25)
     private String profissao;
     @Column(nullable=true, length=30)
     private String obs;
     
-    @ManyToOne()
+    @ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn(name="endereco", nullable=false)
     private Endereco endereco;
     
@@ -49,7 +51,12 @@ public class Paciente
     @OneToMany(cascade=CascadeType.REMOVE, mappedBy="paciente")
     private List<Anamnese> anamneses;
     
-    public Paciente() {}
+    public Paciente() 
+    {
+    	endereco = new Endereco();
+    	consultas = new ArrayList<Consulta>();
+    	anamneses = new ArrayList<Anamnese>();
+    }
 
 	public Paciente(String nome, String cpf, Date dataNascimento, String estadoCivil, String fone, String email,
 			String profissao, String obs, Endereco endereco, List<Consulta> consultas, List<Anamnese> anamneses)
@@ -166,6 +173,16 @@ public class Paciente
 	public void setEndereco(Endereco endereco)
 	{
 		this.endereco = endereco;
+	}
+	
+	public String getSexo()
+	{
+		return sexo;
+	}
+
+	public void setSexo(String sexo)
+	{
+		this.sexo = sexo;
 	}
 
 	public List<Consulta> getConsultas()

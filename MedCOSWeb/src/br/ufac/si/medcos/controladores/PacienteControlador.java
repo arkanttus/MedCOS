@@ -23,6 +23,16 @@ public class PacienteControlador
 		pg = new PacienteGerente();
 	}
 	
+	public Paciente getPaciente()
+	{
+		return paciente;
+	}
+
+	public void setPaciente(Paciente paciente)
+	{
+		this.paciente = paciente;
+	}
+	
 	public List<Paciente> getPacientes()
 	{
 		return pg.recuperarTodosPorNome();
@@ -64,7 +74,7 @@ public class PacienteControlador
 	public String editar(Paciente paciente)
 	{
 		this.paciente = paciente;
-		return "editarConsulta";
+		return "editarPaciente";
 	}
 	
 	//Salvando paciente editado
@@ -88,29 +98,8 @@ public class PacienteControlador
 	}
 	
 	//Excluir paciente
-	public String excluir(Paciente paciente)
-	{
-		this.paciente = paciente;
-		return "editarConsulta";
-	}
-	
-	//Excluindo paciente
-	public String salvarExclusao()
+	public void excluir(Paciente paciente)
 	{
 		pg.remover(paciente);
-		return "pacientes";
-		/*Calendar cal = Calendar.getInstance();
-		Date agora = cal.getTime();
-		
-		if(consulta.getDataHora().compareTo(agora) > 0)
-		{
-			cg.atualizar(consulta);
-			return "index";
-		}
-		else
-		{
-			FacesContext.getCurrentInstance().addMessage("formConsulta:dataHora", new FacesMessage("A data e horário não podem ser antes de agora."));
-			return null;
-		}*/
 	}
 }

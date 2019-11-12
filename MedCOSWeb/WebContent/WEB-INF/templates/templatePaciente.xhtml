@@ -19,11 +19,11 @@
             </div>
             
             <div class='row'>
-		        <div class='col-sm-4'>  
+		        <div class='col-sm'>  
 		            <div class="form-group">
 		                <h:outputLabel for="cpf" value="CPF:"/>
 		                <h:inputText class="form-control" id="cpf" value="#{pacienteControlador.paciente.cpf}" required="true" requiredMessage="O CPF é obrigatório!" validateMessage="O CPF pode ter no máximo 9 dígitos e sem pontuação.">
-		                     <f:validateLength minimum="9" maximum="10" />
+		                     <f:validateLength minimum="9" maximum="11" />
 		                </h:inputText>
 		                    
 		                <small class="form-text text-danger">
@@ -32,9 +32,9 @@
 		            </div>
             	</div>
             	
-            	<div class='col-sm-4'>  
+            	<div class='col-sm'>  
 		            <div class="form-group">
-		                <h:outputLabel for="dataNascimento" value="Data e Horário:"/>
+		                <h:outputLabel for="dataNascimento" value="Data de Nascimento:"/>
 		                <h:inputText class="form-control" id="dataHora" value="#{pacienteControlador.paciente.dataNascimento}" required="true" requiredMessage="A data de nascimento é obrigatória!" validateMessage="A data de nascimento deve estar no formato: dia/mês/ano!">
 		                     <f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
 		                </h:inputText>
@@ -150,50 +150,9 @@
             	
             	<div class='col-sm-4'>  
 		            <div class="form-group">
-		                <h:outputLabel for="bairro" value="Bairro:"/>
-		                <h:inputText class="form-control" id="bairro" value="#{pacienteControlador.paciente.endereco.bairro}" validateMessage="O bairro pode ter no máximo 40 caracteres.">
-		                     <f:validateLength minimum="0" maximum="40" />
-		                </h:inputText> 
-		                    
-		                <small class="form-text text-danger">
-		                    <h:message for="logradouro"/>
-		                </small>
-		            </div>
-            	</div>
-            	
-            	<div class='col-sm-4'>  
-		            <div class="form-group">
-		                <h:outputLabel for="cidade" value="Cidade:"/>
-		                <h:inputText class="form-control" id="cidade" value="#{pacienteControlador.paciente.endereco.cidade}" validateMessage="A cidade pode ter no máximo 40 caracteres.">
-		                     <f:validateLength minimum="0" maximum="40" />
-		                </h:inputText> 
-		                    
-		                <small class="form-text text-danger">
-		                    <h:message for="cidade"/>
-		                </small>
-		            </div>
-            	</div>
-            </div>
-            
-            <div class='row'>
-		        <div class='col-sm-4'>  
-		            <div class="form-group">
-		                <h:outputLabel for="logradouro" value="Logradouro:"/>
-		                <h:inputText class="form-control" id="logradouro" value="#{pacienteControlador.paciente.endereco.logradouro}" validateMessage="O logradouro pode ter no máximo 40 caracteres.">
-		                     <f:validateLength minimum="0" maximum="40" />
-		                </h:inputText> 
-		                    
-		                <small class="form-text text-danger">
-		                    <h:message for="logradouro"/>
-		                </small>
-		            </div>
-            	</div>
-            	
-            	<div class='col-sm-4'>  
-		            <div class="form-group">
 		                <h:outputLabel for="numero" value="Número:"/>
 		                <h:inputText class="form-control" id="numero" value="#{pacienteControlador.paciente.endereco.numero}" validateMessage="O número deve estar entre 1 e 10000.">
-		                     <f:validateLength minimum="0" maximum="40" />
+		                     <f:validateLength minimum="1" maximum="10000" />
 		                </h:inputText> 
 		                    
 		                <small class="form-text text-danger">
@@ -210,34 +169,85 @@
 		                </h:inputText> 
 		                    
 		                <small class="form-text text-danger">
-		                    <h:message for="logradouro"/>
-		                </small>
-		            </div>
-            	</div>
-            	
-            	<div class='col-sm-4'>  
-		            <div class="form-group">
-		                <h:outputLabel for="cidade" value="Cidade:"/>
-		                <h:inputText class="form-control" id="cidade" value="#{pacienteControlador.paciente.endereco.cidade}" validateMessage="A cidade pode ter no máximo 40 caracteres.">
-		                     <f:validateLength minimum="0" maximum="40" />
-		                </h:inputText> 
-		                    
-		                <small class="form-text text-danger">
-		                    <h:message for="cidade"/>
+		                    <h:message for="bairro"/>
 		                </small>
 		            </div>
             	</div>
             </div>
             
+            <div class='row'>
+                <div class='col-sm-4'>  
+                    <div class="form-group">
+                        <h:outputLabel for="cidade" value="Cidade:"/>
+                        <h:inputText class="form-control" id="cidade" value="#{pacienteControlador.paciente.endereco.cidade}" validateMessage="A cidade pode ter no máximo 40 caracteres.">
+                             <f:validateLength minimum="0" maximum="40" />
+                        </h:inputText> 
+                            
+                        <small class="form-text text-danger">
+                            <h:message for="cidade"/>
+                        </small>
+                    </div>
+                </div>
             
+                <div class='col-sm-4'>  
+                    <div class="form-group">
+                        <h:outputLabel for="estado" value="Estado:"/>
+                        <h:selectOneMenu class="form-control" id="estado" value="#{pacienteControlador.paciente.endereco.estado}" converterMessage="O estado deve ser válido.">
+                            <f:selectItem noSelectionOption="true" itemLabel="--Selecione--"/>
+                            <f:selectItem itemValue="Acre" itemLabel="Acre"/>
+                            <f:selectItem itemValue="Alagoas" itemLabel="Alagoas"/>
+                            <f:selectItem itemValue="Amapá" itemLabel="Amapá"/>
+                            <f:selectItem itemValue="Amapá" itemLabel="Amapá"/>
+                            <f:selectItem itemValue="Bahia" itemLabel="Bahia"/>
+                            <f:selectItem itemValue="Ceará" itemLabel="Ceará"/>
+                            <f:selectItem itemValue="Distrito Federal" itemLabel="Distrito Federal"/>
+                            <f:selectItem itemValue="Espírito Santo" itemLabel="Espírito Santo"/>
+                            <f:selectItem itemValue="Goiás" itemLabel="Goiás"/>
+                            <f:selectItem itemValue="Maranhão" itemLabel="Maranhão"/>
+                            <f:selectItem itemValue="Mato Grosso" itemLabel="Mato Grosso"/>
+                            <f:selectItem itemValue="Mato Grosso do Sul" itemLabel="Mato Grosso do Sul"/>
+                            <f:selectItem itemValue="Pará" itemLabel="Pará"/>
+                            <f:selectItem itemValue="Paraíba" itemLabel="Paraíba"/>
+                            <f:selectItem itemValue="Paraná" itemLabel="Paraná"/>
+                            <f:selectItem itemValue="Pernambuco" itemLabel="Pernambuco"/>
+                            <f:selectItem itemValue="Piauí" itemLabel="Piauí"/>
+                            <f:selectItem itemValue="Rio de Janeiro" itemLabel="Rio de Janeiro"/>
+                            <f:selectItem itemValue="Rio Grande do Norte" itemLabel="Rio Grande do Norte"/>
+                            <f:selectItem itemValue="Rio Grande do Sul" itemLabel="Rio Grande do Sul"/>
+                            <f:selectItem itemValue="Rondônia" itemLabel="Rondônia"/>
+                            <f:selectItem itemValue="Roraima" itemLabel="Roraima"/>
+                            <f:selectItem itemValue="Santa Catarina" itemLabel="Santa Catarina"/>
+                            <f:selectItem itemValue="São Paulo" itemLabel="São Paulo"/>
+                            <f:selectItem itemValue="Sergipe" itemLabel="Sergipe"/>
+                            <f:selectItem itemValue="Tocantins" itemLabel="Tocantins"/>
+                        </h:selectOneMenu>  
+                            
+                        <small class="form-text text-danger">
+                            <h:message for="estado"/>
+                        </small>
+                    </div>
+                </div>
+                
+                <div class='col-sm-4'>  
+                    <div class="form-group">
+                        <h:outputLabel for="cep" value="CEP:"/>
+                        <h:inputText class="form-control" id="cep" value="#{pacienteControlador.paciente.endereco.cep}" validateMessage="O CEP pode ter no máximo 9 dígitos.">
+                             <f:validateLength minimum="0" maximum="9" />
+                        </h:inputText> 
+                            
+                        <small class="form-text text-danger">
+                            <h:message for="cep"/>
+                        </small>
+                    </div>
+                </div>
+            </div>
             
-            
-            <h:link value="Cancelar" outcome="index" class="btn btn-danger"/>
+            <h:link value="Cancelar" outcome="pacientes" class="btn btn-danger"/>
             <ui:insert name="botaoPrincipal"/>
         </h:form>
         
         <script>
-			document.getElementById("itemConsultas").classList.add("active");
+			document.getElementById("itemPacientes").classList.add("active");
 		</script>
     </ui:define>
     
