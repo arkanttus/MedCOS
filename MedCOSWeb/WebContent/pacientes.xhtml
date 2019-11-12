@@ -1,0 +1,73 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+      
+  <ui:composition template="/WEB-INF/templates/templateEntidade.xhtml">
+    
+    <ui:define name="titulo">Gerenciamento de Pacientes</ui:define>
+    
+    <ui:define name="subtitulo">Gerenciamento de Pacientes</ui:define>
+    
+    <ui:define name="subpagina">
+        <li class="breadcrumb-item active">Pacientes</li>
+    </ui:define>
+    
+    <ui:define name="body">
+    	<h:form>
+			<div class="card mb-3">
+				<div class="card-header">
+					<i class="fas fa-table"></i> 
+					Pacientes
+                    <h:commandLink action="#{pacienteControlador.adicionar}" class="btn btn-success float-right" value="Novo paciente">
+                        <i class="fas fa-plus"></i>
+                    </h:commandLink>
+				</div>
+				<div class="card-body">
+					<div class="table-responsive text-center">
+						<h:outputText value="Não há pacientes!" class="h4 text-danger" rendered="#{empty pacienteControlador.pacientes}"/>
+					
+					    <h:dataTable value="#{pacienteControlador.pacientes}" var="paciente" styleClass="table table-bordered" id="pacientesTable" width="100%" cellspacing="0" rendered="#{!empty pacienteControlador.pacientes}">
+					        <h:column>
+	                            <f:facet name="header">Código</f:facet>
+	                            #{paciente.id}
+	                        </h:column>
+					        
+					        <h:column>
+	                            <f:facet name="header">Nome</f:facet>
+	                            #{paciente.nome}
+	                        </h:column>
+	                        
+	                        <h:column>
+	                            <f:facet name="header">CPF</f:facet>
+	                            #{paciente.cpf}
+	                        </h:column>
+	                        
+	                        <h:column>
+	                            <f:facet name="header">Telefone</f:facet>
+	                            #{paciente.fone}
+	                        </h:column>
+	                        
+	                        <h:column>
+	                            <f:facet name="header">Operações</f:facet>
+	                            <h:commandLink action="#{pacienteControlador.editar(paciente)}" class="btn btn-success">
+	                                <i class="fas fa-edit"></i>
+	                            </h:commandLink>
+	                            <h:commandLink action="#{pacienteControlador.excluir(paciente)}" class="btn btn-danger ml-2">
+	                                <i class="fas fa-trash-alt"></i>
+	                            </h:commandLink>
+	                        </h:column>
+					    </h:dataTable>
+					</div>
+				</div>
+				<div class="card-footer small text-muted">Updated yesterday
+					at 11:59 PM</div>
+			</div>
+		</h:form>
+    
+    	<script>
+			document.getElementById("itemPacientes").classList.add("active");
+		</script>
+    </ui:define>
+  </ui:composition>
+</html>

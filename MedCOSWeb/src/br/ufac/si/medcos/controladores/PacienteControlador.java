@@ -11,54 +11,16 @@ import javax.faces.context.FacesContext;
 import br.ufac.si.medcos.gerentes.*;
 import br.ufac.si.medcos.entidades.*;
 
-@ManagedBean(name="consultaControlador")
+@ManagedBean(name="pacienteControlador")
 @SessionScoped
-public class ConsultaControlador
+public class PacienteControlador
 {
-	private ConsultaGerente cg;
 	private PacienteGerente pg;
-	private MedicoGerente mg;
-	private Consulta consulta;
+	private Paciente paciente;
 	
-	public ConsultaControlador()
+	public PacienteControlador()
 	{
-		cg = new ConsultaGerente();
 		pg = new PacienteGerente();
-		mg = new MedicoGerente();
-	}
-	
-	public Consulta getConsulta()
-	{
-		return consulta;
-	}
-	public void setConsulta(Consulta consulta)
-	{
-		this.consulta = consulta;
-	}
-	
-	public List<Consulta> getConsultasProximas()
-	{
-		return cg.recuperarTodosProximas();
-	}
-	
-	public List<Consulta> getConsultas()
-	{
-		return cg.recuperarTodosPorDataHora();
-	}
-	
-	public long getConsultasPendentes()
-	{
-		return cg.contarPendentes();
-	}
-	
-	public long getConsultasAtendidas()
-	{
-		return cg.contarAtendidas();
-	}
-	
-	public long getMedicosAtendendo()
-	{
-		return cg.contarMedicosAtendendo();
 	}
 	
 	public List<Paciente> getPacientes()
@@ -66,24 +28,21 @@ public class ConsultaControlador
 		return pg.recuperarTodosPorNome();
 	}
 	
-	public List<Medico> getMedicos()
-	{
-		return mg.recuperarTodosPorNome();
-	}
-	
 	//====================// Rotas //====================//
 	
-	//Inserção de nova consulta
+	//Inserção de novo paciente
 	public String adicionar()  
 	{
-		this.consulta = new Consulta();
-		return "adicionarConsulta";
+		this.paciente = new Paciente();
+		return "adicionarPaciente";
 	}
 	
 	//Salvando nova consulta
 	public String salvarInclusao()
 	{
-		Calendar cal = Calendar.getInstance();
+		pg.adicionar(paciente);
+		return "index";
+		/*Calendar cal = Calendar.getInstance();
 		Date agora = cal.getTime();
 		
 		if(consulta.getDataHora().compareTo(agora) > 0)
@@ -98,20 +57,22 @@ public class ConsultaControlador
 		{
 			FacesContext.getCurrentInstance().addMessage("formConsulta:dataHora", new FacesMessage("A data e horário não podem ser antes de agora."));
 			return null;
-		}
+		}*/
 	}
 	
-	//Edição de consulta
-	public String editar(Consulta consulta)
+	//Edição de paciente
+	public String editar(Paciente paciente)
 	{
-		this.consulta = consulta;
+		this.paciente = paciente;
 		return "editarConsulta";
 	}
 	
-	//Salvando consulta editada
+	//Salvando paciente editado
 	public String salvarEdicao()
 	{
-		Calendar cal = Calendar.getInstance();
+		pg.atualizar(paciente);
+		return "pacientes";
+		/*Calendar cal = Calendar.getInstance();
 		Date agora = cal.getTime();
 		
 		if(consulta.getDataHora().compareTo(agora) > 0)
@@ -123,13 +84,33 @@ public class ConsultaControlador
 		{
 			FacesContext.getCurrentInstance().addMessage("formConsulta:dataHora", new FacesMessage("A data e horário não podem ser antes de agora."));
 			return null;
-		}
+		}*/
 	}
 	
-	//Salvando consulta cancelada
-	public void cancelar(Consulta consulta)
+	//Excluir paciente
+	public String excluir(Paciente paciente)
 	{
-		consulta.setStatus("Cancelada");
-		cg.atualizar(consulta);
+		this.paciente = paciente;
+		return "editarConsulta";
+	}
+	
+	//Excluindo paciente
+	public String salvarExclusao()
+	{
+		pg.remover(paciente);
+		return "pacientes";
+		/*Calendar cal = Calendar.getInstance();
+		Date agora = cal.getTime();
+		
+		if(consulta.getDataHora().compareTo(agora) > 0)
+		{
+			cg.atualizar(consulta);
+			return "index";
+		}
+		else
+		{
+			FacesContext.getCurrentInstance().addMessage("formConsulta:dataHora", new FacesMessage("A data e horário não podem ser antes de agora."));
+			return null;
+		}*/
 	}
 }

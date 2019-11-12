@@ -1,0 +1,245 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+      
+  <ui:composition template="/WEB-INF/templates/templateEntidade.xhtml">
+  
+    <ui:define name="body">
+        <h:form id="formConsulta">           
+            <div class="form-group">
+                <h:outputLabel for="nome" value="Nome completo:"/>
+                <h:inputText class="form-control" id="nome" value="#{pacienteControlador.paciente.nome}" required="true" requiredMessage="O nome é obrigatório!" validateMessage="O nome deve ter entre 5 e 70 caracteres.">
+                     <f:validateLength minimum="5" maximum="70"/>
+                </h:inputText>
+                    
+                <small class="form-text text-danger">
+                    <h:message for="nome"/>
+                </small>
+            </div>
+            
+            <div class='row'>
+		        <div class='col-sm-4'>  
+		            <div class="form-group">
+		                <h:outputLabel for="cpf" value="CPF:"/>
+		                <h:inputText class="form-control" id="cpf" value="#{pacienteControlador.paciente.cpf}" required="true" requiredMessage="O CPF é obrigatório!" validateMessage="O CPF pode ter no máximo 9 dígitos e sem pontuação.">
+		                     <f:validateLength minimum="9" maximum="10" />
+		                </h:inputText>
+		                    
+		                <small class="form-text text-danger">
+		                    <h:message for="cpf"/>
+		                </small>
+		            </div>
+            	</div>
+            	
+            	<div class='col-sm-4'>  
+		            <div class="form-group">
+		                <h:outputLabel for="dataNascimento" value="Data e Horário:"/>
+		                <h:inputText class="form-control" id="dataHora" value="#{pacienteControlador.paciente.dataNascimento}" required="true" requiredMessage="A data de nascimento é obrigatória!" validateMessage="A data de nascimento deve estar no formato: dia/mês/ano!">
+		                     <f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
+		                </h:inputText>
+		                    
+		                <small class="form-text text-danger">
+		                    <h:message for="dataNascimento"/>
+		                </small>
+		            </div>
+            	</div>
+            </div>
+            
+            <div class='row'>
+		        <div class='col-sm-4'>  
+		            <div class="form-group">
+		                <h:outputLabel for="estadoCivil" value="Estado Civil:"/>
+		                <h:selectOneMenu class="form-control" id="estadoCivil" value="#{pacienteControlador.paciente.estadoCivil}" converterMessage="O estado civil deve ser válido.">
+		                    <f:selectItem noSelectionOption="true" itemLabel="--Selecione--"/>
+		                    <f:selectItem itemValue="Solteiro(a)" itemLabel="Solteiro(a)"/>
+		                    <f:selectItem itemValue="Casado(a)" itemLabel="Casado(a)"/>
+		                    <f:selectItem itemValue="Divorciado(a)" itemLabel="Divorciado(a)"/>
+		                    <f:selectItem itemValue="Viúvo(a)" itemLabel="Viúvo(a)"/>
+		                </h:selectOneMenu>  
+		                    
+		                <small class="form-text text-danger">
+		                    <h:message for="estadoCivil"/>
+		                </small>
+		            </div>
+            	</div>
+            	
+            	<div class='col-sm-4'>  
+		            <div class="form-group">
+		                <h:outputLabel for="sexo" value="Sexo:"/>
+		                <h:selectOneMenu class="form-control" id="sexo" value="#{pacienteControlador.paciente.sexo}" converterMessage="O sexo deve ser válido.">
+		                    <f:selectItem noSelectionOption="true" itemLabel="--Selecione--"/>
+		                    <f:selectItem itemValue="Masculino" itemLabel="Masculino"/>
+		                    <f:selectItem itemValue="Feminino" itemLabel="Feminino"/>
+		                </h:selectOneMenu>  
+		                    
+		                <small class="form-text text-danger">
+		                    <h:message for="sexo"/>
+		                </small>
+		            </div>
+            	</div>
+            	
+            	<div class='col-sm-4'>  
+		            <div class="form-group">
+		                <h:outputLabel for="fone" value="Telefone:"/>
+		                <h:inputText class="form-control" id="fone" value="#{pacienteControlador.paciente.fone}" validateMessage="O telefone pode ter no máximo 12 dígitos.">
+		                     <f:validateLength minimum="0" maximum="12" />
+		                </h:inputText>
+		                    
+		                <small class="form-text text-danger">
+		                    <h:message for="fone"/>
+		                </small>
+		            </div>
+            	</div>
+            </div>
+            
+            <div class='row'>
+		        <div class='col-sm-4'>  
+		            <div class="form-group">
+		                <h:outputLabel for="email" value="Email:"/>
+		                <h:inputText class="form-control" id="email" value="#{pacienteControlador.paciente.email}" validateMessage="O email pode ter no máximo 40 caracteres.">
+		                     <f:validateLength minimum="0" maximum="40" />
+		                </h:inputText> 
+		                    
+		                <small class="form-text text-danger">
+		                    <h:message for="email"/>
+		                </small>
+		            </div>
+            	</div>
+            	
+            	<div class='col-sm-4'>  
+		            <div class="form-group">
+		                <h:outputLabel for="profissao" value="Profissão"/>
+		                <h:inputText class="form-control" id="profissao" value="#{pacienteControlador.paciente.profissao}" validateMessage="O telefone pode ter no máximo 12 dígitos.">
+		                     <f:validateLength minimum="0" maximum="25" />
+		                </h:inputText>
+		                    
+		                <small class="form-text text-danger">
+		                    <h:message for="profissao"/>
+		                </small>
+		            </div>
+            	</div>
+            	
+            	<div class='col-sm-4'>  
+		            <div class="form-group">
+		                <h:outputLabel for="obs" value="Observações:"/>
+		                <h:inputText class="form-control" id="obs" value="#{pacienteControlador.paciente.obs}" validateMessage="As observações podem ter no máximo 30 caracteres.">
+		                     <f:validateLength minimum="0" maximum="30" />
+		                </h:inputText>
+		                    
+		                <small class="form-text text-danger">
+		                    <h:message for="obs"/>
+		                </small>
+		            </div>
+            	</div>
+            </div>
+            
+            <div class='row'>
+		        <div class='col-sm-4'>  
+		            <div class="form-group">
+		                <h:outputLabel for="logradouro" value="Logradouro:"/>
+		                <h:inputText class="form-control" id="logradouro" value="#{pacienteControlador.paciente.endereco.logradouro}" validateMessage="O logradouro pode ter no máximo 40 caracteres.">
+		                     <f:validateLength minimum="0" maximum="40" />
+		                </h:inputText> 
+		                    
+		                <small class="form-text text-danger">
+		                    <h:message for="logradouro"/>
+		                </small>
+		            </div>
+            	</div>
+            	
+            	<div class='col-sm-4'>  
+		            <div class="form-group">
+		                <h:outputLabel for="bairro" value="Bairro:"/>
+		                <h:inputText class="form-control" id="bairro" value="#{pacienteControlador.paciente.endereco.bairro}" validateMessage="O bairro pode ter no máximo 40 caracteres.">
+		                     <f:validateLength minimum="0" maximum="40" />
+		                </h:inputText> 
+		                    
+		                <small class="form-text text-danger">
+		                    <h:message for="logradouro"/>
+		                </small>
+		            </div>
+            	</div>
+            	
+            	<div class='col-sm-4'>  
+		            <div class="form-group">
+		                <h:outputLabel for="cidade" value="Cidade:"/>
+		                <h:inputText class="form-control" id="cidade" value="#{pacienteControlador.paciente.endereco.cidade}" validateMessage="A cidade pode ter no máximo 40 caracteres.">
+		                     <f:validateLength minimum="0" maximum="40" />
+		                </h:inputText> 
+		                    
+		                <small class="form-text text-danger">
+		                    <h:message for="cidade"/>
+		                </small>
+		            </div>
+            	</div>
+            </div>
+            
+            <div class='row'>
+		        <div class='col-sm-4'>  
+		            <div class="form-group">
+		                <h:outputLabel for="logradouro" value="Logradouro:"/>
+		                <h:inputText class="form-control" id="logradouro" value="#{pacienteControlador.paciente.endereco.logradouro}" validateMessage="O logradouro pode ter no máximo 40 caracteres.">
+		                     <f:validateLength minimum="0" maximum="40" />
+		                </h:inputText> 
+		                    
+		                <small class="form-text text-danger">
+		                    <h:message for="logradouro"/>
+		                </small>
+		            </div>
+            	</div>
+            	
+            	<div class='col-sm-4'>  
+		            <div class="form-group">
+		                <h:outputLabel for="numero" value="Número:"/>
+		                <h:inputText class="form-control" id="numero" value="#{pacienteControlador.paciente.endereco.numero}" validateMessage="O número deve estar entre 1 e 10000.">
+		                     <f:validateLength minimum="0" maximum="40" />
+		                </h:inputText> 
+		                    
+		                <small class="form-text text-danger">
+		                    <h:message for="numero"/>
+		                </small>
+		            </div>
+            	</div>
+            	
+            	<div class='col-sm-4'>  
+		            <div class="form-group">
+		                <h:outputLabel for="bairro" value="Bairro:"/>
+		                <h:inputText class="form-control" id="bairro" value="#{pacienteControlador.paciente.endereco.bairro}" validateMessage="O bairro pode ter no máximo 40 caracteres.">
+		                     <f:validateLength minimum="0" maximum="40" />
+		                </h:inputText> 
+		                    
+		                <small class="form-text text-danger">
+		                    <h:message for="logradouro"/>
+		                </small>
+		            </div>
+            	</div>
+            	
+            	<div class='col-sm-4'>  
+		            <div class="form-group">
+		                <h:outputLabel for="cidade" value="Cidade:"/>
+		                <h:inputText class="form-control" id="cidade" value="#{pacienteControlador.paciente.endereco.cidade}" validateMessage="A cidade pode ter no máximo 40 caracteres.">
+		                     <f:validateLength minimum="0" maximum="40" />
+		                </h:inputText> 
+		                    
+		                <small class="form-text text-danger">
+		                    <h:message for="cidade"/>
+		                </small>
+		            </div>
+            	</div>
+            </div>
+            
+            
+            
+            
+            <h:link value="Cancelar" outcome="index" class="btn btn-danger"/>
+            <ui:insert name="botaoPrincipal"/>
+        </h:form>
+        
+        <script>
+			document.getElementById("itemConsultas").classList.add("active");
+		</script>
+    </ui:define>
+    
+  </ui:composition>
+</html>

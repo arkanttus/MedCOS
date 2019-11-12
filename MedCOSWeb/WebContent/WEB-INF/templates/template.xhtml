@@ -53,34 +53,42 @@
 		<div id="wrapper">
 			<!-- Sidebar -->
 			<ul class="sidebar navbar-nav toggled">
-				<li class="nav-item active">
-					<a class="nav-link" href="index.html"> <i class="fas fa-fw fa-tachometer-alt"></i> 
+				<li class="nav-item" id="itemDashboard">
+					<h:link class="nav-link" outcome="index"> 
+						<i class="fas fa-fw fa-tachometer-alt"></i> 
 						<span>Dashboard</span>
-					</a>
+					</h:link>
 				</li>
-				<li class="nav-item dropdown">
-				]	<a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
-						<i class="fas fa-fw fa-folder"></i> 
-						<span>Pages</span>
-					</a>
-					<div class="dropdown-menu" aria-labelledby="pagesDropdown">
-						<h6 class="dropdown-header">Login Screens:</h6>
-						<a class="dropdown-item" href="login.html">Login</a> 
-						<a class="dropdown-item" href="register.html">Register</a> 
-						<a class="dropdown-item" href="forgot-password.html">Forgot Password</a>
-						<div class="dropdown-divider"></div>
-						<h6 class="dropdown-header">Other Pages:</h6>
-						<a class="dropdown-item" href="404.html">404 Page</a> 
-						<a class="dropdown-item" href="blank.html">Blank Page</a>
-					</div>
+				<li class="nav-item" id="itemConsultas">
+					<h:link class="nav-link" outcome="consultas"> 
+						<i class="fas fa-fw fa-clinic-medical"></i> 
+						<span>Consultas</span>
+					</h:link>
 				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="charts.html">
-					<i class="fas fa-fw fa-chart-area"></i> <span>Charts</span>
-				</a></li>
-				<li class="nav-item"><a class="nav-link" href="tables.html">
-						<i class="fas fa-fw fa-table"></i> <span>Tables</span>
-				</a></li>
+				<li class="nav-item" id="itemPacientes">
+					<h:link class="nav-link" outcome="pacientes"> 
+						<i class="fas fa-fw fa-users"></i> 
+						<span>Pacientes</span>
+					</h:link>
+				</li>
+				<li class="nav-item" id="itemMedicos">
+					<h:link class="nav-link" outcome="medicos"> 
+						<i class="fas fa-fw fa-user-md"></i> 
+						<span>Médicos</span>
+					</h:link>
+				</li>
+				<li class="nav-item" id="itemFuncionarios">
+					<h:link class="nav-link" outcome="funcionarios"> 
+						<i class="fas fa-fw fa-user-cog"></i> 
+						<span>Funcionários</span>
+					</h:link>
+				</li>
+				<li class="nav-item" id="itemDef">
+					<h:link class="nav-link" outcome="definicoes"> 
+						<i class="fas fa-fw fa-cogs"></i> 
+						<span>Definições</span>
+					</h:link>
+				</li>
 			</ul>
 	
 			<div id="content-wrapper">

@@ -22,7 +22,7 @@ import br.ufac.si.medcos.entidades.Funcionario;
 	@NamedQuery(name="Consulta.contarAtendidas", 
 		query="SELECT COUNT(*) FROM Consulta a WHERE a.status = 'Atendida' AND a.dataHora >= CURDATE() AND a.dataHora < (CURDATE()+1)"),
 	@NamedQuery(name="Consulta.contarMedicosAtendendo", 
-		query="SELECT COUNT(DISTINCT a.medico) FROM Consulta a WHERE a.dataHora >= CURDATE() AND a.dataHora < (CURDATE()+1)")
+		query="SELECT COUNT(DISTINCT a.medico) FROM Consulta a WHERE a.status = 'Pendente' AND a.dataHora >= CURDATE() AND a.dataHora < (CURDATE()+1)")
 })
 public class Consulta
 {

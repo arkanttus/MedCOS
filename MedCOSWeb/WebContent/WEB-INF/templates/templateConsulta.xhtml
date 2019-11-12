@@ -6,7 +6,7 @@
   <ui:composition template="/WEB-INF/templates/templateEntidade.xhtml">
   
     <ui:define name="body">
-        <h:form>
+        <h:form id="formConsulta">
             <div class="form-group">
                 <h:outputLabel for="paciente" value="Paciente:"/>
                 <h:selectOneMenu class="form-control" id="paciente" value="#{consultaControlador.consulta.paciente}" converter="pacienteConversor" required="true" requiredMessage="Paciente é obrigatório!" converterMessage="O paciente deve ser válido.">
@@ -58,9 +58,9 @@
 	                <h:outputLabel for="status" value="Status:"/>
 	                <h:selectOneMenu class="form-control" id="status" value="#{consultaControlador.consulta.status}" required="true" requiredMessage="O status é obrigatório!" converterMessage="O status deve ser válido.">
 	                    <f:selectItem noSelectionOption="true" itemLabel="--Selecione--"/>
-	                    <f:selectItem itemLabel="Pendente"/>
-	                    <f:selectItem itemLabel="Atendida"/>
-	                    <f:selectItem itemLabel="Cancelada"/>
+	                    <f:selectItem itemValue="Pendente" itemLabel="Pendente"/>
+	                    <f:selectItem itemValue="Atendida" itemLabel="Atendida"/>
+	                    <f:selectItem itemValue="Cancelada" itemLabel="Cancelada"/>
 	                </h:selectOneMenu>  
 	                    
 	                <small class="form-text text-danger">
@@ -83,6 +83,10 @@
             <h:link value="Cancelar" outcome="index" class="btn btn-danger"/>
             <ui:insert name="botaoPrincipal"/>
         </h:form>
+        
+        <script>
+			document.getElementById("itemConsultas").classList.add("active");
+		</script>
     </ui:define>
     
   </ui:composition>

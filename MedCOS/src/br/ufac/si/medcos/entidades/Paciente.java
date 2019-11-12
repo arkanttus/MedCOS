@@ -30,7 +30,9 @@ public class Paciente
     private String estadoCivil;
     @Column(nullable=true, length=12)
     private String fone;
-    @Column(nullable=true, length=20)
+    @Column(nullable=true, length=10)
+    private String sexo;
+    @Column(nullable=true, length=40)
     private String email;
     @Column(nullable=true, length=25)
     private String profissao;
