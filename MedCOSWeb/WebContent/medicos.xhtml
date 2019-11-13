@@ -1,0 +1,139 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+      
+  <ui:composition template="/WEB-INF/templates/templateEntidade.xhtml">
+    f
+    <ui:define name="titulo">Gerenciamento de Médicos</ui:define>
+    
+    <ui:define name="subtitulo">Gerenciamento de Médicos</ui:define>
+    
+    <ui:define name="subpagina">
+        <li class="breadcrumb-item active">Médicos</li>
+    </ui:define>
+    
+    <ui:define name="body">
+    	<h:form>
+			<div class="card mb-3">
+				<div class="card-header">
+					<i class="fas fa-table"></i> 
+					Médicos
+                    <h:commandLink action="#{medicoControlador.adicionar}" class="btn btn-success float-right" value="Novo médico">
+                        <i class="fas fa-plus"></i>
+                    </h:commandLink>
+				</div>
+				<div class="card-body">
+					<div class="table-responsive text-center">
+						<h:outputText value="Não há médicos!" class="h4 text-danger" rendered="#{empty medicoControlador.medicos}"/>
+					
+					    <h:dataTable value="#{medicoControlador.medicos}" var="medico" styleClass="table table-bordered" id="medicosTable" width="100%" cellspacing="0" rendered="#{!empty medicoControlador.medicos}">
+					        <h:column>
+	                            <f:facet name="header">Código</f:facet>
+	                            #{medico.id}
+	                        </h:column>
+					        
+					        <h:column>
+	                            <f:facet name="header">Nome</f:facet>
+	                            #{medico.nome}
+	                        </h:column>
+	                        
+	                        <h:column>
+	                            <f:facet name="header">CPF</f:facet>
+	                            #{medico.cpf}
+	                        </h:column>
+	                        
+	                        <h:column>
+	                            <f:facet name="header">Status</f:facet>
+	                            #{medico.status}
+	                        </h:column>
+	                        
+	                        <h:column>
+	                            <f:facet name="header">Operações</f:facet>
+	                            <h:commandLink action="#{medicoControlador.editar(medico)}" class="btn btn-success">
+	                                <i class="fas fa-edit"></i>
+	                            </h:commandLink>
+	                            <a href="#" class="btn btn-danger ml-2" data-toggle="modal" data-target="#medicoModal#{medico.id}">
+                                   <i class="far fa-trash-alt"></i>
+                                </a>
+	                        </h:column>
+					    </h:dataTable>
+					</div>
+				</div>
+				<div class="card-footer small text-muted">Updated yesterday
+					at 11:59 PM</div>
+			</div>
+		</h:form>
+		
+		<h:form>
+            <ui:repeat var="medico" value="#{medicoControlador.medicos}" varStatus="status">
+                <!-- Cancelar Consulta Modal-->
+                <div class="modal fade" id="medicoModal#{medico.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="medicoModalLabel">Deseja cancelar esta consulta?</h5>
+                                <button class="close" type="button" data-dismiss="modal"
+                                    aria-label="Close"><span aria-hidden="true">×</span></button>
+                            </div>
+                            <div class="modal-body">
+                                <p>Você deseja remover este médico?</p>
+
+                                <div class="form-group">
+					                <h:outputLabel for="nome" value="Nome completo:"/>
+					                <h:inputText class="form-control" id="nome" value="#{medico.nome}" disabled="true" requiredMessage="O nome é obrigatório!" validateMessage="O nome deve ter entre 5 e 70 caracteres.">
+					                     <f:validateLength minimum="5" maximum="70"/>
+					                </h:inputText>
+					                    
+					                <small class="form-text text-danger">
+					                    <h:message for="nome"/>
+					                </small>
+					            </div>
+					            
+					            <div class='row'>
+					                <div class='col-sm'>  
+					                    <div class="form-group">
+					                        <h:outputLabel for="cpf" value="CPF:"/>
+					                        <h:inputText class="form-control" id="cpf" value="#{medico.cpf}" disabled="true" required="true" requiredMessage="O CPF é obrigatório!" validateMessage="O CPF pode ter no máximo 9 dígitos e sem pontuação.">
+					                             <f:validateLength minimum="9" maximum="11" />
+					                        </h:inputText>
+					                            
+					                        <small class="form-text text-danger">
+					                            <h:message for="cpf"/>
+					                        </small>
+					                    </div>
+					                </div>
+					                
+					                <div class='col-sm'>  
+					                    <div class="form-group">
+					                        <h:outputLabel for="dataNascimento" value="Data de Nascimento:"/>
+					                        <h:inputText class="form-control" id="dataHora" value="#{medico.dataNascimento}" disabled="true" required="true" requiredMessage="A data de nascimento é obrigatória!" validateMessage="A data de nascimento deve estar no formato: dia/mês/ano!">
+					                             <f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
+					                        </h:inputText>
+					                            
+					                        <small class="form-text text-danger">
+					                            <h:message for="dataNascimento"/>
+					                        </small>
+					                    </div>
+					                </div>
+					            </div>
+
+                                <small class="form-text text-muted">Não é possível desfazer futuramente.</small>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button> 
+                                
+                                <h:commandButton class="btn btn-danger" action="#{medicoControlador.excluir(medico)}" value="Excluir"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ui:repeat>
+        </h:form>
+    
+    	<script>
+			document.getElementById("itemMedicos").classList.add("active");
+		</script>
+    </ui:define>
+  </ui:composition>
+</html>

@@ -9,6 +9,7 @@
         <h:form id="formConsulta">
             <div class="form-group">
                 <h:outputLabel for="paciente" value="Paciente:"/>
+                <span class="text-danger"> *</span>
                 <h:selectOneMenu class="form-control" id="paciente" value="#{consultaControlador.consulta.paciente}" converter="pacienteConversor" required="true" requiredMessage="Paciente é obrigatório!" converterMessage="O paciente deve ser válido.">
 	                <f:selectItem noSelectionOption="true" itemLabel="--Selecione--"/>
 	                <f:selectItems value="#{consultaControlador.pacientes}" var="paciente" itemValue="#{paciente}" itemLabel="#{paciente.nome} (#{paciente.cpf})"/>
@@ -21,6 +22,7 @@
             
             <div class="form-group">
                 <h:outputLabel for="medico" value="Médico:"/>
+                <span class="text-danger"> *</span>
                 <h:selectOneMenu class="form-control" id="medico" value="#{consultaControlador.consulta.medico}" converter="medicoConversor" required="true" requiredMessage="Médico é obrigatório!" converterMessage="O médico deve ser válido!" validateMessage="Médico inválido!">
                     <f:selectItem noSelectionOption="true" itemLabel="--Selecione--"/>
                     <f:selectItems value="#{consultaControlador.medicos}" var="medico" itemValue="#{medico}" itemLabel="#{medico.nome}"/>
@@ -33,6 +35,7 @@
             
             <div class="form-group">
                 <h:outputLabel for="dataHora" value="Data e Horário:"/>
+                <span class="text-danger"> *</span>
                 <h:inputText class="form-control" id="dataHora" value="#{consultaControlador.consulta.dataHora}" required="true" requiredMessage="O horário é obrigatório!" validateMessage="O horário deve estar no formato: dia/mês/ano horas:minutos!" converterMessage="O horário deve estar no formato: dia/mês/ano horas:minutos!">
                      <f:convertDateTime type="date" pattern="dd/MM/yyyy HH:mm"/>
                 </h:inputText>
@@ -56,6 +59,7 @@
 	            
 	            <div class="form-group">
 	                <h:outputLabel for="status" value="Status:"/>
+	                <span class="text-danger"> *</span>
 	                <h:selectOneMenu class="form-control" id="status" value="#{consultaControlador.consulta.status}" required="true" requiredMessage="O status é obrigatório!" converterMessage="O status deve ser válido.">
 	                    <f:selectItem noSelectionOption="true" itemLabel="--Selecione--"/>
 	                    <f:selectItem itemValue="Pendente" itemLabel="Pendente"/>

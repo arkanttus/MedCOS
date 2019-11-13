@@ -6,9 +6,10 @@
   <ui:composition template="/WEB-INF/templates/templateEntidade.xhtml">
   
     <ui:define name="body">
-        <h:form id="formConsulta">           
+        <h:form id="formPaciente">           
             <div class="form-group">
                 <h:outputLabel for="nome" value="Nome completo:"/>
+                <span class="text-danger"> *</span>
                 <h:inputText class="form-control" id="nome" value="#{pacienteControlador.paciente.nome}" required="true" requiredMessage="O nome é obrigatório!" validateMessage="O nome deve ter entre 5 e 70 caracteres.">
                      <f:validateLength minimum="5" maximum="70"/>
                 </h:inputText>
@@ -22,6 +23,7 @@
 		        <div class='col-sm'>  
 		            <div class="form-group">
 		                <h:outputLabel for="cpf" value="CPF:"/>
+		                <span class="text-danger"> *</span>
 		                <h:inputText class="form-control" id="cpf" value="#{pacienteControlador.paciente.cpf}" required="true" requiredMessage="O CPF é obrigatório!" validateMessage="O CPF pode ter no máximo 9 dígitos e sem pontuação.">
 		                     <f:validateLength minimum="9" maximum="11" />
 		                </h:inputText>
@@ -35,6 +37,7 @@
             	<div class='col-sm'>  
 		            <div class="form-group">
 		                <h:outputLabel for="dataNascimento" value="Data de Nascimento:"/>
+		                <span class="text-danger"> *</span>
 		                <h:inputText class="form-control" id="dataHora" value="#{pacienteControlador.paciente.dataNascimento}" required="true" requiredMessage="A data de nascimento é obrigatória!" validateMessage="A data de nascimento deve estar no formato: dia/mês/ano!">
 		                     <f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
 		                </h:inputText>

@@ -1,0 +1,107 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+      
+  <ui:composition template="/WEB-INF/templates/templateEntidade.xhtml">
+  
+    <ui:define name="body">
+        <h:form id="formConsulta">           
+            <div class="form-group">
+                <h:outputLabel for="nome" value="Nome completo:"/>
+                <span class="text-danger"> *</span>
+                <h:inputText class="form-control" id="nome" value="#{medicoControlador.medico.nome}" required="true" requiredMessage="O nome é obrigatório!" validateMessage="O nome deve ter entre 5 e 70 caracteres.">
+                     <f:validateLength minimum="5" maximum="70"/>
+                </h:inputText>
+                    
+                <small class="form-text text-danger">
+                    <h:message for="nome"/>
+                </small>
+            </div>
+            
+            <div class='row'>
+		        <div class='col-sm'>  
+		            <div class="form-group">
+		                <h:outputLabel for="cpf" value="CPF:"/>
+		                <span class="text-danger"> *</span>
+		                <h:inputText class="form-control" id="cpf" value="#{medicoControlador.medico.cpf}" required="true" requiredMessage="O CPF é obrigatório!" validateMessage="O CPF pode ter no máximo 9 dígitos e sem pontuação.">
+		                     <f:validateLength minimum="9" maximum="11" />
+		                </h:inputText>
+		                    
+		                <small class="form-text text-danger">
+		                    <h:message for="cpf"/>
+		                </small>
+		            </div>
+            	</div>
+            	
+            	<div class='col-sm'>  
+		            <div class="form-group">
+		                <h:outputLabel for="dataNascimento" value="Data de Nascimento:"/>
+		                <span class="text-danger"> *</span>
+		                <h:inputText class="form-control" id="dataHora" value="#{medicoControlador.medico.dataNascimento}" required="true" requiredMessage="A data de nascimento é obrigatória!" validateMessage="A data de nascimento deve estar no formato: dia/mês/ano!">
+		                     <f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
+		                </h:inputText>
+		                    
+		                <small class="form-text text-danger">
+		                    <h:message for="dataNascimento"/>
+		                </small>
+		            </div>
+            	</div>
+            </div>
+            
+            <div class='row'>
+				<div class='col-sm'>  
+		            <div class="form-group">
+		                <h:outputLabel for="crm" value="CRM:"/>
+		                <span class="text-danger"> *</span>
+		                <h:inputText class="form-control" id="crm" value="#{medicoControlador.medico.crm}" validateMessage="O CRM pode ter no máximo 10 dígitos." required="true" requiredMessage="O CRM é obrigatório!">
+		                     <f:validateLength minimum="1" maximum="10" />
+		                </h:inputText>
+		                    
+		                <small class="form-text text-danger">
+		                    <h:message for="crm"/>
+		                </small>
+		            </div>
+            	</div>
+            	
+            	<div class='col-sm'>  
+		            <div class="form-group">
+		                <h:outputLabel for="especialidade" value="Especialidade:"/>
+		                <h:inputText class="form-control" id="especialidade" value="#{medicoControlador.medico.especialidade}" validateMessage="A especialidade pode ter no máximo 50 caracteres.">
+		                     <f:validateLength minimum="0" maximum="50" />
+		                </h:inputText>
+		                    
+		                <small class="form-text text-danger">
+		                    <h:message for="especialidade"/>
+		                </small>
+		            </div>
+            	</div>
+
+		        <div class='col-sm'>  
+		            <div class="form-group">
+		                <h:outputLabel for="status" value="Status:"/>
+		                <span class="text-danger"> *</span>
+		                <h:selectOneMenu class="form-control" id="status" value="#{medicoControlador.medico.status}" converterMessage="O status deve ser válido." required="true" requiredMessage="O status é obrigatório!">
+		                    <f:selectItem noSelectionOption="true" itemLabel="--Selecione--"/>
+		                    <f:selectItem itemValue="Ativo" itemLabel="Ativo"/>
+		                    <f:selectItem itemValue="Inativo" itemLabel="Inativo"/>
+		                </h:selectOneMenu>  
+		                    
+		                <small class="form-text text-danger">
+		                    <h:message for="status"/>
+		                </small>
+		            </div>
+            	</div>
+            </div>
+            
+            <h:link value="Cancelar" outcome="medicos" class="btn btn-danger"/>
+            <ui:insert name="botaoPrincipal"/>
+        </h:form>
+        
+        <script>
+			document.getElementById("itemMedicos").classList.add("active");
+		</script>
+    </ui:define>
+    
+  </ui:composition>
+</html>

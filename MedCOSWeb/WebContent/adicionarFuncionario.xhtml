@@ -1,0 +1,22 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+      
+  <ui:composition template="/WEB-INF/templates/templateFuncionario.xhtml">
+    
+    <ui:define name="titulo">Novo funcionário</ui:define>
+    
+    <ui:define name="subtitulo">Novo funcionário</ui:define>
+    
+    <ui:define name="subpagina">
+        <li class="breadcrumb-item"><h:link value="Funcionários" outcome="funcionarios"/></li>
+        <li class="breadcrumb-item active">Novo funcionário</li>
+    </ui:define>
+    
+    <ui:define name="botaoPrincipal">
+        <h:commandButton value="Adicionar" action="#{funcionarioControlador.salvarInclusao}" class="btn btn-success ml-2"/>
+    </ui:define>
+    
+  </ui:composition>
+</html>

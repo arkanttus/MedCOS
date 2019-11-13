@@ -7,7 +7,8 @@ import javax.persistence.*;
 @Entity
 @Table(name="funcionarios")
 @NamedQueries({
-	@NamedQuery(name="Funcionario.todos", query="SELECT a FROM Funcionario a")
+	@NamedQuery(name="Funcionario.todos", query="SELECT a FROM Funcionario a"),
+	@NamedQuery(name="Funcionario.todosPorNome", query="SELECT a FROM Funcionario a ORDER BY a.nome")
 })
 public class Funcionario
 {
@@ -23,28 +24,22 @@ public class Funcionario
     private Date dataNascimento;
     @Column(nullable=true, length=20)
     private String funcao;
-    @Column(nullable=false, length=5)
-    private Boolean ativo;
+    @Column(nullable=false, length=10)
+    private String status;
     @Column(nullable=false)
     private Integer permissao;
     
-    @ManyToOne()
-    @JoinColumn(name="endereco", nullable=false)
-    private Endereco endereco;
-    
     public Funcionario() {}
 
-	public Funcionario(String nome, String cpf, Date dataNascimento, String funcao, Boolean ativo, Integer permissao,
-			Endereco endereco)
+	public Funcionario(String nome, String cpf, Date dataNascimento, String funcao, String status, Integer permissao)
 	{
 		super();
 		this.nome = nome;
 		this.cpf = cpf;
 		this.dataNascimento = dataNascimento;
 		this.funcao = funcao;
-		this.ativo = ativo;
+		this.status = status;
 		this.permissao = permissao;
-		this.endereco = endereco;
 	}
 
 	public Integer getId()
@@ -97,14 +92,14 @@ public class Funcionario
 		this.funcao = funcao;
 	}
 
-	public Boolean getAtivo()
+	public String getStatus()
 	{
-		return ativo;
+		return status;
 	}
 
-	public void setAtivo(Boolean ativo)
+	public void setStatus(String status)
 	{
-		this.ativo = ativo;
+		this.status = status;
 	}
 
 	public Integer getPermissao()
@@ -115,15 +110,5 @@ public class Funcionario
 	public void setPermissao(Integer permissao)
 	{
 		this.permissao = permissao;
-	}
-
-	public Endereco getEndereco()
-	{
-		return endereco;
-	}
-
-	public void setEndereco(Endereco endereco)
-	{
-		this.endereco = endereco;
 	}
 }

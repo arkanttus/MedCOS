@@ -1,0 +1,109 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+      
+  <ui:composition template="/WEB-INF/templates/templateEntidade.xhtml">
+  
+    <ui:define name="body">
+        <h:form id="formFuncionario">           
+            <div class="form-group">
+                <h:outputLabel for="nome" value="Nome completo:"/>
+                <span class="text-danger"> *</span>
+                <h:inputText class="form-control" id="nome" value="#{funcionarioControlador.funcionario.nome}" required="true" requiredMessage="O nome é obrigatório!" validateMessage="O nome deve ter entre 5 e 70 caracteres.">
+                     <f:validateLength minimum="5" maximum="70"/>
+                </h:inputText>
+                    
+                <small class="form-text text-danger">
+                    <h:message for="nome"/>
+                </small>
+            </div>
+            
+            <div class='row'>
+		        <div class='col-sm'>  
+		            <div class="form-group">
+		                <h:outputLabel for="cpf" value="CPF:"/>
+		                <span class="text-danger"> *</span>
+		                <h:inputText class="form-control" id="cpf" value="#{funcionarioControlador.funcionario.cpf}" required="true" requiredMessage="O CPF é obrigatório!" validateMessage="O CPF pode ter no máximo 9 dígitos e sem pontuação.">
+		                     <f:validateLength minimum="9" maximum="11" />
+		                </h:inputText>
+		                    
+		                <small class="form-text text-danger">
+		                    <h:message for="cpf"/>
+		                </small>
+		            </div>
+            	</div>
+            	
+            	<div class='col-sm'>  
+		            <div class="form-group">
+		                <h:outputLabel for="dataNascimento" value="Data de Nascimento:"/>
+		                <span class="text-danger"> *</span>
+		                <h:inputText class="form-control" id="dataHora" value="#{funcionarioControlador.funcionario.dataNascimento}" required="true" requiredMessage="A data de nascimento é obrigatória!" validateMessage="A data de nascimento deve estar no formato: dia/mês/ano!">
+		                     <f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
+		                </h:inputText>
+		                    
+		                <small class="form-text text-danger">
+		                    <h:message for="dataNascimento"/>
+		                </small>
+		            </div>
+            	</div>
+            </div>
+            
+            <div class='row'>
+				<div class='col-sm'>  
+		            <div class="form-group">
+		                <h:outputLabel for="funcao" value="Função:"/>
+		                <h:inputText class="form-control" id="funcao" value="#{funcionarioControlador.funcionario.funcao}" validateMessage="A função pode ter no máximo 20 caracteres.">
+		                     <f:validateLength minimum="0" maximum="20" />
+		                </h:inputText>
+		                    
+		                <small class="form-text text-danger">
+		                    <h:message for="funcao"/>
+		                </small>
+		            </div>
+            	</div>
+            	
+            	<div class='col-sm'>  
+		            <div class="form-group">
+		                <h:outputLabel for="permissao" value="Permissão"/>
+		                <span class="text-danger"> *</span>
+		                <h:selectOneMenu class="form-control" id="permissao" value="#{funcionarioControlador.funcionario.permissao}" converterMessage="A permissão deve ser válida." required="true" requiredMessage="A permissão é obrigatória!">
+		                    <f:selectItem noSelectionOption="true" itemLabel="--Selecione--"/>
+		                    <f:selectItem itemValue="1" itemLabel="Comum"/>
+		                    <f:selectItem itemValue="2" itemLabel="Gerente"/>
+		                </h:selectOneMenu>  
+		                    
+		                <small class="form-text text-danger">
+		                    <h:message for="permissao"/>
+		                </small>
+		            </div>
+            	</div>
+
+		        <div class='col-sm'>  
+		            <div class="form-group">
+		                <h:outputLabel for="status" value="Status:"/>
+		                <span class="text-danger"> *</span>
+		                <h:selectOneMenu class="form-control" id="status" value="#{funcionarioControlador.funcionario.status}" converterMessage="O status deve ser válido." required="true" requiredMessage="O status é obrigatório!">
+		                    <f:selectItem noSelectionOption="true" itemLabel="--Selecione--"/>
+		                    <f:selectItem itemValue="Ativo" itemLabel="Ativo"/>
+		                    <f:selectItem itemValue="Inativo" itemLabel="Inativo"/>
+		                </h:selectOneMenu>  
+		                    
+		                <small class="form-text text-danger">
+		                    <h:message for="status"/>
+		                </small>
+		            </div>
+            	</div>
+            </div>
+            
+            <h:link value="Cancelar" outcome="funcionarios" class="btn btn-danger"/>
+            <ui:insert name="botaoPrincipal"/>
+        </h:form>
+        
+        <script>
+			document.getElementById("itemFuncionarios").classList.add("active");
+		</script>
+    </ui:define>
+    
+  </ui:composition>
+</html>

@@ -26,8 +26,8 @@ public class Medico
     @Column(nullable=false, length=10)
     @Temporal(TemporalType.DATE)
     private Date dataNascimento;
-    @Column(nullable=false, length=1)
-    private Boolean ativo;
+    @Column(nullable=false, length=10)
+    private String status;
     @Column(nullable=false, length=10)
     private String crm;
     @Column(nullable=true, length=50)
@@ -35,13 +35,13 @@ public class Medico
 
     public Medico() {}
 
-	public Medico(String nome, String cpf, Date dataNascimento, Boolean ativo, String crm, String especialidade)
+	public Medico(String nome, String cpf, Date dataNascimento, String status, String crm, String especialidade)
 	{
 		super();
 		this.nome = nome;
 		this.cpf = cpf;
 		this.dataNascimento = dataNascimento;
-		this.ativo = ativo;
+		this.status = status;
 		this.crm = crm;
 		this.especialidade = especialidade;
 	}
@@ -86,14 +86,14 @@ public class Medico
 		this.dataNascimento = dataNascimento;
 	}
 
-	public Boolean getAtivo()
+	public String getStatus()
 	{
-		return ativo;
+		return status;
 	}
 
-	public void setAtivo(Boolean ativo)
+	public void setStatus(String status)
 	{
-		this.ativo = ativo;
+		this.status = status;
 	}
 
 	public String getCrm()
