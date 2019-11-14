@@ -1,0 +1,66 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+      
+  <ui:composition template="/WEB-INF/templates/templateEntidade.xhtml">
+  
+    <ui:define name="body">
+        <h:form id="formMolde" class="container">           
+            <div class="form-group">
+                <h:outputLabel for="descricao" value="Descrição:"/>
+                <span class="text-danger"> *</span>
+                <h:inputText class="form-control" id="descricao" value="#{moldeControlador.molde.descricao}"/>
+                    
+                <small class="form-text text-danger">
+                    <h:message for="descricao"/>
+                </small>
+            </div>
+            
+            <ui:repeat var="pergunta" value="#{moldeControlador.molde.perguntas}" varStatus="status">
+	            <div class='row'>
+			        <div class='col-sm'>  
+			            <div class="form-group">
+			                <h:outputLabel for="pergunta#{status.index}" value="Pergunta #{status.index+1}:">
+			                	<h:commandLink value="X" action="#{moldeControlador.removerPergunta(pergunta)}" class="badge badge-danger ml-2"/>
+			                </h:outputLabel>
+			                <h:inputText class="form-control" id="pergunta#{status.index}" value="#{pergunta.descricao}" validateMessage="A pergunta pode ter no máximo 30 caracteres.">
+			                     <f:validateLength minimum="2" maximum="30" />
+			                </h:inputText>
+			                    
+			                <small class="form-text text-danger">
+			                    <h:message for="cpf"/>
+			                </small>
+			            </div>
+	            	</div>
+	            	
+	            	<div class='col-sm-2'>  
+			            <div class="form-group">
+			                <h:outputLabel for="tipo#{status.index}" value="Tipo:"/>
+			                <h:selectOneMenu class="form-control" id="tipo#{status.index}" value="#{pergunta.tipo}" converterMessage="O status deve ser válido.">
+			                    <f:selectItem itemValue="1" itemLabel="Sim/Não"/>
+			                    <f:selectItem itemValue="2" itemLabel="Escrita"/>
+			                </h:selectOneMenu>  
+			                    
+			                <small class="form-text text-danger">
+			                    <h:message for="tipo#{status.index}"/>
+			                </small>
+			            </div>
+	            	</div>
+	            </div>
+	        </ui:repeat>
+	        <div class="form-group">
+	        	<h:commandButton value="Nova pergunta" action="#{moldeControlador.adicionarPergunta}" class="btn btn-success btn-block"/>
+	        </div>
+            
+            <h:link value="Cancelar" outcome="moldes" class="btn btn-danger"/>
+            <ui:insert name="botaoPrincipal"/>
+        </h:form>
+        
+        <script>
+			document.getElementById("itemMoldes").classList.add("active");
+		</script>
+    </ui:define>
+    
+  </ui:composition>
+</html>

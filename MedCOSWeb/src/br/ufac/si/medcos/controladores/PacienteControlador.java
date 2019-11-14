@@ -38,6 +38,11 @@ public class PacienteControlador
 		return pg.recuperarTodosPorNome();
 	}
 	
+	public PacienteGerente getGerente()
+	{
+		return pg;
+	}
+	
 	//====================// Rotas //====================//
 	
 	//Inserção de novo paciente

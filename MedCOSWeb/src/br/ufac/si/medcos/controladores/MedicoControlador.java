@@ -38,6 +38,11 @@ public class MedicoControlador
 		return mg.recuperarTodosPorNome();
 	}
 	
+	public MedicoGerente getGerente()
+	{
+		return mg;
+	}
+	
 	//====================// Rotas //====================//
 	
 	//Inserção de novo medico

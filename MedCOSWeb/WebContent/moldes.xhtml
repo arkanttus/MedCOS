@@ -1,0 +1,134 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+      
+  <ui:composition template="/WEB-INF/templates/templateEntidade.xhtml">
+  
+  	<ui:define name="titulo">Moldes de Anamnese</ui:define>
+    
+    <ui:define name="subtitulo">Moldes de Anamnese</ui:define>
+    
+    <ui:define name="subpagina">
+        <li class="breadcrumb-item active">Moldes</li>
+    </ui:define>
+  
+    <ui:define name="body">
+        <h:form>
+			<div class="card mb-3">
+				<div class="card-header">
+					<i class="fas fa-table"></i> 
+					Moldes
+                    <h:commandLink action="#{moldeControlador.adicionar}" class="btn btn-success float-right" value="Novo molde">
+                        <i class="fas fa-plus"></i>
+                    </h:commandLink>
+				</div>
+				<div class="card-body">
+					<div class="table-responsive text-center">
+						<h:outputText value="Não há moldes de anamnese!" class="h4 text-danger" rendered="#{empty moldeControlador.moldes}"/>
+					
+					    <h:dataTable value="#{moldeControlador.moldes}" var="molde" styleClass="table table-bordered" id="moldesTable" width="100%" cellspacing="0" rendered="#{!empty moldeControlador.moldes}">
+					        <h:column>
+	                            <f:facet name="header">Código</f:facet>
+	                            #{molde.id}
+	                        </h:column>
+					        
+					        <h:column>
+	                            <f:facet name="header">Descrição</f:facet>
+	                            #{molde.descricao}
+	                        </h:column>
+	                        
+	                        <h:column>
+	                            <f:facet name="header">Perguntas</f:facet>
+	                            #{molde.perguntas.size()}
+	                        </h:column>
+	                        
+	                        <h:column>
+	                            <f:facet name="header">Data de criação</f:facet>
+	                            <h:outputText value="#{molde.criacao}">
+	                                <f:convertDateTime type="date" pattern="dd/MM/yyyy HH:mm"/>
+	                            </h:outputText>
+	                        </h:column>
+	                        
+	                        <h:column>
+	                            <f:facet name="header">Operações</f:facet>
+	                            <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#moldeVModal#{molde.id}">
+                                   <i class="fas fa-eye"></i>
+                                </a>
+	                            <h:commandLink action="#{moldeControlador.editar(molde)}" class="btn btn-success ml-2">
+	                                <i class="fas fa-edit"></i>
+	                            </h:commandLink>
+	                            <a href="#" class="btn btn-danger ml-2" data-toggle="modal" data-target="#moldeDModal#{molde.id}">
+                                   <i class="fas fa-trash-alt"></i>
+                                </a>
+	                        </h:column>
+					    </h:dataTable>
+					</div>
+				</div>
+				<div class="card-footer small text-muted">Updated yesterday
+					at 11:59 PM</div>
+			</div>
+		</h:form>
+		
+		<ui:repeat var="molde" value="#{moldeControlador.moldes}" varStatus="status">
+			<!-- Cancelar Consulta Modal-->
+			<div class="modal fade" id="moldeDModal#{molde.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="moldeVModalLabel">#{molde.descricao}</h5>
+							<button class="close" type="button" data-dismiss="modal"
+								aria-label="Close"><span aria-hidden="true">×</span></button>
+						</div>
+						<div class="modal-body">
+							<ui:repeat var="pergunta" value="#{molde.perguntas}" varStatus="status2">
+								<div class="form-group">
+									<h:outputLabel for="pergunta#{status2.index}" value="Pergunta #{status2.index+1}:"/>
+									<h:inputText id="pergunta#{status2.index}" class="form-control" value="#{pergunta.descricao}" disabled="true"/>
+								</div>
+							</ui:repeat>
+						</div>
+						<div class="modal-footer">
+							<button class="btn btn-secondary" type="button" data-dismiss="modal">Fechar</button> 
+							<h:commandButton class="btn btn-danger" action="#{moldeControlador.realizarExclusao(molde)}" value="Excluir"/>
+						</div>
+					</div>
+				</div>
+			</div>
+		</ui:repeat>
+		
+		<h:form>
+			<ui:repeat var="molde" value="#{moldeControlador.moldes}" varStatus="status">
+				<!-- Cancelar Consulta Modal-->
+				<div class="modal fade" id="moldeVModal#{molde.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="moldeVModalLabel">#{molde.descricao}</h5>
+								<button class="close" type="button" data-dismiss="modal"
+									aria-label="Close"><span aria-hidden="true">×</span></button>
+							</div>
+							<div class="modal-body">
+								<ui:repeat var="pergunta" value="#{molde.perguntas}" varStatus="status2">
+									<div class="form-group">
+										<h:outputLabel for="pergunta#{status2.index}" value="Pergunta #{status2.index+1}:"/>
+										<h:inputText id="pergunta#{status2.index}" class="form-control" value="#{pergunta.descricao}" disabled="true"/>
+									</div>
+								</ui:repeat>
+							</div>
+							<div class="modal-footer">
+								<button class="btn btn-secondary" type="button" data-dismiss="modal">Fechar</button> 
+							</div>
+						</div>
+					</div>
+				</div>
+			</ui:repeat>
+		</h:form>
+        
+        <script>
+			document.getElementById("itemMoldes").classList.add("active");
+		</script>
+    </ui:define>
+    
+  </ui:composition>
+</html>

@@ -1,23 +1,33 @@
 package br.ufac.si.medcos.conversores;
 
+import javax.el.ELContext;
+import javax.el.ELResolver;
 import javax.faces.component.*;
 import javax.faces.context.*;
 import javax.faces.convert.*;
 
+import br.ufac.si.medcos.controladores.MedicoControlador;
 import br.ufac.si.medcos.entidades.Medico;
 import br.ufac.si.medcos.gerentes.MedicoGerente;
 
 @FacesConverter(value="medicoConversor", forClass=Medico.class)
 public class MedicoConversor implements Converter 
 {
-	MedicoGerente pg = new MedicoGerente();
+	MedicoGerente mg = new MedicoGerente();
 	
 	public Object getAsObject(FacesContext context, UIComponent component, String value) 
 	{
 		if(value == null || value.isEmpty())
 			return null;
 		
-		return pg.recuperar(Medico.class, Integer.valueOf(value));
+		if(mg == null)
+		{
+			ELContext elContext = context.getELContext();
+			ELResolver elResolver = elContext.getELResolver();
+			mg = ((MedicoControlador) elResolver.getValue(elContext, null, "medicoControlador")).getGerente();
+		}
+		
+		return mg.recuperar(Medico.class, Integer.valueOf(value));
 	}
 
 	public String getAsString(FacesContext context, UIComponent component, Object value) 

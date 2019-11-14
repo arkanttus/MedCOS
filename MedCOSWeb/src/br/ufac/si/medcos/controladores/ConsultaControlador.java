@@ -16,15 +16,11 @@ import br.ufac.si.medcos.entidades.*;
 public class ConsultaControlador
 {
 	private ConsultaGerente cg;
-	private PacienteGerente pg;
-	private MedicoGerente mg;
 	private Consulta consulta;
 	
 	public ConsultaControlador()
 	{
 		cg = new ConsultaGerente();
-		pg = new PacienteGerente();
-		mg = new MedicoGerente();
 	}
 	
 	public Consulta getConsulta()
@@ -59,16 +55,6 @@ public class ConsultaControlador
 	public long getMedicosAtendendo()
 	{
 		return cg.contarMedicosAtendendo();
-	}
-	
-	public List<Paciente> getPacientes()
-	{
-		return pg.recuperarTodosPorNome();
-	}
-	
-	public List<Medico> getMedicos()
-	{
-		return mg.recuperarTodosPorNome();
 	}
 	
 	//====================// Rotas //====================//

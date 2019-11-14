@@ -83,10 +83,10 @@
 						<span>Funcionários</span>
 					</h:link>
 				</li>
-				<li class="nav-item" id="itemDef">
-					<h:link class="nav-link" outcome="definicoes"> 
+				<li class="nav-item" id="itemMoldes">
+					<h:link class="nav-link" outcome="moldes"> 
 						<i class="fas fa-fw fa-cogs"></i> 
-						<span>Definições</span>
+						<span>Moldes</span>
 					</h:link>
 				</li>
 			</ul>
@@ -96,11 +96,18 @@
 				<div class="container-fluid">
 	
 					<ui:insert name="pagina">
-						<!-- Breadcrumbs-->
-						<ol class="breadcrumb">
-							<li class="breadcrumb-item"><h:link value="Dashboard" outcome="index"/></li>
-							<li class="breadcrumb-item active">Informativo</li>
-						</ol>
+						<!-- Page Heading -->
+				        <div class="row">
+				            <div class="col-lg-12">
+				                <h1 class="page-header">Dashboard</h1>
+				                
+				                <!-- Breadcrumbs-->
+				                <ol class="breadcrumb">
+				                    <li class="breadcrumb-item"><h:link value="Dashboard" outcome="index"/></li>
+									<li class="breadcrumb-item active">Informativo</li>
+				                </ol>
+				            </div>
+				        </div>
 					</ui:insert>
 					
 					<ui:insert name="selos"/>

@@ -14,6 +14,8 @@ import br.ufac.si.medcos.entidades.Pergunta;
 @NamedQueries({
 	@NamedQuery(name="Molde.todos", 
 		query="SELECT a FROM Molde a"), 
+	@NamedQuery(name="Molde.todosPorCriacao", 
+		query="SELECT a FROM Molde a ORDER BY a.criacao DESC"),
 	@NamedQuery(name="Molde.todosPorDescricao", 
 		query="SELECT a FROM Molde a ORDER BY a.descricao"),
 	@NamedQuery(name="Molde.todosPorDescricaoContendo", 
@@ -35,12 +37,16 @@ public class Molde
     inverseJoinColumns=@JoinColumn(name="pergunta"))
     private List<Pergunta> perguntas;
     
-    @ManyToMany()
+    @ManyToMany(fetch=FetchType.LAZY)
     @JoinTable(name="moldes_responsaveis", joinColumns=@JoinColumn(name="molde"), 
     inverseJoinColumns=@JoinColumn(name="funcionario"))
     private List<Funcionario> responsaveis;
     
-    public Molde() {}
+    public Molde() 
+    {
+    	this.perguntas = new ArrayList<Pergunta>();
+		this.responsaveis = new ArrayList<Funcionario>();
+    }
     
 	public Molde(String descricao, Date criacao)
 	{

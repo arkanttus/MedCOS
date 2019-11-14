@@ -6,13 +6,13 @@
   <ui:composition template="/WEB-INF/templates/templateEntidade.xhtml">
   
     <ui:define name="body">
-        <h:form id="formConsulta">
+        <h:form id="formConsulta" class="container">
             <div class="form-group">
                 <h:outputLabel for="paciente" value="Paciente:"/>
                 <span class="text-danger"> *</span>
                 <h:selectOneMenu class="form-control" id="paciente" value="#{consultaControlador.consulta.paciente}" converter="pacienteConversor" required="true" requiredMessage="Paciente é obrigatório!" converterMessage="O paciente deve ser válido.">
 	                <f:selectItem noSelectionOption="true" itemLabel="--Selecione--"/>
-	                <f:selectItems value="#{consultaControlador.pacientes}" var="paciente" itemValue="#{paciente}" itemLabel="#{paciente.nome} (#{paciente.cpf})"/>
+	                <f:selectItems value="#{pacienteControlador.pacientes}" var="paciente" itemValue="#{paciente}" itemLabel="#{paciente.nome} (#{paciente.cpf})"/>
 	            </h:selectOneMenu>  
                     
                 <small class="form-text text-danger">
@@ -25,7 +25,7 @@
                 <span class="text-danger"> *</span>
                 <h:selectOneMenu class="form-control" id="medico" value="#{consultaControlador.consulta.medico}" converter="medicoConversor" required="true" requiredMessage="Médico é obrigatório!" converterMessage="O médico deve ser válido!" validateMessage="Médico inválido!">
                     <f:selectItem noSelectionOption="true" itemLabel="--Selecione--"/>
-                    <f:selectItems value="#{consultaControlador.medicos}" var="medico" itemValue="#{medico}" itemLabel="#{medico.nome}"/>
+                    <f:selectItems value="#{medicoControlador.medicos}" var="medico" itemValue="#{medico}" itemLabel="#{medico.nome}"/>
                 </h:selectOneMenu>  
                     
                 <small class="form-text text-danger">
