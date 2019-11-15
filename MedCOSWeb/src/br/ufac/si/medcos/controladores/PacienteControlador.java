@@ -17,6 +17,7 @@ public class PacienteControlador
 {
 	private PacienteGerente pg;
 	private Paciente paciente;
+	private String termo;
 	
 	public PacienteControlador()
 	{
@@ -32,10 +33,25 @@ public class PacienteControlador
 	{
 		this.paciente = paciente;
 	}
+
+	public String getTermo()
+	{
+		return termo;
+	}
+
+	public void setTermo(String termo)
+	{
+		this.termo = termo;
+	}
 	
 	public List<Paciente> getPacientes()
 	{
 		return pg.recuperarTodosPorNome();
+	}
+	
+	public List<Paciente> getPacientesContendo()
+	{
+		return pg.recuperarTodosPorNomeContendo(termo);
 	}
 	
 	public PacienteGerente getGerente()

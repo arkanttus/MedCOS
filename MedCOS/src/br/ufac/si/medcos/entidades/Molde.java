@@ -42,6 +42,9 @@ public class Molde
     inverseJoinColumns=@JoinColumn(name="funcionario"))
     private List<Funcionario> responsaveis;
     
+    @OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.REMOVE, mappedBy="molde")
+    private List<Anamnese> anamneses;
+    
     public Molde() 
     {
     	this.perguntas = new ArrayList<Pergunta>();

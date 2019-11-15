@@ -17,10 +17,12 @@ public class ConsultaControlador
 {
 	private ConsultaGerente cg;
 	private Consulta consulta;
+	private String termo;
 	
 	public ConsultaControlador()
 	{
 		cg = new ConsultaGerente();
+		termo = "";
 	}
 	
 	public Consulta getConsulta()
@@ -31,7 +33,17 @@ public class ConsultaControlador
 	{
 		this.consulta = consulta;
 	}
-	
+
+	public String getTermo()
+	{
+		return termo;
+	}
+
+	public void setTermo(String termo)
+	{
+		this.termo = termo;
+	}
+
 	public List<Consulta> getConsultasProximas()
 	{
 		return cg.recuperarTodosProximas();
@@ -40,6 +52,11 @@ public class ConsultaControlador
 	public List<Consulta> getConsultas()
 	{
 		return cg.recuperarTodosPorDataHora();
+	}
+	
+	public List<Consulta> getConsultasContendo()
+	{
+		return cg.recuperarTodosPorPacienteContendo(termo);
 	}
 	
 	public long getConsultasPendentes()

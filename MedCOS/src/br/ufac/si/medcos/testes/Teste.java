@@ -9,8 +9,12 @@ public class Teste
 
 	public static void main(String[] args)
 	{
-		Gerente g = new Gerente();
+		ConsultaGerente g = new ConsultaGerente();
 		
+		for(Consulta c : g.recuperarTodosPorPacienteContendo("Bruno"))
+		{
+			System.out.println("ID " + c.getId());
+		}
 		g.encerrar();
 	}
 

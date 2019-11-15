@@ -3,6 +3,7 @@ package br.ufac.si.medcos.gerentes;
 import java.util.List;
 
 import br.ufac.si.medcos.entidades.Consulta;
+import br.ufac.si.medcos.entidades.Paciente;
 
 public class ConsultaGerente extends Gerente
 {
@@ -16,6 +17,12 @@ public class ConsultaGerente extends Gerente
 	public List<Consulta> recuperarTodosPorDataHora()
 	{
 		return em.createNamedQuery("Consulta.todosPorDataHora").getResultList();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Consulta> recuperarTodosPorPacienteContendo(String termo)
+	{
+		return em.createNamedQuery("Consulta.todosPorPacienteContendo").setParameter("termo", "%"+termo+"%").getResultList();
 	}
 	
 	@SuppressWarnings("unchecked")

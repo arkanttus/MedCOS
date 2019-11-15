@@ -3,7 +3,7 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core">
       
-  <ui:composition template="/WEB-INF/templates/templateEntidade.xhtml">
+  <ui:composition template="/WEB-INF/templates/templateGerenciamento.xhtml">
     
     <ui:define name="titulo">Gerenciamento de Funcionários</ui:define>
     
@@ -13,59 +13,54 @@
         <li class="breadcrumb-item active">Funcionários</li>
     </ui:define>
     
-    <ui:define name="body">
-    	<h:form>
-			<div class="card mb-3">
-				<div class="card-header">
-					<i class="fas fa-table"></i> 
-					Funcionários
-                    <h:commandLink action="#{funcionarioControlador.adicionar}" class="btn btn-success float-right" value="Novo funcionário">
-                        <i class="fas fa-plus"></i>
-                    </h:commandLink>
-				</div>
-				<div class="card-body">
-					<div class="table-responsive text-center">
-						<h:outputText value="Não há funcionários!" class="h4 text-danger" rendered="#{empty funcionarioControlador.funcionarios}"/>
-					
-					    <h:dataTable value="#{funcionarioControlador.funcionarios}" var="funcionario" styleClass="table table-bordered" id="funcionariosTable" width="100%" cellspacing="0" rendered="#{!empty funcionarioControlador.funcionarios}">
-					        <h:column>
-	                            <f:facet name="header">Código</f:facet>
-	                            #{funcionario.id}
-	                        </h:column>
-					        
-					        <h:column>
-	                            <f:facet name="header">Nome</f:facet>
-	                            #{funcionario.nome}
-	                        </h:column>
-	                        
-	                        <h:column>
-	                            <f:facet name="header">CPF</f:facet>
-	                            #{funcionario.cpf}
-	                        </h:column>
-	                        
-	                        <h:column>
-	                            <f:facet name="header">Status</f:facet>
-	                            #{funcionario.status}
-	                        </h:column>
-	                        
-	                        <h:column>
-	                            <f:facet name="header">Operações</f:facet>
-	                            <h:commandLink action="#{funcionarioControlador.editar(funcionario)}" class="btn btn-success">
-	                                <i class="fas fa-edit"></i>
-	                            </h:commandLink>
-	                            <a href="#" class="btn btn-danger ml-2" data-toggle="modal" data-target="#funcionarioModal#{funcionario.id}">
-                                   <i class="far fa-trash-alt"></i>
-                                </a>
-	                        </h:column>
-					    </h:dataTable>
-					</div>
-				</div>
-				<div class="card-footer small text-muted">Updated yesterday
-					at 11:59 PM</div>
-			</div>
-		</h:form>
-		
-		<h:form>
+    <ui:define name="tituloTabela">Funcionários</ui:define>
+    
+    <ui:define name="barraBuscar">
+        <h:inputText type="text" class="form-control form-search" value="#{funcionarioControlador.termo}" id="buscarPor" aria-label="Search" aria-describedby="basic-addon2" />
+    </ui:define>
+    
+    <ui:define name="botaoAdicionar">
+        <h:commandLink action="#{funcionarioControlador.adicionar}" class="btn btn-success float-right" value="Novo"><i class="fas fa-plus ml-1"></i></h:commandLink>
+    </ui:define>
+    
+    <ui:define name="tabela">
+        <h:outputText value="Não há funcionários!" class="h4 text-danger" rendered="#{empty funcionarioControlador.funcionarios}"/>
+                    
+        <h:dataTable value="#{funcionarioControlador.funcionarios}" var="funcionario" styleClass="table table-bordered" id="funcionariosTable" width="100%" cellspacing="0" rendered="#{!empty funcionarioControlador.funcionarios}">
+            <h:column>
+                <f:facet name="header">Código</f:facet>
+                #{funcionario.id}
+            </h:column>
+            
+            <h:column>
+                <f:facet name="header">Nome</f:facet>
+                #{funcionario.nome}
+            </h:column>
+            
+            <h:column>
+                <f:facet name="header">CPF</f:facet>
+                #{funcionario.cpf}
+            </h:column>
+            
+            <h:column>
+                <f:facet name="header">Status</f:facet>
+                #{funcionario.status}
+            </h:column>
+            
+            <h:column>
+                <f:facet name="header">Operações</f:facet>
+                <h:commandLink action="#{funcionarioControlador.editar(funcionario)}" class="btn btn-warning text-white">
+                    <i class="fas fa-edit"></i>
+                </h:commandLink>
+                <a href="#" class="btn btn-danger ml-2" data-toggle="modal" data-target="#funcionarioModal#{funcionario.id}">
+                   <i class="far fa-trash-alt"></i>
+                </a>
+            </h:column>
+        </h:dataTable>
+    </ui:define>
+    
+    <ui:define name="modal">
+        <h:form>
             <ui:repeat var="funcionario" value="#{funcionarioControlador.funcionarios}" varStatus="status">
                 <!-- Cancelar Consulta Modal-->
                 <div class="modal fade" id="funcionarioModal#{funcionario.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -80,60 +75,64 @@
                                 <p>Você deseja remover este funcionário?</p>
 
                                 <div class="form-group">
-					                <h:outputLabel for="nome" value="Nome completo:"/>
-					                <h:inputText class="form-control" id="nome" value="#{funcionario.nome}" disabled="true" requiredMessage="O nome é obrigatório!" validateMessage="O nome deve ter entre 5 e 70 caracteres.">
-					                     <f:validateLength minimum="5" maximum="70"/>
-					                </h:inputText>
-					                    
-					                <small class="form-text text-danger">
-					                    <h:message for="nome"/>
-					                </small>
-					            </div>
-					            
-					            <div class='row'>
-					                <div class='col-sm'>  
-					                    <div class="form-group">
-					                        <h:outputLabel for="cpf" value="CPF:"/>
-					                        <h:inputText class="form-control" id="cpf" value="#{funcionario.cpf}" disabled="true" required="true" requiredMessage="O CPF é obrigatório!" validateMessage="O CPF pode ter no máximo 9 dígitos e sem pontuação.">
-					                             <f:validateLength minimum="9" maximum="11" />
-					                        </h:inputText>
-					                            
-					                        <small class="form-text text-danger">
-					                            <h:message for="cpf"/>
-					                        </small>
-					                    </div>
-					                </div>
-					                
-					                <div class='col-sm'>  
-					                    <div class="form-group">
-					                        <h:outputLabel for="dataNascimento" value="Data de Nascimento:"/>
-					                        <h:inputText class="form-control" id="dataHora" value="#{funcionario.dataNascimento}" disabled="true" required="true" requiredMessage="A data de nascimento é obrigatória!" validateMessage="A data de nascimento deve estar no formato: dia/mês/ano!">
-					                             <f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
-					                        </h:inputText>
-					                            
-					                        <small class="form-text text-danger">
-					                            <h:message for="dataNascimento"/>
-					                        </small>
-					                    </div>
-					                </div>
-					            </div>
+                                    <h:outputLabel for="nome" value="Nome completo:"/>
+                                    <h:inputText class="form-control" id="nome" value="#{funcionario.nome}" disabled="true" requiredMessage="O nome é obrigatório!" validateMessage="O nome deve ter entre 5 e 70 caracteres.">
+                                         <f:validateLength minimum="5" maximum="70"/>
+                                    </h:inputText>
+                                        
+                                    <small class="form-text text-danger">
+                                        <h:message for="nome"/>
+                                    </small>
+                                </div>
+                                
+                                <div class='row'>
+                                    <div class='col-sm'>  
+                                        <div class="form-group">
+                                            <h:outputLabel for="cpf" value="CPF:"/>
+                                            <h:inputText class="form-control" id="cpf" value="#{funcionario.cpf}" disabled="true" required="true" requiredMessage="O CPF é obrigatório!" validateMessage="O CPF pode ter no máximo 9 dígitos e sem pontuação.">
+                                                 <f:validateLength minimum="9" maximum="11" />
+                                            </h:inputText>
+                                                
+                                            <small class="form-text text-danger">
+                                                <h:message for="cpf"/>
+                                            </small>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class='col-sm'>  
+                                        <div class="form-group">
+                                            <h:outputLabel for="dataNascimento" value="Data de Nascimento:"/>
+                                            <h:inputText class="form-control" id="dataHora" value="#{funcionario.dataNascimento}" disabled="true" required="true" requiredMessage="A data de nascimento é obrigatória!" validateMessage="A data de nascimento deve estar no formato: dia/mês/ano!">
+                                                 <f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
+                                            </h:inputText>
+                                                
+                                            <small class="form-text text-danger">
+                                                <h:message for="dataNascimento"/>
+                                            </small>
+                                        </div>
+                                    </div>
+                                </div>
 
                                 <small class="form-text text-muted">Não é possível desfazer futuramente.</small>
                             </div>
                             <div class="modal-footer">
                                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button> 
                                 
-                                <h:commandButton class="btn btn-danger" action="#{funcionarioControlador.excluir(funcionario)}" value="Excluir"/>
+                                <h:commandLink class="btn btn-danger" action="#{funcionarioControlador.excluir(funcionario)}" value="Excluir"><i class="fas fa-trash-alt ml-1"></i></h:commandLink>
                             </div>
                         </div>
                     </div>
                 </div>
             </ui:repeat>
         </h:form>
-    
-    	<script>
-			document.getElementById("itemFuncionarios").classList.add("active");
-		</script>
     </ui:define>
+    
+    <ui:define name="script">
+        <script>
+            document.getElementById("itemFuncionarios").classList.add("active");
+            document.querySelector(".form-search").setAttribute("placeholder", "Buscar por nome...");
+        </script>
+    </ui:define>
+    
   </ui:composition>
 </html>

@@ -3,7 +3,7 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core">
       
-  <ui:composition template="/WEB-INF/templates/templateEntidade.xhtml">
+  <ui:composition template="/WEB-INF/templates/templateGerenciamento.xhtml">
     
     <ui:define name="titulo">Gerenciamento de Consultas</ui:define>
     
@@ -13,112 +13,111 @@
         <li class="breadcrumb-item active">Consultas</li>
     </ui:define>
     
-    <ui:define name="body">
-    	<h:form>
-			<div class="card mb-3">
-				<div class="card-header">
-					<i class="fas fa-table"></i> 
-					Consultas
-                    <h:commandLink action="#{consultaControlador.adicionar}" class="btn btn-success float-right" value="Nova consulta">
-                        <i class="fas fa-plus"></i>
-                    </h:commandLink>
-				</div>
-				<div class="card-body">
-					<div class="table-responsive text-center">
-						<h:outputText value="Não há consultas!" class="h4 text-danger" rendered="#{empty consultaControlador.consultas}"/>
-					
-					    <h:dataTable value="#{consultaControlador.consultas}" var="consulta" styleClass="table table-bordered" id="consultasTable" width="100%" cellspacing="0" rendered="#{!empty consultaControlador.consultas}">
-					        <h:column>
-	                            <f:facet name="header">Código</f:facet>
-	                            #{consulta.id}
-	                        </h:column>
-					        
-					        <h:column>
-	                            <f:facet name="header">Paciente</f:facet>
-	                            #{consulta.paciente.nome}
-	                        </h:column>
-	                        
-	                        <h:column>
-	                            <f:facet name="header">Médico</f:facet>
-	                            #{consulta.medico.nome}
-	                        </h:column>
-	                        
-	                        <h:column>
-	                            <f:facet name="header">Horário</f:facet>
-	                            <h:outputText value="#{consulta.dataHora.time}">
-	                                <f:convertDateTime type="date" pattern="dd/MM/yyyy HH:mm"/>
-	                            </h:outputText>
-	                        </h:column>
-	                        
-	                        <h:column>
-	                            <f:facet name="header">Status</f:facet>
-	                            #{consulta.status}
-	                        </h:column>
-	                        
-	                        <h:column>
-	                            <f:facet name="header">Operações</f:facet>
-	                            <h:commandLink action="#{consultaControlador.editar(consulta)}" class="btn btn-success">
-	                                <i class="fas fa-edit"></i>
-	                            </h:commandLink>
-	                            <a href="#" class="btn btn-danger ml-2" data-toggle="modal" data-target="#consultaModal#{consulta.id}" rendered="#{consulta.status ne 'Cancelada'}">
-	                               <i class="far fa-trash-alt"></i>
-	                            </a>
-	                        </h:column>
-					    </h:dataTable>
-					</div>
-				</div>
-				<div class="card-footer small text-muted">Updated yesterday
-					at 11:59 PM</div>
-			</div>
-		</h:form>
-		
-		<h:form>
-			<ui:repeat var="consulta" value="#{consultaControlador.consultas}" varStatus="status">
-				<!-- Cancelar Consulta Modal-->
-				<div class="modal fade" id="consultaModal#{consulta.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-					<div class="modal-dialog" role="document">
-						<div class="modal-content">
-							<div class="modal-header">
-								<h5 class="modal-title" id="consultaModalLabel">Deseja cancelar esta consulta?</h5>
-								<button class="close" type="button" data-dismiss="modal"
-									aria-label="Close"><span aria-hidden="true">×</span></button>
-							</div>
-							<div class="modal-body">
-								<p>Você deseja cancelar esta consulta?</p>
-
-								<div class="form-group">
-									<h:outputLabel for="paciente" value="Paciente:"/>
-									<h:inputText id="paciente" class="form-control" value="#{consulta.paciente.nome}" disabled="true"/>
-								</div>
-
-								<div class="form-group">
-									<h:outputLabel for="medico" value="Médico:"/>
-									<h:inputText id="medico" class="form-control" value="#{consulta.medico.nome}" disabled="true"/>
-								</div>
-
-								<div class="form-group">
-									<h:outputLabel for="datahora" value="Data e horário:"/>
-									<h:inputText id="datahora" class="form-control" value="#{consulta.dataHora}" disabled="true">
-										<f:convertDateTime type="date" pattern="dd/MM/yyyy HH:mm"/>
-									</h:inputText>
-								</div>
-
-								<small class="form-text text-muted">É possível desfazer a partir da área de edição.</small>
-							</div>
-							<div class="modal-footer">
-								<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button> 
-								
-								<h:commandButton class="btn btn-danger" action="#{consultaControlador.cancelar(consulta)}" value="Desmarcar"/>
-							</div>
-						</div>
-					</div>
-				</div>
-			</ui:repeat>
-		</h:form>
+    <ui:define name="tituloTabela">Consultas</ui:define>
     
-    	<script>
-			document.getElementById("itemConsultas").classList.add("active");
-		</script>
+    <ui:define name="barraBuscar">
+        <h:inputText type="text" class="form-control form-search" value="#{consultaControlador.termo}" id="buscarPor" aria-label="Search" aria-describedby="basic-addon2" />
     </ui:define>
+    
+    <ui:define name="botaoAdicionar">
+        <h:commandLink action="#{consultaControlador.adicionar}" class="btn btn-success float-right" value="Nova"><i class="fas fa-plus ml-1"></i></h:commandLink>
+    </ui:define>
+    
+    <ui:define name="tabela">
+        <h:outputText value="Não há consultas!" class="h4 text-danger" rendered="#{empty consultaControlador.consultasContendo}"/>
+                    
+        <h:dataTable value="#{consultaControlador.consultasContendo}" var="consulta" styleClass="table table-bordered" id="consultasTable" width="100%" cellspacing="0" rendered="#{!empty consultaControlador.consultas}">
+            <h:column>
+                <f:facet name="header">Código</f:facet>
+                #{consulta.id}
+            </h:column>
+            
+            <h:column>
+                <f:facet name="header">Paciente</f:facet>
+                #{consulta.paciente.nome}
+            </h:column>
+            
+            <h:column>
+                <f:facet name="header">Médico</f:facet>
+                #{consulta.medico.nome}
+            </h:column>
+            
+            <h:column>
+                <f:facet name="header">Horário</f:facet>
+                <h:outputText value="#{consulta.dataHora.time}">
+                    <f:convertDateTime type="date" pattern="dd/MM/yyyy HH:mm"/>
+                </h:outputText>
+            </h:column>
+            
+            <h:column>
+                <f:facet name="header">Status</f:facet>
+                #{consulta.status}
+            </h:column>
+            
+            <h:column>
+                <f:facet name="header">Operações</f:facet>
+                <h:commandLink action="#{consultaControlador.editar(consulta)}" class="btn btn-warning text-white">
+                    <i class="fas fa-edit"></i>
+                </h:commandLink>
+                <a href="#" class="btn btn-danger ml-2" data-toggle="modal" data-target="#consultaModal#{consulta.id}" rendered="#{consulta.status ne 'Cancelada'}">
+                   <i class="far fa-trash-alt"></i>
+                </a>
+            </h:column>
+        </h:dataTable>
+    </ui:define>
+    
+    <ui:define name="modal">
+        <h:form>
+            <ui:repeat var="consulta" value="#{consultaControlador.consultasContendo}" varStatus="status">
+                <!-- Cancelar Consulta Modal-->
+                <div class="modal fade" id="consultaModal#{consulta.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="consultaModalLabel">Deseja cancelar esta consulta?</h5>
+                                <button class="close" type="button" data-dismiss="modal"
+                                    aria-label="Close"><span aria-hidden="true">×</span></button>
+                            </div>
+                            <div class="modal-body">
+                                <p>Você deseja cancelar esta consulta?</p>
+
+                                <div class="form-group">
+                                    <h:outputLabel for="paciente" value="Paciente:"/>
+                                    <h:inputText id="paciente" class="form-control" value="#{consulta.paciente.nome}" disabled="true"/>
+                                </div>
+
+                                <div class="form-group">
+                                    <h:outputLabel for="medico" value="Médico:"/>
+                                    <h:inputText id="medico" class="form-control" value="#{consulta.medico.nome}" disabled="true"/>
+                                </div>
+
+                                <div class="form-group">
+                                    <h:outputLabel for="datahora" value="Data e horário:"/>
+                                    <h:inputText id="datahora" class="form-control" value="#{consulta.dataHora}" disabled="true">
+                                        <f:convertDateTime type="date" pattern="dd/MM/yyyy HH:mm"/>
+                                    </h:inputText>
+                                </div>
+
+                                <small class="form-text text-muted">É possível desfazer a partir da área de edição.</small>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button> 
+                                
+                                <h:commandLink class="btn btn-danger" action="#{consultaControlador.cancelar(consulta)}" value="Desmarcar"><i class="fas fa-ban ml-1"></i></h:commandLink>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ui:repeat>
+        </h:form>
+    </ui:define>
+    
+    <ui:define name="script">
+        <script>
+            document.getElementById("itemConsultas").classList.add("active");
+            document.querySelector(".form-search").setAttribute("placeholder", "Buscar por data e horário...");
+        </script>
+    </ui:define>
+    
   </ui:composition>
 </html>

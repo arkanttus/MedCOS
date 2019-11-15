@@ -3,7 +3,7 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core">
       
-  <ui:composition template="/WEB-INF/templates/templateEntidade.xhtml">
+  <ui:composition template="/WEB-INF/templates/templateBase.xhtml">
   
     <ui:define name="body">
         <h:form id="formPaciente" class="container">           
@@ -245,7 +245,7 @@
                 </div>
             </div>
             
-            <h:link value="Cancelar" outcome="pacientes" class="btn btn-danger"/>
+            <h:link value="Cancelar" outcome="pacientes" class="btn btn-danger"><i class="fas fa-trash-alt ml-1"></i></h:link>
             <ui:insert name="botaoPrincipal"/>
         </h:form>
         

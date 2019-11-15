@@ -18,6 +18,7 @@ public class MoldeControlador
 {
 	private MoldeGerente mg;
 	private Molde molde;
+	private String termo;
 	
 	public MoldeControlador()
 	{
@@ -33,10 +34,25 @@ public class MoldeControlador
 	{
 		this.molde = molde;
 	}
+
+	public String getTermo()
+	{
+		return termo;
+	}
+
+	public void setTermo(String termo)
+	{
+		this.termo = termo;
+	}
 	
 	public List<Molde> getMoldes()
 	{
 		return mg.recuperarTodosPorCriacao();
+	}
+	
+	public List<Molde> getMoldesContendo()
+	{
+		return mg.recuperarTodosPorDescricaoContendo(termo);
 	}
 	
 	public MoldeGerente getGerente()

@@ -13,6 +13,7 @@ public class FuncionarioControlador
 {
 	private FuncionarioGerente fg;
 	private Funcionario funcionario;
+	private String termo;
 	
 	public FuncionarioControlador()
 	{
@@ -24,6 +25,16 @@ public class FuncionarioControlador
 		return funcionario;
 	}
 
+	public String getTermo()
+	{
+		return termo;
+	}
+
+	public void setTermo(String termo)
+	{
+		this.termo = termo;
+	}
+	
 	public void setFuncionario(Funcionario funcionario)
 	{
 		this.funcionario = funcionario;
@@ -32,6 +43,11 @@ public class FuncionarioControlador
 	public List<Funcionario> getFuncionarios()
 	{
 		return fg.recuperarTodosPorNome();
+	}
+	
+	public List<Funcionario> getFuncionariosContendo()
+	{
+		return fg.recuperarTodosPorNomeContendo(termo);
 	}
 	
 	//====================// Rotas //====================//

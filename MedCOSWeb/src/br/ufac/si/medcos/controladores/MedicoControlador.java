@@ -17,6 +17,7 @@ public class MedicoControlador
 {
 	private MedicoGerente mg;
 	private Medico medico;
+	private String termo;
 	
 	public MedicoControlador()
 	{
@@ -32,10 +33,25 @@ public class MedicoControlador
 	{
 		this.medico = medico;
 	}
+
+	public String getTermo()
+	{
+		return termo;
+	}
+
+	public void setTermo(String termo)
+	{
+		this.termo = termo;
+	}
 	
 	public List<Medico> getMedicos()
 	{
 		return mg.recuperarTodosPorNome();
+	}
+	
+	public List<Medico> getMedicosContendo()
+	{
+		return mg.recuperarTodosPorNomeContendo(termo);
 	}
 	
 	public MedicoGerente getGerente()

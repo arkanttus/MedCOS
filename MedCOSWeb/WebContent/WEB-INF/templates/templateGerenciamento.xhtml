@@ -1,0 +1,56 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+      
+  <ui:composition template="/WEB-INF/templates/templateBase.xhtml">
+  
+    <ui:define name="body">
+        <h:form>
+            <div class="card mb-3">
+                <div class="card-header">
+                    <div class="row h-100 justify-content-center align-items-center">
+                        <div class="col-2">
+                            <i class="fas fa-table mr-1"></i> 
+                            
+                            <ui:insert name="tituloTabela"/>
+                        </div>
+    
+                        <div class="col-7">
+                            <div class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0 w-100">
+                                <div class="input-group">
+                                    <ui:insert name="barraBuscar"/>
+                                    <div class="input-group-append">
+                                    
+                                        <h:commandLink class="btn btn-primary"><i class="fas fa-search"></i></h:commandLink>
+                                    </div>
+                                </div>
+                            </div>     
+                        </div>
+       
+                        <div class="col-3">
+                        
+                            <ui:insert name="botaoAdicionar"/>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive text-center">
+                    
+                        <ui:insert name="tabela"/>
+
+                    </div>
+                </div>
+                <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+            </div>
+        </h:form>
+    
+        <ui:insert name="modal"/>
+    
+        <ui:insert name="script"/>
+    </ui:define>
+    
+  </ui:composition>
+</html>
