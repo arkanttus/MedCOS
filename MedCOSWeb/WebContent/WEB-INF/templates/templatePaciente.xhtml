@@ -38,7 +38,7 @@
 		            <div class="form-group">
 		                <h:outputLabel for="dataNascimento" value="Data de Nascimento:"/>
 		                <span class="text-danger"> *</span>
-		                <h:inputText class="form-control" id="dataHora" value="#{pacienteControlador.paciente.dataNascimento}" required="true" requiredMessage="A data de nascimento é obrigatória!" validateMessage="A data de nascimento deve estar no formato: dia/mês/ano!">
+		                <h:inputText class="form-control" id="dataNascimento" value="#{pacienteControlador.paciente.dataNascimento}" required="true" requiredMessage="A data de nascimento é obrigatória!" validateMessage="A data de nascimento deve estar no formato: dia/mês/ano!">
 		                     <f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
 		                </h:inputText>
 		                    
@@ -244,6 +244,98 @@
                     </div>
                 </div>
             </div>
+            
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+	                    <div class="card">
+	                       <h5 class="card-header">Nova anamnese</h5>
+	                       <div class="card-body">
+                                <h:outputLabel for="molde" value="Molde:"/>
+                                <div class="input-group">
+                                    <h:selectOneMenu class="form-control" id="molde" value="#{pacienteControlador.molde}" converter="moldeConversor" converterMessage="O molde deve ser válido.">
+	                                    <f:selectItem noSelectionOption="true" itemLabel="--Selecione--"/>
+	                                    <f:selectItems value="#{moldeControlador.moldes}" var="molde" itemValue="#{molde}" itemLabel="#{molde.descricao} (#{molde.criacaoString})"/>
+	                                </h:selectOneMenu>
+                                    <h:commandLink class="btn btn-success ml-1">
+                                        <f:ajax event="click" render="@all" execute="formPaciente:molde" listener="#{pacienteControlador.novaAnamnese}"/>
+                                        <i class="fas fa-plus"></i>
+                                    </h:commandLink>
+                                </div>
+                                    
+                                <small class="form-text text-danger">
+                                    <h:message for="molde"/>
+                                </small>
+                            </div>
+	                     </div>
+                    </div>
+                </div>
+                
+                <div class="col-6">
+                    <div class="form-group">
+	                    <div class="card">
+	                       <h5 class="card-header">Anamneses existentes</h5>
+	                       <div class="card-body">
+		                        <h:outputLabel for="anamnese" value="Anamnese:"/>
+                                <div class="input-group">
+								    <h:selectOneMenu class="form-control" id="anamnese" value="#{pacienteControlador.anamnese}" converter="anamneseConversor" converterMessage="A anamnese deve ser válida.">
+                                        <f:ajax event="change" render="@all"/>
+                                        <f:selectItem noSelectionOption="true" itemLabel="--Selecione--"/>
+                                        <f:selectItems value="#{pacienteControlador.paciente.anamneses}" var="anamnese" itemValue="#{anamnese}" itemLabel="#{anamnese.molde.descricao} (#{anamnese.dataString})"/>
+                                    </h:selectOneMenu>
+								    <h:commandLink class="btn btn-danger ml-1">
+								        <f:ajax event="click" render="@all" execute="formPaciente:anamnese" listener="#{pacienteControlador.excluirAnamnese}"/>
+								        <i class="fas fa-trash-alt"></i>
+								    </h:commandLink>
+								</div>
+		                            
+		                        <small class="form-text text-danger">
+		                            <h:message for="anamnese"/>
+		                        </small>
+	                       </div>
+	                    </div>
+                    </div>
+                </div>
+            </div>
+            
+            <ui:fragment rendered="#{pacienteControlador.anamnese ne null}">
+	            <div class="row">
+	                <div class="col-sm">
+		               <div class="form-group">
+		                   <div class="card">
+		                       <h5 class="card-header">Anamnese</h5>
+		                       <div class="card-body" id="anamneseDiv">
+		                            <ui:repeat var="resposta" value="#{pacienteControlador.anamnese.respostas}" varStatus="status">
+                                       <ui:fragment rendered="#{resposta.pergunta.tipo eq 1}">                             
+				                           <h:outputLabel for="pergunta#{status.index}" value="#{resposta.pergunta.descricao}"/>
+				                           <h:selectOneMenu class="form-control" id="pergunta#{status.index}" value="#{resposta.conteudo}" converterMessage="A resposta deve ser válida.">
+				                              <f:selectItem itemValue="Não" itemLabel="Não"/>
+				                              <f:selectItem itemValue="Sim" itemLabel="Sim"/>
+				                           </h:selectOneMenu>
+				                           
+				                           <small class="form-text text-danger">
+                                              <h:message for="pergunta#{status.index}"/>
+                                           </small>
+			                           </ui:fragment>
+			                            
+			                            
+			                           <ui:fragment rendered="#{resposta.pergunta.tipo eq 2}">                             
+                                           <h:outputLabel for="perguntaX#{status.index}" value="#{resposta.pergunta.descricao}"/>
+                                           <h:inputText class="form-control" id="perguntaX#{status.index}" value="#{resposta.conteudo}" rendered="#{resposta.pergunta.tipo eq 2}" validateMessage="A resposta pode ter no máximo 40 caracteres.">
+	                                           <f:validateLength minimum="3" maximum="40"/>
+	                                       </h:inputText>
+                                           
+                                           <small class="form-text text-danger">
+                                              <h:message for="perguntaX#{status.index}"/>
+                                           </small>
+                                       </ui:fragment> 
+		                            </ui:repeat>	                            
+		                       </div>
+	                       </div>
+	                    </div>
+	                </div>
+	            </div>
+	        </ui:fragment>
             
             <h:link value="Cancelar" outcome="pacientes" class="btn btn-danger"><i class="fas fa-trash-alt ml-1"></i></h:link>
             <ui:insert name="botaoPrincipal"/>

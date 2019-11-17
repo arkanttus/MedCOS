@@ -2,6 +2,7 @@ package br.ufac.si.medcos.entidades;
 
 import java.util.List;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -15,7 +16,9 @@ import br.ufac.si.medcos.entidades.Funcionario;
 	@NamedQuery(name="Anamnese.todos", 
 		query="SELECT a FROM Anamnese a"), 
 	@NamedQuery(name="Anamnese.todosPorData", 
-		query="SELECT a FROM Anamnese a ORDER BY a.data")
+		query="SELECT a FROM Anamnese a ORDER BY a.data"),
+	@NamedQuery(name="Anamnese.maisRecentesPorPaciente", 
+		query="SELECT a FROM Anamnese a WHERE a.paciente = :id ORDER BY a.data DESC")	
 })
 public class Anamnese
 {
@@ -43,16 +46,18 @@ public class Anamnese
     inverseJoinColumns=@JoinColumn(name="funcionario"))
     private List<Funcionario> responsaveis;
 
-    public Anamnese() {}
+    public Anamnese() 
+    {
+    	this.respostas = new ArrayList<Resposta>();
+		this.responsaveis = new ArrayList<Funcionario>();
+    }
 	
 	public Anamnese(Date data, Paciente paciente, Molde molde)
 	{
-		super();
+		this();
 		this.data = data;
 		this.paciente = paciente;
 		this.molde = molde;
-		this.respostas = new ArrayList<Resposta>();
-		this.responsaveis = new ArrayList<Funcionario>();
 	}
 
 	public Integer getId()
@@ -65,6 +70,12 @@ public class Anamnese
 		this.id = id;
 	}
 
+	public String getDataString()
+	{
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		return sdf.format(this.data);
+	}
+	
 	public Date getData()
 	{
 		return data;

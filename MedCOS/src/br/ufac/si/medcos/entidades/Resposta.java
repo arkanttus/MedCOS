@@ -17,7 +17,7 @@ public class Resposta
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer id;
-    @Column(nullable=false, length=20)
+    @Column(nullable=false, length=40)
     private String conteudo;
     
     @ManyToOne()

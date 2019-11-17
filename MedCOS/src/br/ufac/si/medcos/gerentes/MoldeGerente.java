@@ -29,4 +29,9 @@ public class MoldeGerente extends Gerente
 	{
 		return em.createNamedQuery("Molde.todosPorDescricaoContendo").setParameter("termo", "%"+termo+"%").getResultList();
 	}
+	
+	public Molde recuperarMaisRecente()
+	{
+		return (Molde) em.createNamedQuery("Molde.maisRecente").getSingleResult();
+	}
 }

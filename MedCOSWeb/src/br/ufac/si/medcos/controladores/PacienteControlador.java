@@ -1,5 +1,6 @@
 package br.ufac.si.medcos.controladores;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -16,12 +17,17 @@ import br.ufac.si.medcos.entidades.*;
 public class PacienteControlador
 {
 	private PacienteGerente pg;
+	private AnamneseGerente ag;
 	private Paciente paciente;
+	private Anamnese anamnese;
+	private Molde molde;
 	private String termo;
 	
 	public PacienteControlador()
 	{
+		termo = "";
 		pg = new PacienteGerente();
+		ag = new AnamneseGerente();
 	}
 	
 	public Paciente getPaciente()
@@ -44,6 +50,26 @@ public class PacienteControlador
 		this.termo = termo;
 	}
 	
+	public Anamnese getAnamnese()
+	{
+		return anamnese;
+	}
+
+	public void setAnamnese(Anamnese anamnese)
+	{
+		this.anamnese = anamnese;
+	}
+
+	public Molde getMolde()
+	{
+		return molde;
+	}
+
+	public void setMolde(Molde molde)
+	{
+		this.molde = molde;
+	}
+	
 	public List<Paciente> getPacientes()
 	{
 		return pg.recuperarTodosPorNome();
@@ -54,17 +80,49 @@ public class PacienteControlador
 		return pg.recuperarTodosPorNomeContendo(termo);
 	}
 	
+	public List<Anamnese> getAnamnesesRecentes()
+	{
+		return ag.recuperarMaisRecentesPorPaciente(paciente);
+	}
+	
 	public PacienteGerente getGerente()
 	{
 		return pg;
 	}
 	
+	public AnamneseGerente getGerenteAnamnese()
+	{
+		return ag;
+	}
+	
 	//====================// Rotas //====================//
+	//Nova anamnese
+	public void novaAnamnese()
+	{
+		anamnese = new Anamnese(Calendar.getInstance().getTime(), paciente, molde);
+		anamnese.setId(paciente.getAnamneses().size()); //Deve ser setado null antes de persistir
+		for(Pergunta p : molde.getPerguntas())
+		{
+			Resposta r = new Resposta("", p, paciente, anamnese);
+			anamnese.adicionarResposta(r);
+		}
+		paciente.adicionarAnamnese(anamnese);
+		
+		molde = new Molde();
+	}
+	
+	//Excluir anamnese
+	public void excluirAnamnese()
+	{
+		paciente.removerAnamnese(anamnese);
+		anamnese = null;
+	}
 	
 	//Inserção de novo paciente
 	public String adicionar()  
 	{
 		this.paciente = new Paciente();
+		this.anamnese = null;
 		return "adicionarPaciente";
 	}
 	
@@ -95,6 +153,7 @@ public class PacienteControlador
 	public String editar(Paciente paciente)
 	{
 		this.paciente = paciente;
+		//this.anamnese = getAnamnesesRecentes().get(0);
 		return "editarPaciente";
 	}
 	

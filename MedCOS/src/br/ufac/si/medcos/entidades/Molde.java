@@ -1,5 +1,6 @@
 package br.ufac.si.medcos.entidades;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -19,7 +20,9 @@ import br.ufac.si.medcos.entidades.Pergunta;
 	@NamedQuery(name="Molde.todosPorDescricao", 
 		query="SELECT a FROM Molde a ORDER BY a.descricao"),
 	@NamedQuery(name="Molde.todosPorDescricaoContendo", 
-		query="SELECT a FROM Molde a WHERE a.descricao LIKE :termo ORDER BY a.descricao")		
+		query="SELECT a FROM Molde a WHERE a.descricao LIKE :termo ORDER BY a.descricao"),
+	@NamedQuery(name="Molde.maisRecente", 
+		query="SELECT m FROM Molde m ORDER BY m.criacao DESC")		
 })
 public class Molde
 {
@@ -78,6 +81,12 @@ public class Molde
 	public void setDescricao(String descricao)
 	{
 		this.descricao = descricao;
+	}
+	
+	public String getCriacaoString()
+	{
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		return sdf.format(this.criacao);
 	}
 
 	public Date getCriacao()

@@ -204,6 +204,16 @@ public class Paciente
 	{
 		this.anamneses = anamneses;
 	}
+	
+	public void adicionarAnamnese(Anamnese a)
+	{
+		this.anamneses.add(a);
+	}
+
+	public void removerAnamnese(Anamnese a)
+	{
+		this.anamneses.remove(a);
+	}
 
 	public boolean equals(Object obj)
 	{
