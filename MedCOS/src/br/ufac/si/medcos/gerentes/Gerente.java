@@ -2,6 +2,9 @@ package br.ufac.si.medcos.gerentes;
 
 import javax.persistence.*;
 
+import br.ufac.si.medcos.entidades.Usuario;
+import br.ufac.si.medcos.utils.Funcoes;
+
 public class Gerente
 {
 	protected EntityManagerFactory emf;
@@ -43,5 +46,17 @@ public class Gerente
 	{
 		em.close();
 		emf.close();
+	}
+	
+	public Usuario recuperarUsuarioPorCredencial(String cpf, String senha)
+	{
+		try
+		{
+			return (Usuario) em.createNamedQuery("Usuario.porCredencial").setParameter("cpf", cpf).setParameter("senha", Funcoes.md5(senha)).getSingleResult();
+		}
+		catch(NoResultException nre)
+		{
+			return null;
+		}
 	}
 }

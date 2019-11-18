@@ -1,0 +1,118 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+      
+  <ui:composition template="/WEB-INF/templates/templateBase.xhtml">
+  
+    <ui:define name="titulo">Edição de Perfil</ui:define>
+    
+    <ui:define name="subtitulo">Edição de Perfil</ui:define>
+    
+    <ui:define name="subpagina">
+        <li class="breadcrumb-item active">Edição de Perfil</li>
+    </ui:define>
+  
+    <ui:define name="body">
+        <h:form id="formUsuario" class="container">           
+            <div class="form-group">
+                <h:outputLabel for="nome" value="Nome completo:"/>
+                <span class="text-danger"> *</span>
+                <h:inputText class="form-control" id="nome" value="#{usuarioControlador.usuario.nome}" disabled="true" required="true" requiredMessage="O nome é obrigatório!" validatorMessage="O nome deve ter entre 5 e 70 caracteres.">
+                     <f:validateLength minimum="5" maximum="70"/>
+                </h:inputText>
+                    
+                <small class="form-text text-danger">
+                    <h:message for="nome"/>
+                </small>
+            </div>
+            
+            <div class='row'>
+		        <div class='col-sm'>  
+		            <div class="form-group">
+		                <h:outputLabel for="cpf" value="CPF:"/>
+		                <span class="text-danger"> *</span>
+		                <h:inputText class="form-control" id="cpf" value="#{usuarioControlador.usuario.cpf}" disabled="true" required="true" requiredMessage="O CPF é obrigatório!" validatorMessage="O CPF pode ter no máximo 9 dígitos e sem pontuação.">
+		                     <f:validateLength minimum="9" maximum="11" />
+		                </h:inputText>
+		                    
+		                <small class="form-text text-danger">
+		                    <h:message for="cpf"/>
+		                </small>
+		            </div>
+            	</div>
+            	
+            	<div class='col-sm'>  
+		            <div class="form-group">
+		                <h:outputLabel for="dataNascimento" value="Data de Nascimento:"/>
+		                <span class="text-danger"> *</span>
+		                <h:inputText class="form-control" id="dataNascimento" value="#{usuarioControlador.usuario.dataNascimento}" required="true" requiredMessage="A data de nascimento é obrigatória!" validatorMessage="A data de nascimento deve estar no formato: dia/mês/ano!">
+		                     <f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
+		                </h:inputText>
+		                    
+		                <small class="form-text text-danger">
+		                    <h:message for="dataNascimento"/>
+		                </small>
+		            </div>
+            	</div>
+            </div>
+            
+            <h:link value="Cancelar" outcome="medicos" class="btn btn-danger"><i class="fas fa-trash-alt ml-1"></i></h:link>
+            <a href="#" class="btn btn-warning" data-toggle="modal" data-target="#mudarSenhaModal">
+                   Alterar senha<i class="fas fa-key ml-2"></i>
+                </a>
+            <h:commandLink value="Salvar" action="#{usuarioControlador.atualizarPerfil}" class="btn btn-success ml-2"><i class="fas fa-plus ml-1"></i></h:commandLink>
+        </h:form>
+        
+        <!-- Mudar senha Modal-->
+        <h:form id="formSenha">
+	        <div class="modal fade" id="mudarSenhaModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	            <div class="modal-dialog" role="document">
+	                <div class="modal-content">
+	                    <div class="modal-header">
+	                        <h5 class="modal-title" id="consultaModalLabel">Alteração de Senha</h5>
+	                        <button class="close" type="button" data-dismiss="modal"
+	                            aria-label="Close"><span aria-hidden="true">×</span></button>
+	                    </div>
+	                    <div class="modal-body">
+	                        <p>Preencha sua senha atual no primeiro campo e a nova senha nos outros.</p>
+	                        
+	                        <div class="text-success h4"><h:messages globalOnly="true"/></div>
+	
+	                        <div class="form-group">
+	                            <h:outputLabel for="senhaAtual" value="Senha atual:"/>
+	                            <h:inputSecret id="senhaAtual" class="form-control" value="#{usuarioControlador.senhaAtual}" required="true"/>
+	                        </div>
+	
+	                        <div class="form-group">
+                                <h:outputLabel for="senhaNova" value="Nova senha:"/>
+                                <h:inputText id="senhaNova" class="form-control" value="#{usuarioControlador.senhaNova}" required="true"/>
+                            </div>
+                            
+                            <div class="form-group">
+                                <h:outputLabel for="senhaConfirmada" value="Nova senha (confirmação):"/>
+                                <h:inputText id="senhaConfirmada" class="form-control" value="#{usuarioControlador.senhaConfirmada}" required="true"/>
+                            </div>
+	
+	                        <small class="form-text text-muted">Só é possível alterar através deste local.</small>
+	                    </div>
+	                    <div class="modal-footer">
+	                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button> 
+	                        
+	                        <h:commandLink class="btn btn-success" value="Alterar senha">
+	                           <i class="fas fa-ok ml-1"></i>
+	                           <f:ajax event="click" render="@form" execute="@form" listener="#{usuarioControlador.alterarSenha}"/>
+	                        </h:commandLink>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+        </h:form>
+        
+        <script>
+			document.getElementById("itemDashboard").classList.add("active");
+		</script>
+    </ui:define>
+    
+  </ui:composition>
+</html>

@@ -100,7 +100,6 @@ public class PacienteControlador
 	public void novaAnamnese()
 	{
 		anamnese = new Anamnese(Calendar.getInstance().getTime(), paciente, molde);
-		anamnese.setId(paciente.getAnamneses().size()); //Deve ser setado null antes de persistir
 		for(Pergunta p : molde.getPerguntas())
 		{
 			Resposta r = new Resposta("", p, paciente, anamnese);
@@ -130,7 +129,7 @@ public class PacienteControlador
 	public String salvarInclusao()
 	{
 		pg.adicionar(paciente);
-		return "index";
+		return "pacientes";
 		/*Calendar cal = Calendar.getInstance();
 		Date agora = cal.getTime();
 		
@@ -153,7 +152,9 @@ public class PacienteControlador
 	public String editar(Paciente paciente)
 	{
 		this.paciente = paciente;
-		//this.anamnese = getAnamnesesRecentes().get(0);
+		
+		List<Anamnese> anamneses = paciente.getAnamneses();
+		this.anamnese = anamneses.size() > 0 ? anamneses.get(0) : null;
 		return "editarPaciente";
 	}
 	

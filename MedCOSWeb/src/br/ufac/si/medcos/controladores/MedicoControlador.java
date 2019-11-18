@@ -72,7 +72,7 @@ public class MedicoControlador
 	public String salvarInclusao()
 	{
 		mg.adicionar(medico);
-		return "index";
+		return "medicos";
 		/*Calendar cal = Calendar.getInstance();
 		Date agora = cal.getTime();
 		

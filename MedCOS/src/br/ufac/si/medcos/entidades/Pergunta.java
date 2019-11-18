@@ -15,7 +15,7 @@ public class Pergunta
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer id;
-    @Column(nullable=false, length=30)
+    @Column(nullable=false, length=60)
     private String descricao;
     @Column(nullable=false, length=5)
     private Integer tipo;

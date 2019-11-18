@@ -1,20 +1,17 @@
 package br.ufac.si.medcos.testes;
 
-import br.ufac.si.medcos.entidades.Consulta;
-import br.ufac.si.medcos.gerentes.ConsultaGerente;
+import br.ufac.si.medcos.entidades.Medico;
 import br.ufac.si.medcos.gerentes.Gerente;
+import br.ufac.si.medcos.gerentes.MedicoGerente;
 
 public class Teste
 {
 
 	public static void main(String[] args)
 	{
-		ConsultaGerente g = new ConsultaGerente();
+		Gerente g = new Gerente();
 		
-		for(Consulta c : g.recuperarTodosPorPacienteContendo("Bruno"))
-		{
-			System.out.println("ID " + c.getId());
-		}
+
 		g.encerrar();
 	}
 

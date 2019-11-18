@@ -45,10 +45,10 @@ public class Paciente
     @JoinColumn(name="endereco", nullable=false)
     private Endereco endereco;
     
-    @OneToMany(cascade=CascadeType.REMOVE, mappedBy="paciente")
+    @OneToMany(cascade=CascadeType.ALL, mappedBy="paciente")
     private List<Consulta> consultas;
     
-    @OneToMany(cascade=CascadeType.REMOVE, mappedBy="paciente")
+    @OneToMany(cascade=CascadeType.ALL, mappedBy="paciente")
     private List<Anamnese> anamneses;
     
     public Paciente() 

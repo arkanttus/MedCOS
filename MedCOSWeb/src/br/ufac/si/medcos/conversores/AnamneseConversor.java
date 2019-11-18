@@ -36,7 +36,8 @@ public class AnamneseConversor implements Converter
 		if(anamneses.size() > chave)
 			return anamneses.get(chave);
 		
-		return ag.recuperar(Anamnese.class, chave);
+		return "null";
+		//return ag.recuperar(Anamnese.class, chave);
 	}
 
 	public String getAsString(FacesContext context, UIComponent component, Object value) 
@@ -44,6 +45,23 @@ public class AnamneseConversor implements Converter
 		if(value == null || !(value instanceof Anamnese))
 			return "";
 		
+		if(ag == null)
+		{
+			ELContext elContext = context.getELContext();
+			ELResolver elResolver = elContext.getELResolver();
+			pc = ((PacienteControlador) elResolver.getValue(elContext, null, "pacienteControlador"));
+			ag = pc.getGerenteAnamnese();
+		}
+		
+		List<Anamnese> anamneses = pc.getPaciente().getAnamneses();
+		for(int i = 0; i < anamneses.size(); i++)
+		{
+			System.out.println(anamneses.get(i) + " = " + (Anamnese)value);
+			if(anamneses.get(i) == (Anamnese)value)
+				return String.valueOf(i);
+		}
+		
+		//return null;
 		return String.valueOf(((Anamnese)value).getId());
 	}
 }

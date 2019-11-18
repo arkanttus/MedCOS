@@ -23,7 +23,7 @@
             <div class="form-group">
                 <h:outputLabel for="medico" value="Médico:"/>
                 <span class="text-danger"> *</span>
-                <h:selectOneMenu class="form-control" id="medico" value="#{consultaControlador.consulta.medico}" converter="medicoConversor" required="true" requiredMessage="Médico é obrigatório!" converterMessage="O médico deve ser válido!" validateMessage="Médico inválido!">
+                <h:selectOneMenu class="form-control" id="medico" value="#{consultaControlador.consulta.medico}" converter="medicoConversor" required="true" requiredMessage="Médico é obrigatório!" converterMessage="O médico deve ser válido!" validatorMessage="Médico inválido!">
                     <f:selectItem noSelectionOption="true" itemLabel="--Selecione--"/>
                     <f:selectItems value="#{medicoControlador.medicos}" var="medico" itemValue="#{medico}" itemLabel="#{medico.nome}"/>
                 </h:selectOneMenu>  
@@ -36,7 +36,7 @@
             <div class="form-group">
                 <h:outputLabel for="dataHora" value="Data e Horário:"/>
                 <span class="text-danger"> *</span>
-                <h:inputText class="form-control" id="dataHora" value="#{consultaControlador.consulta.dataHora}" required="true" requiredMessage="O horário é obrigatório!" validateMessage="O horário deve estar no formato: dia/mês/ano horas:minutos!" converterMessage="O horário deve estar no formato: dia/mês/ano horas:minutos!">
+                <h:inputText class="form-control" id="dataHora" value="#{consultaControlador.consulta.dataHora}" required="true" requiredMessage="O horário é obrigatório!" validatorMessage="O horário deve estar no formato: dia/mês/ano horas:minutos!" converterMessage="O horário deve estar no formato: dia/mês/ano horas:minutos!">
                      <f:convertDateTime type="date" pattern="dd/MM/yyyy HH:mm"/>
                 </h:inputText>
                     

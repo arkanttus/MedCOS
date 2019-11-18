@@ -38,11 +38,11 @@ public class Anamnese
     @JoinColumn(name="molde", nullable=false)
     private Molde molde;
     
-    @OneToMany(mappedBy="anamnese", cascade=CascadeType.REMOVE, orphanRemoval=true)
+    @OneToMany(mappedBy="anamnese", cascade=CascadeType.ALL, orphanRemoval=true)
     private List<Resposta> respostas;
     
-    @ManyToMany(cascade=CascadeType.REMOVE)
-    @JoinTable(name="anmneses_responsaveis", joinColumns=@JoinColumn(name="anamnese"), 
+    @ManyToMany(cascade=CascadeType.ALL)
+    @JoinTable(name="anamneses_responsaveis", joinColumns=@JoinColumn(name="anamnese"), 
     inverseJoinColumns=@JoinColumn(name="funcionario"))
     private List<Funcionario> responsaveis;
 

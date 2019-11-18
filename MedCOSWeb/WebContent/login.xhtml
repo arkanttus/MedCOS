@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        
+        <!-- Custom fonts for this template-->
+        <link href="resources/sbadmin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" />
+        
+        <!-- Page level plugin CSS-->
+        <link href="resources/sbadmin/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet" />
+        
+        <!-- Custom styles for this template-->
+        <link href="resources/sbadmin/css/sb-admin.css" rel="stylesheet"/>
+        
+        <link href="resources/icon.ico" rel="icon" type="image/x-icon" />
+        
+        <title>MedCOS - Login</title>
+    </h:head>
+
+    <h:body class="bg-dark">
+        <div class="container">
+            <div class="card card-login mx-auto mt-5">
+                <div class="card-header">Med Clinical Open Source - MedCOS</div>
+                <div class="card-body">
+                    <h:form id="formLogin">
+                        <div class="form-group">
+                            <small class="form-text text-danger text-center">
+	                            <h:inputHidden id="aviso"/>
+	                            <h:message for="aviso"/>
+	                        </small>
+                            <div class="form-label-group">
+                                <h:inputText id="cpf" class="form-control cpf" value="#{usuarioControlador.usuario.cpf}" required="true" requiredMessage="O CPF é obrigatório!"/>
+                                <h:outputLabel for="cpf" value="CPF"/>
+                            </div>
+                            <small class="form-text text-danger">
+                                <h:message for="cpf"/>
+                            </small>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-label-group">
+                                <h:inputSecret id="senha" class="form-control senha" value="#{usuarioControlador.usuario.senha}" required="true" requiredMessage="A senha é obrigatória!"/>
+                                <h:outputLabel for="senha" value="Senha"/>
+                            </div>
+                            <small class="form-text text-danger">
+                                <h:message for="senha"/>
+                            </small>
+                        </div>
+                        <!--  <div class="form-group">
+                            <div class="checkbox">
+                                <label> <input type="checkbox" value="remember-me">
+                                    Remember Password
+                                </label>
+                            </div>
+                        </div>-->
+                        <h:commandButton class="btn btn-primary btn-block" action="#{usuarioControlador.login}" value="Login"/>
+                    </h:form>
+                    <!-- <div class="text-center">
+                        <a class="d-block small mt-3" href="register.html">Register an
+                            Account</a> <a class="d-block small" href="forgot-password.html">Forgot
+                            Password?</a>
+                    </div> -->
+                </div>
+            </div>
+        </div>      
+         
+        <script>
+            document.querySelector(".cpf").setAttribute("placeholder", "CPF");
+            document.querySelector().setAttribute("placeholder", "Senha");
+        </script>
+        
+        <!-- Bootstrap core JavaScript-->
+        <script src="resources/sbadmin/vendor/jquery/jquery.min.js"/>
+        <script src="resources/sbadmin/vendor/bootstrap/js/bootstrap.bundle.min.js"/>
+    
+        <!-- Core plugin JavaScript-->
+        <script src="resources/sbadmin/vendor/jquery-easing/jquery.easing.min.js"/>
+    </h:body>
+</html>

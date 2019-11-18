@@ -24,12 +24,12 @@
 			                <h:outputLabel for="pergunta#{status.index}" value="Pergunta #{status.index+1}:">
 			                	<h:commandLink value="X" action="#{moldeControlador.removerPergunta(pergunta)}" class="badge badge-danger ml-2"/>
 			                </h:outputLabel>
-			                <h:inputText class="form-control" id="pergunta#{status.index}" value="#{pergunta.descricao}" validateMessage="A pergunta pode ter no máximo 30 caracteres.">
-			                     <f:validateLength minimum="2" maximum="30" />
+			                <h:inputText class="form-control" id="pergunta#{status.index}" value="#{pergunta.descricao}" validatorMessage="A pergunta pode ter no máximo 30 caracteres.">
+			                     <f:validateLength minimum="2" maximum="60" />
 			                </h:inputText>
 			                    
 			                <small class="form-text text-danger">
-			                    <h:message for="cpf"/>
+			                    <h:message for="pergunta#{status.index}"/>
 			                </small>
 			            </div>
 	            	</div>
