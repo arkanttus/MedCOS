@@ -77,8 +77,7 @@ public class UsuarioControlador
 
 		this.usuario = user;
 		SessionContext.getInstance().setAttribute("usuarioLogado", user);
-		System.out.println("LOGOU CERTIN");
-		return "/index.xhtml";
+		return "/index.xhtml?faces-redirect=true";
 	}
 
 	public String logout()

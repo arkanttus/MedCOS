@@ -9,10 +9,10 @@
 		<link href="resources/sbadmin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" />
 		
 		<!-- Page level plugin CSS-->
-		<link href="resources/sbadmin/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet" />
+		<h:outputStylesheet library="sbadmin/vendor/datatables" name="dataTables.bootstrap4.css"/>
 		
 		<!-- Custom styles for this template-->
-		<link href="resources/sbadmin/css/sb-admin.css" rel="stylesheet"/>
+		<h:outputStylesheet library="sbadmin/css" name="sb-admin.css"/>
 		
 		<link href="resources/icon.ico" rel="icon" type="image/x-icon" />
 		
@@ -151,22 +151,22 @@
 	    </h:form>
 	
 		<!-- Bootstrap core JavaScript-->
-		<script src="resources/sbadmin/vendor/jquery/jquery.min.js"/>
-		<script src="resources/sbadmin/vendor/bootstrap/js/bootstrap.bundle.min.js"/>
+		<h:outputScript library="sbadmin/vendor/jquery" name="jquery.min.js"/>
+		<h:outputScript library="sbadmin/vendor/bootstrap/js" name="bootstrap.bundle.min.js"/>
 	
 		<!-- Core plugin JavaScript-->
-		<script	src="resources/sbadmin/vendor/jquery-easing/jquery.easing.min.js"/>
+		<h:outputScript library="sbadmin/vendor/jquery-easing" name="jquery.easing.min.js"/>
 	
 		<!-- Page level plugin JavaScript-->
-		<script src="resources/sbadmin/vendor/chart.js/Chart.min.js"/>
-		<script src="resources/sbadmin/vendor/datatables/jquery.dataTables.js"/>
-		<script src="resources/sbadmin/vendor/datatables/dataTables.bootstrap4.js"/>
+		<h:outputScript library="sbadmin/vendor/chart.js" name="Chart.min.js"/>
+		<h:outputScript library="sbadmin/vendor/datatables" name="jquery.dataTables.js"/>
+		<h:outputScript library="sbadmin/vendor/datatables" name="dataTables.bootstrap4.js"/>
 	
 		<!-- Custom scripts for all pages-->
-		<script src="resources/sbadmin/js/sb-admin.min.js"/>
+		<h:outputScript library="sbadmin/js" name="sb-admin.min.js"/>
 	
 		<!-- Demo scripts for this page-->
-		<script src="resources/sbadmin/js/demo/datatables-demo.js"/>
-		<script src="resources/sbadmin/js/demo/chart-area-demo.js"/>
+		<h:outputScript library="sbadmin/js/demo" name="datatables-demo.js"/>
+		<h:outputScript library="sbadmin/js/demo" name="chart-area-demo.js"/>
 	</h:body>
 </html>
