@@ -23,11 +23,12 @@ public class Medico extends Usuario
 
     public Medico() {}
 
-	public Medico(String nome, String cpf, Date dataNascimento, String status, String crm, String especialidade)
+	public Medico(String nome, String cpf, String senha, Date dataNascimento, String status, String crm, String especialidade)
 	{
 		super();
 		this.setNome(nome);
 		this.setCpf(cpf);
+		this.setSenha(senha);
 		this.setDataNascimento(dataNascimento);
 		this.setStatus(status);
 		this.crm = crm;

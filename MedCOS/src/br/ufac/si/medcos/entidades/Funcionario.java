@@ -19,9 +19,10 @@ public class Funcionario extends Usuario
     
     public Funcionario() {}
 
-	public Funcionario(String nome, String cpf, Date dataNascimento, String funcao, String status, Integer permissao)
+	public Funcionario(String nome, String cpf, String senha, Date dataNascimento, String funcao, String status, Integer permissao)
 	{
 		super();
+		this.setSenha(senha);
 		this.setNome(nome);
 		this.setCpf(cpf);
 		this.setDataNascimento(dataNascimento);
