@@ -36,7 +36,7 @@ public class Consulta
     @Column(nullable=false, length=19)
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataHora;
-    @Column(nullable=true, length=40)
+    @Column(nullable=true, length=100)
     private String obs;
     @Column(nullable=false, length=20)
     private String status;
@@ -180,5 +180,11 @@ public class Consulta
 	public void setMedico(Medico medico)
 	{
 		this.medico = medico;
+	}
+
+	public String toString() 
+	{
+		return "Consulta [id=" + id + ", sintomas=" + sintomas + ", dataHora=" + dataHora + ", obs=" + obs + ", status="
+				+ status + ", paciente=" + paciente.getId() + ", medico=" + medico.getId() + "]";
 	}
 }

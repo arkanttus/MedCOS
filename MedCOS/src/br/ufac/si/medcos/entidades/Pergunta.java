@@ -58,4 +58,9 @@ public class Pergunta
 	{
 		this.tipo = tipo;
 	}
+
+	public String toString() 
+	{
+		return "Pergunta [id=" + id + ", descricao=" + descricao + ", tipo=" + tipo + "]";
+	}
 }

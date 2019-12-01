@@ -66,4 +66,10 @@ public class Medico extends Usuario
 		
 		return false;
 	}
+	
+	public String toString() 
+	{
+		return "Medico [id=" + getId() + ", nome=" + getNome() + ", senha=" + getSenha() + ", cpf=" + getCpf() + ", dataNascimento="
+				+ getDataNascimento() + ", status=" + getStatus() + ", crm=" + crm +", especialidade=" + especialidade + "]";
+	}
 }

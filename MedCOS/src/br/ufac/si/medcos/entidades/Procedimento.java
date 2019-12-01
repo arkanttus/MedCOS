@@ -21,7 +21,7 @@ public class Procedimento
     private String nome;
     @Column(nullable=false, length=70)
     private String descricao;
-    @Column(nullable=false, length=10)
+    @Column(nullable=false, length=25)
     private String tipo;
     
     @ManyToOne()
@@ -87,5 +87,11 @@ public class Procedimento
 	public void setConsulta(Consulta consulta)
 	{
 		this.consulta = consulta;
+	}
+
+	public String toString() 
+	{
+		return "Procedimento [id=" + id + ", nome=" + nome + ", descricao=" + descricao + ", tipo=" + tipo
+				+ ", consulta=" + consulta.getId() + "]";
 	}
 }

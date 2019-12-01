@@ -226,4 +226,12 @@ public class Paciente
 		
 		return false;
 	}
+
+	public String toString() 
+	{
+		return "Paciente [id=" + id + ", nome=" + nome + ", cpf=" + cpf + ", dataNascimento=" + dataNascimento
+				+ ", estadoCivil=" + estadoCivil + ", fone=" + fone + ", sexo=" + sexo + ", email=" + email
+				+ ", profissao=" + profissao + ", obs=" + obs + ", endereco=" + endereco + ", consultas=" + consultas
+				+ "]";
+	}
 }

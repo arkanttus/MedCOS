@@ -92,4 +92,10 @@ public class Resposta
 	{
 		this.anamnese = anamnese;
 	}
+
+	public String toString()  
+	{
+		return "Resposta [id=" + id + ", conteudo=" + conteudo + ", pergunta=" + pergunta + ", paciente=" + paciente.getId()
+				+ ", anamnese=" + anamnese.getId() + "]";
+	}
 }

@@ -50,4 +50,10 @@ public class Funcionario extends Usuario
 	{
 		this.permissao = permissao;
 	}
+	
+	public String toString() 
+	{
+		return "Funcionario [id=" + getId() + ", nome=" + getNome() + ", senha=" + getSenha() + ", cpf=" + getCpf() + ", dataNascimento="
+				+ getDataNascimento() + ", status=" + getStatus() + ", funcao=" + funcao +", permissao=" + permissao + "]";
+	}
 }

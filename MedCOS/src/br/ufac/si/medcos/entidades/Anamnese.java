@@ -145,4 +145,9 @@ public class Anamnese
 	{
 		this.responsaveis = responsaveis;
 	}
+
+	public String toString() 
+	{
+		return "Anamnese [id=" + id + ", data=" + data + ", paciente=" + paciente + ", molde=" + molde + "]";
+	}
 }

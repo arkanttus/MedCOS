@@ -138,4 +138,9 @@ public class Molde
 	{
 		this.responsaveis = responsaveis;
 	}
+
+	public String toString() 
+	{
+		return "Molde [id=" + id + ", descricao=" + descricao + ", criacao=" + criacao + "]";
+	}
 }

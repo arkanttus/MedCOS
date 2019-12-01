@@ -1,22 +1,24 @@
 package br.ufac.si.medcos.testes;
 
 import java.util.Calendar;
+import java.util.Date;
 
-import br.ufac.si.medcos.entidades.Funcionario;
-import br.ufac.si.medcos.entidades.Medico;
 import br.ufac.si.medcos.gerentes.Gerente;
-import br.ufac.si.medcos.gerentes.MedicoGerente;
-import br.ufac.si.medcos.utils.Funcoes;
 
 public class Teste
 {
-
 	public static void main(String[] args)
 	{
+		Date date = Calendar.getInstance().getTime();
 		Gerente g = new Gerente();
-		Funcionario f = new Funcionario("Funcionario da Silva", "0", Funcoes.md5("123"), Calendar.getInstance().getTime(), "", "Ativo", 1);
+
+		new TesteUsuarios(g, date);
+		new TesteMoldes(g, date);
+		new TestePacientes(g, date);
+		new TesteAnamneses(g, date);
+		new TesteAgendarConsulta(g, date);
+		new TesteGerenciarConsulta(g, date);
 		
-		g.adicionar(f);
 		g.encerrar();
 	}
 

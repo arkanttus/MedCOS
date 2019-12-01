@@ -10,7 +10,7 @@ import javax.persistence.*;
 })
 public class Endereco
 {
-    @Id
+	@Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer id;
     @Column(nullable=false, length=40)
@@ -107,5 +107,11 @@ public class Endereco
 	public void setNumero(Integer numero)
 	{
 		this.numero = numero;
+	}
+	
+	public String toString() 
+	{
+		return "Endereco [id=" + id + ", logradouro=" + logradouro + ", bairro=" + bairro + ", cidade=" + cidade
+				+ ", estado=" + estado + ", cep=" + cep + ", numero=" + numero + "]";
 	}
 }

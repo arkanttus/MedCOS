@@ -88,4 +88,10 @@ public abstract class Usuario
 	{
 		this.status = status;
 	}
+
+	public String toString() 
+	{
+		return "Usuario [id=" + id + ", nome=" + nome + ", senha=" + senha + ", cpf=" + cpf + ", dataNascimento="
+				+ dataNascimento + ", status=" + status + "]";
+	}
 }
