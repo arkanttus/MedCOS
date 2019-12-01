@@ -1,0 +1,22 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+      
+  <ui:composition template="templates/templateConsulta.xhtml">
+    
+    <ui:define name="titulo">Atendimento de consulta</ui:define>
+    
+    <ui:define name="subtitulo">Atendimento de consulta</ui:define>
+    
+    <ui:define name="subpagina">
+        <li class="breadcrumb-item"><h:link value="Consultas" outcome="consultas"/></li>
+        <li class="breadcrumb-item active">Atendimento de consulta</li>
+    </ui:define>
+    
+    <ui:define name="botaoPrincipal">
+        <h:commandLink value="Salvar" action="#{consultaControlador.salvarAtendimento}" class="btn btn-success ml-2"><i class="fas fa-check ml-1"></i></h:commandLink>
+    </ui:define>
+    
+  </ui:composition>
+</html>

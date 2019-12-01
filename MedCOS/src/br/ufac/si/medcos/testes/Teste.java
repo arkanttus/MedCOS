@@ -15,9 +15,9 @@ public class Teste
 		new TesteUsuarios(g, date);
 		new TesteMoldes(g, date);
 		new TestePacientes(g, date);
-		new TesteAnamneses(g, date);
+		//new TesteAnamneses(g, date);
 		new TesteAgendarConsulta(g, date);
-		new TesteGerenciarConsulta(g, date);
+		//new TesteGerenciarConsulta(g, date);
 		
 		g.encerrar();
 	}

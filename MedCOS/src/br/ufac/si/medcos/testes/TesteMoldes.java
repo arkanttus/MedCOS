@@ -19,16 +19,16 @@ public class TesteMoldes
 		System.out.println("\n=> Criando moldes...");
 
 		Molde m1 = new Molde("Molde A", date);
-		m1.adicionarPergunta(new Pergunta("Você gosta de bacon?", 1));
-		m1.adicionarPergunta(new Pergunta("Você gosta de pizza?", 1));
-		m1.adicionarPergunta(new Pergunta("Você tem alergia a carne de porco?", 1));
-		m1.adicionarPergunta(new Pergunta("Quando foi a última vez que comeu porco?", 2));
+		m1.adicionarPergunta("Você gosta de bacon?", 1);
+		m1.adicionarPergunta("Você gosta de pizza?", 1);
+		m1.adicionarPergunta("Você tem alergia a carne de porco?", 1);
+		m1.adicionarPergunta("Quando foi a última vez que comeu porco?", 2);
 		m1.adicionarResponsavel(f1);
 		g.adicionar(m1);
 		
 		Molde m2 = new Molde("Molde B", date);
-		m2.adicionarPergunta(new Pergunta("Você tem hipertensão?", 1));
-		m2.adicionarPergunta(new Pergunta("Você tem diabetes?", 1));
+		m2.adicionarPergunta("Você tem hipertensão?", 1);
+		m2.adicionarPergunta("Você tem diabetes?", 1);
 		m2.adicionarResponsavel(f2);
 		g.adicionar(m2);
 		

@@ -20,8 +20,8 @@ public class TesteUsuarios
 		//Funcionários
 		System.out.println("\n=> Criando funcionários...");
 		
-		Funcionario f1 = new Funcionario("Funcionario da Silva", "123456789-12", Funcoes.md5("123"), date, "", "Ativo", 1);
-		Funcionario f2 = new Funcionario("Funcionario da Costa", "123456559-11", Funcoes.md5("123"), date, "", "Ativo", 1);
+		Funcionario f1 = new Funcionario("Funcionario da Silva", "12345678900", Funcoes.md5("123"), date, "", "Ativo", 1);
+		Funcionario f2 = new Funcionario("Funcionario da Costa", "12345667811", Funcoes.md5("123"), date, "", "Ativo", 2);
 		g.adicionar(f1);
 		g.adicionar(f2);
 		
@@ -32,8 +32,8 @@ public class TesteUsuarios
 		//Médicos
 		System.out.println("\n=> Criando médicos...");
 		
-		Medico med1 = new Medico("Medico de Oliveira", "343123532-11", Funcoes.md5("123"), date, "Ativo", "143-0 AC", "Neurologista");
-		Medico med2 = new Medico("Medico de Araújo", "656212422-11", Funcoes.md5("123"), date, "Ativo", "122-0 AC", "Gastroenterologista");
+		Medico med1 = new Medico("Medico de Oliveira", "12345678922", Funcoes.md5("123"), date, "Ativo", "143-0 AC", "Neurologista");
+		Medico med2 = new Medico("Medico de Araújo", "65621242211", Funcoes.md5("123"), date, "Ativo", "122-0 AC", "Gastroenterologista");
 		g.adicionar(med1);
 		g.adicionar(med2);
 		

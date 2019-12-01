@@ -10,6 +10,7 @@ import javax.faces.bean.*;
 import javax.faces.context.FacesContext;
 
 import br.ufac.si.medcos.gerentes.*;
+import br.ufac.si.medcos.sessao.SessionContext;
 import br.ufac.si.medcos.entidades.*;
 
 @ManagedBean(name="pacienteControlador")
@@ -105,6 +106,7 @@ public class PacienteControlador
 			Resposta r = new Resposta("", p, paciente, anamnese);
 			anamnese.adicionarResposta(r);
 		}
+		anamnese.adicionarResponsavel((Funcionario) SessionContext.getInstance().getUsuarioLogado());
 		paciente.adicionarAnamnese(anamnese);
 		
 		molde = new Molde();
@@ -125,27 +127,11 @@ public class PacienteControlador
 		return "adicionarPaciente";
 	}
 	
-	//Salvando nova consulta
+	//Salvando novo paciente
 	public String salvarInclusao()
 	{
 		pg.adicionar(paciente);
 		return "pacientes";
-		/*Calendar cal = Calendar.getInstance();
-		Date agora = cal.getTime();
-		
-		if(consulta.getDataHora().compareTo(agora) > 0)
-		{
-			consulta.setObs("");
-			consulta.setSintomas("");
-			consulta.setStatus("Pendente");
-			cg.adicionar(consulta);
-			return "index";
-		}
-		else
-		{
-			FacesContext.getCurrentInstance().addMessage("formConsulta:dataHora", new FacesMessage("A data e horário não podem ser antes de agora."));
-			return null;
-		}*/
 	}
 	
 	//Edição de paciente
@@ -163,19 +149,6 @@ public class PacienteControlador
 	{
 		pg.atualizar(paciente);
 		return "pacientes";
-		/*Calendar cal = Calendar.getInstance();
-		Date agora = cal.getTime();
-		
-		if(consulta.getDataHora().compareTo(agora) > 0)
-		{
-			cg.atualizar(consulta);
-			return "index";
-		}
-		else
-		{
-			FacesContext.getCurrentInstance().addMessage("formConsulta:dataHora", new FacesMessage("A data e horário não podem ser antes de agora."));
-			return null;
-		}*/
 	}
 	
 	//Excluir paciente

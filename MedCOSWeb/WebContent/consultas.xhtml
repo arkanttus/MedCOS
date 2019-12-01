@@ -20,7 +20,7 @@
     </ui:define>
     
     <ui:define name="botaoAdicionar">
-        <h:commandLink action="#{consultaControlador.adicionar}" class="btn btn-success float-right" value="Nova"><i class="fas fa-plus ml-1"></i></h:commandLink>
+        <h:commandLink action="#{consultaControlador.adicionar}" class="btn btn-success float-right" value="Nova" rendered="#{usuarioControlador.usuarioLogado['class'].simpleName eq 'Funcionario'}"><i class="fas fa-plus ml-1"></i></h:commandLink>
     </ui:define>
     
     <ui:define name="tabela">
@@ -37,7 +37,7 @@
                 #{consulta.paciente.nome}
             </h:column>
             
-            <h:column>
+            <h:column rendered="#{usuarioControlador.usuarioLogado['class'].simpleName eq 'Funcionario'}">
                 <f:facet name="header">Médico</f:facet>
                 #{consulta.medico.nome}
             </h:column>
@@ -54,14 +54,26 @@
                 #{consulta.status}
             </h:column>
             
-            <h:column>
+            <h:column rendered="#{usuarioControlador.usuarioLogado['class'].simpleName eq 'Funcionario'}">
                 <f:facet name="header">Operações</f:facet>
                 <h:commandLink action="#{consultaControlador.editar(consulta)}" class="btn btn-warning text-white">
                     <i class="fas fa-edit"></i>
                 </h:commandLink>
-                <a href="#" class="btn btn-danger ml-2" data-toggle="modal" data-target="#consultaModal#{consulta.id}" rendered="#{consulta.status ne 'Cancelada'}">
-                   <i class="far fa-trash-alt"></i>
-                </a>
+                <h:panelGroup layout="block" rendered="#{consulta.status ne 'Cancelada'}">
+	                <a href="#" class="btn btn-danger ml-2" data-toggle="modal" data-target="#consultaModal#{consulta.id}">
+	                   <i class="far fa-trash-alt"></i>
+	                </a>
+                </h:panelGroup>
+            </h:column>
+            
+            <h:column rendered="#{usuarioControlador.usuarioLogado['class'].simpleName eq 'Medico'}">
+                <f:facet name="header">Operações</f:facet>
+                
+                <h:outputText value="---" rendered="#{consulta.status eq 'Atendida'}"/>
+                
+                <h:commandLink action="#{consultaControlador.atender(consulta)}" class="btn btn-primary text-white" rendered="#{consulta.status ne 'Atendida'}">
+                    <i class="fas fa-notes-medical"></i>
+                </h:commandLink>
             </h:column>
         </h:dataTable>
     </ui:define>

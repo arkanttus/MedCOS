@@ -10,6 +10,7 @@ import javax.faces.bean.*;
 import javax.faces.context.FacesContext;
 
 import br.ufac.si.medcos.gerentes.*;
+import br.ufac.si.medcos.sessao.SessionContext;
 import br.ufac.si.medcos.entidades.*;
 
 @ManagedBean(name="moldeControlador")
@@ -62,8 +63,7 @@ public class MoldeControlador
 	
 	public void adicionarPergunta()
 	{
-		Pergunta p = new Pergunta("", 1);
-		molde.adicionarPergunta(p);
+		molde.adicionarPergunta("", 1);
 	}
 	
 	public void removerPergunta(Pergunta p)
@@ -87,7 +87,7 @@ public class MoldeControlador
 	public String adicionar()  
 	{
 		this.molde = new Molde();
-		this.molde.adicionarPergunta(new Pergunta("", 1));
+		this.molde.adicionarPergunta("", 1);
 		return "adicionarMolde";
 	}
 	
@@ -103,6 +103,7 @@ public class MoldeControlador
 		filtrarPerguntas();
 		Calendar cal = Calendar.getInstance();
 		molde.setCriacao(cal.getTime());
+		molde.adicionarResponsavel((Funcionario) SessionContext.getInstance().getUsuarioLogado());
 		mg.adicionar(molde);
 		return "moldes";
 	}
@@ -124,6 +125,7 @@ public class MoldeControlador
 		}
 		
 		filtrarPerguntas();
+		molde.adicionarResponsavel((Funcionario) SessionContext.getInstance().getUsuarioLogado());
 		mg.atualizar(molde);
 		return "moldes";
 	}

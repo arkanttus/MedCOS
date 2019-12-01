@@ -19,12 +19,16 @@ import br.ufac.si.medcos.entidades.Funcionario;
 		query="SELECT c FROM Consulta c, Paciente p WHERE c.paciente = p.id AND p.nome LIKE :termo ORDER BY c.dataHora DESC"),		
 	@NamedQuery(name="Consulta.todosProximas", 
 		query="SELECT a FROM Consulta a WHERE a.status = 'Pendente' AND a.dataHora >= NOW() AND a.dataHora <= NOW()+60000 ORDER BY a.dataHora"),
+	@NamedQuery(name="Consulta.todosProximasDoMedico", 
+		query="SELECT a FROM Consulta a WHERE a.status = 'Pendente' AND a.dataHora >= NOW() AND a.dataHora <= NOW()+60000 AND a.medico = :id ORDER BY a.dataHora"),
 	@NamedQuery(name="Consulta.contarPendentes", 
 		query="SELECT COUNT(*) FROM Consulta a WHERE a.status = 'Pendente' AND a.dataHora >= CURDATE() AND a.dataHora < (CURDATE()+1)"),
 	@NamedQuery(name="Consulta.contarAtendidas", 
 		query="SELECT COUNT(*) FROM Consulta a WHERE a.status = 'Atendida' AND a.dataHora >= CURDATE() AND a.dataHora < (CURDATE()+1)"),
 	@NamedQuery(name="Consulta.contarMedicosAtendendo", 
-		query="SELECT COUNT(DISTINCT a.medico) FROM Consulta a WHERE a.status = 'Pendente' AND a.dataHora >= CURDATE() AND a.dataHora < (CURDATE()+1)")
+		query="SELECT COUNT(DISTINCT a.medico) FROM Consulta a WHERE a.status = 'Pendente' AND a.dataHora >= CURDATE() AND a.dataHora < (CURDATE()+1)"),
+	@NamedQuery(name="Consulta.maisRecentesPorMedicoContendo", 
+		query="SELECT c FROM Consulta c, Paciente p WHERE c.medico = :id AND c.paciente = p.id AND p.nome LIKE :termo ORDER BY c.dataHora DESC")	
 })
 public class Consulta
 {
@@ -36,7 +40,7 @@ public class Consulta
     @Column(nullable=false, length=19)
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataHora;
-    @Column(nullable=true, length=100)
+    @Column(nullable=true, length=150)
     private String obs;
     @Column(nullable=false, length=20)
     private String status;
@@ -49,7 +53,7 @@ public class Consulta
     @JoinColumn(name="medico", nullable=false)
     private Medico medico;
 
-    @OneToMany(mappedBy="consulta", cascade=CascadeType.ALL, orphanRemoval=true)
+    @OneToMany(mappedBy="consulta", cascade=CascadeType.ALL)
     private List<Procedimento> procedimentos;
     
     @ManyToMany()
@@ -57,19 +61,21 @@ public class Consulta
     inverseJoinColumns=@JoinColumn(name="funcionario"))
     private List<Funcionario> responsaveis;
     
-    public Consulta() {}
+    public Consulta() 
+    {
+    	this.procedimentos = new ArrayList<Procedimento>();
+		this.responsaveis = new ArrayList<Funcionario>();
+    }
     
 	public Consulta(String sintomas, Date dataHora, String obs, String status, Paciente paciente, Medico medico)
 	{
-		super();
+		this();
 		this.sintomas = sintomas;
 		this.dataHora = dataHora;
 		this.obs = obs;
 		this.status = status;
 		this.paciente = paciente;
 		this.medico = medico;
-		this.procedimentos = new ArrayList<Procedimento>();
-		this.responsaveis = new ArrayList<Funcionario>();
 	}
 
 	public Integer getId()
@@ -137,9 +143,9 @@ public class Consulta
 		return procedimentos;
 	}
 
-	public void adicionarProcedimento(Procedimento p)
+	public void adicionarProcedimento(String nome, String descricao, String tipo)
 	{
-		this.procedimentos.add(p);
+		this.procedimentos.add(new Procedimento(nome, descricao, tipo, this));
 	}
 
 	public void removerProcedimento(Procedimento p)

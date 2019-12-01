@@ -16,41 +16,46 @@
                     <h:message for="descricao"/>
                 </small>
             </div>
-            
-            <ui:repeat var="pergunta" value="#{moldeControlador.molde.perguntas}" varStatus="status">
-	            <div class='row'>
-			        <div class='col-sm'>  
-			            <div class="form-group">
-			                <h:outputLabel for="pergunta#{status.index}" value="Pergunta #{status.index+1}:">
-			                	<h:commandLink value="X" action="#{moldeControlador.removerPergunta(pergunta)}" class="badge badge-danger ml-2"/>
-			                </h:outputLabel>
-			                <h:inputText class="form-control" id="pergunta#{status.index}" value="#{pergunta.descricao}" validatorMessage="A pergunta pode ter no máximo 30 caracteres.">
-			                     <f:validateLength minimum="2" maximum="60" />
-			                </h:inputText>
-			                    
-			                <small class="form-text text-danger">
-			                    <h:message for="pergunta#{status.index}"/>
-			                </small>
-			            </div>
-	            	</div>
-	            	
-	            	<div class='col-sm-2'>  
-			            <div class="form-group">
-			                <h:outputLabel for="tipo#{status.index}" value="Tipo:"/>
-			                <h:selectOneMenu class="form-control" id="tipo#{status.index}" value="#{pergunta.tipo}" converterMessage="O status deve ser válido.">
-			                    <f:selectItem itemValue="1" itemLabel="Sim/Não"/>
-			                    <f:selectItem itemValue="2" itemLabel="Escrita"/>
-			                </h:selectOneMenu>  
-			                    
-			                <small class="form-text text-danger">
-			                    <h:message for="tipo#{status.index}"/>
-			                </small>
-			            </div>
-	            	</div>
-	            </div>
-	        </ui:repeat>
+            <h:panelGroup layout="block" id="conteudoDinamico">
+	            <ui:repeat var="pergunta" value="#{moldeControlador.molde.perguntas}" varStatus="status">
+		            <div class='row'>
+				        <div class='col-sm'>  
+				            <div class="form-group">
+				                <h:outputLabel for="pergunta#{status.index}" value="Pergunta #{status.index+1}:">
+				                	<h:commandLink value="X" class="badge badge-danger ml-2">
+				                	   <f:ajax event="click" render=":formMolde:conteudoDinamico" execute=":formMolde:conteudoDinamico" listener="#{moldeControlador.removerPergunta(pergunta)}"/>
+				                	</h:commandLink>
+				                </h:outputLabel>
+				                <h:inputText class="form-control" id="pergunta#{status.index}" value="#{pergunta.descricao}" validatorMessage="A pergunta pode ter no máximo 30 caracteres.">
+				                     <f:validateLength minimum="2" maximum="60" />
+				                </h:inputText>
+				                    
+				                <small class="form-text text-danger">
+				                    <h:message for="pergunta#{status.index}"/>
+				                </small>
+				            </div>
+		            	</div>
+		            	
+		            	<div class='col-sm-2'>  
+				            <div class="form-group">
+				                <h:outputLabel for="tipo#{status.index}" value="Tipo:"/>
+				                <h:selectOneMenu class="form-control" id="tipo#{status.index}" value="#{pergunta.tipo}" converterMessage="O status deve ser válido.">
+				                    <f:selectItem itemValue="1" itemLabel="Sim/Não"/>
+				                    <f:selectItem itemValue="2" itemLabel="Escrita"/>
+				                </h:selectOneMenu>  
+				                    
+				                <small class="form-text text-danger">
+				                    <h:message for="tipo#{status.index}"/>
+				                </small>
+				            </div>
+		            	</div>
+		            </div>
+		        </ui:repeat>
+		    </h:panelGroup>
 	        <div class="form-group">
-	        	<h:commandButton value="Nova pergunta" action="#{moldeControlador.adicionarPergunta}" class="btn btn-success btn-block"/>
+	        	<h:commandButton value="Nova pergunta" class="btn btn-success btn-block">
+	        	    <f:ajax event="click" render="formMolde:conteudoDinamico" execute="formMolde:conteudoDinamico" listener="#{moldeControlador.adicionarPergunta()}"/>
+	        	</h:commandButton>
 	        </div>
             
             <h:link value="Cancelar" outcome="moldes" class="btn btn-danger"><i class="fas fa-trash-alt ml-1"></i></h:link>

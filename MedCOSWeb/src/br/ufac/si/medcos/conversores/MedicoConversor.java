@@ -13,7 +13,7 @@ import br.ufac.si.medcos.gerentes.MedicoGerente;
 @FacesConverter(value="medicoConversor", forClass=Medico.class)
 public class MedicoConversor implements Converter 
 {
-	MedicoGerente mg = new MedicoGerente();
+	MedicoGerente mg;
 	
 	public Object getAsObject(FacesContext context, UIComponent component, String value) 
 	{

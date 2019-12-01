@@ -63,6 +63,11 @@ public class UsuarioControlador
 		this.senhaConfirmada = senhaConfirmada;
 	}
 	
+	public Usuario getUsuarioLogado()
+	{
+		return SessionContext.getInstance().getUsuarioLogado();
+	}
+	
 	//====================// Rotas //====================//
 	
 	public String login()

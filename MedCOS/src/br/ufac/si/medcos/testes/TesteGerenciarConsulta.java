@@ -21,8 +21,8 @@ public class TesteGerenciarConsulta
 		System.out.println("\n=> Atendendo a consulta...");
 		
 		c2.setStatus("Atendida");
-		c2.adicionarProcedimento(new Procedimento("Endoscopia", "Solicitado endoscopia com o uso de anestésicos", "Exame", c2));
-		c2.adicionarProcedimento(new Procedimento("Dipirona", "Uso de dipirona 3 vezes por dia, até que a dor suma.", "Medicamento", c2));
+		c2.adicionarProcedimento("Endoscopia", "Solicitado endoscopia com o uso de anestésicos", "Exame");
+		c2.adicionarProcedimento("Dipirona", "Uso de dipirona 3 vezes por dia, até que a dor suma.", "Medicamento");
 		g.atualizar(c2);
 		
 		//Cancelando a consulta 

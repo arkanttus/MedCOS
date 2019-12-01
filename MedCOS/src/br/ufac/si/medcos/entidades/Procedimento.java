@@ -17,7 +17,7 @@ public class Procedimento
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer id;
-    @Column(nullable=false, length=20)
+    @Column(nullable=false, length=30)
     private String nome;
     @Column(nullable=false, length=70)
     private String descricao;

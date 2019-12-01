@@ -10,7 +10,7 @@
             <div class="form-group">
                 <h:outputLabel for="paciente" value="Paciente:"/>
                 <span class="text-danger"> *</span>
-                <h:selectOneMenu class="form-control" id="paciente" value="#{consultaControlador.consulta.paciente}" converter="pacienteConversor" required="true" requiredMessage="Paciente é obrigatório!" converterMessage="O paciente deve ser válido.">
+                <h:selectOneMenu class="form-control" id="paciente" value="#{consultaControlador.consulta.paciente}" converter="pacienteConversor" required="true" requiredMessage="Paciente é obrigatório!" converterMessage="O paciente deve ser válido." disabled="#{(usuarioControlador.usuarioLogado['class'].simpleName eq 'Medico')}">
 	                <f:selectItem noSelectionOption="true" itemLabel="--Selecione--"/>
 	                <f:selectItems value="#{pacienteControlador.pacientes}" var="paciente" itemValue="#{paciente}" itemLabel="#{paciente.nome} (#{paciente.cpf})"/>
 	            </h:selectOneMenu>  
@@ -23,7 +23,7 @@
             <div class="form-group">
                 <h:outputLabel for="medico" value="Médico:"/>
                 <span class="text-danger"> *</span>
-                <h:selectOneMenu class="form-control" id="medico" value="#{consultaControlador.consulta.medico}" converter="medicoConversor" required="true" requiredMessage="Médico é obrigatório!" converterMessage="O médico deve ser válido!" validatorMessage="Médico inválido!">
+                <h:selectOneMenu class="form-control" id="medico" value="#{consultaControlador.consulta.medico}" converter="medicoConversor" required="true" requiredMessage="Médico é obrigatório!" converterMessage="O médico deve ser válido!" validatorMessage="Médico inválido!" disabled="#{(usuarioControlador.usuarioLogado['class'].simpleName eq 'Medico')}">
                     <f:selectItem noSelectionOption="true" itemLabel="--Selecione--"/>
                     <f:selectItems value="#{medicoControlador.medicos}" var="medico" itemValue="#{medico}" itemLabel="#{medico.nome}"/>
                 </h:selectOneMenu>  
@@ -36,7 +36,7 @@
             <div class="form-group">
                 <h:outputLabel for="dataHora" value="Data e Horário:"/>
                 <span class="text-danger"> *</span>
-                <h:inputText class="form-control" id="dataHora" value="#{consultaControlador.consulta.dataHora}" required="true" requiredMessage="O horário é obrigatório!" validatorMessage="O horário deve estar no formato: dia/mês/ano horas:minutos!" converterMessage="O horário deve estar no formato: dia/mês/ano horas:minutos!">
+                <h:inputText class="form-control" id="dataHora" value="#{consultaControlador.consulta.dataHora}" required="true" requiredMessage="O horário é obrigatório!" validatorMessage="O horário deve estar no formato: dia/mês/ano horas:minutos!" converterMessage="O horário deve estar no formato: dia/mês/ano horas:minutos!" disabled="#{(usuarioControlador.usuarioLogado['class'].simpleName eq 'Medico')}">
                      <f:convertDateTime type="date" pattern="dd/MM/yyyy HH:mm"/>
                 </h:inputText>
                     
@@ -46,6 +46,23 @@
             </div>
             
             <ui:insert name="foraInclusao">
+                <h:panelGroup layout="block" rendered="#{(usuarioControlador.usuarioLogado['class'].simpleName eq 'Funcionario')}">
+		            <div class="form-group">
+		                <h:outputLabel for="status" value="Status:"/>
+		                <span class="text-danger"> *</span>
+		                <h:selectOneMenu class="form-control" id="status" value="#{consultaControlador.consulta.status}" required="true" requiredMessage="O status é obrigatório!" converterMessage="O status deve ser válido.">
+		                    <f:selectItem noSelectionOption="true" itemLabel="--Selecione--"/>
+		                    <f:selectItem itemValue="Pendente" itemLabel="Pendente"/>
+		                    <f:selectItem itemValue="Atendida" itemLabel="Atendida"/>
+		                    <f:selectItem itemValue="Cancelada" itemLabel="Cancelada"/>
+		                </h:selectOneMenu>  
+		                    
+		                <small class="form-text text-danger">
+		                    <h:message for="status"/>
+		                </small>
+		            </div>
+                </h:panelGroup>
+	            
 	            <div class="form-group">
 	                <h:outputLabel for="sintomas" value="Sintomas:"/>
 	                <h:inputTextarea class="form-control" id="sintomas" value="#{consultaControlador.consulta.sintomas}" validatorMessage="Os sintomas podem ter no máximo 100 caracteres!">
@@ -58,30 +75,83 @@
 	            </div>
 	            
 	            <div class="form-group">
-	                <h:outputLabel for="status" value="Status:"/>
-	                <span class="text-danger"> *</span>
-	                <h:selectOneMenu class="form-control" id="status" value="#{consultaControlador.consulta.status}" required="true" requiredMessage="O status é obrigatório!" converterMessage="O status deve ser válido.">
-	                    <f:selectItem noSelectionOption="true" itemLabel="--Selecione--"/>
-	                    <f:selectItem itemValue="Pendente" itemLabel="Pendente"/>
-	                    <f:selectItem itemValue="Atendida" itemLabel="Atendida"/>
-	                    <f:selectItem itemValue="Cancelada" itemLabel="Cancelada"/>
-	                </h:selectOneMenu>  
-	                    
-	                <small class="form-text text-danger">
-	                    <h:message for="status"/>
-	                </small>
-	            </div>
-	            
-	            <div class="form-group">
 	                <h:outputLabel for="obs" value="Observações:"/>
-	                <h:inputTextarea class="form-control" id="obs" value="#{consultaControlador.consulta.obs}" validatorMessage="As observações podem ter no máximo 40 caracteres!">
-	                    <f:validateLength minimum="0" maximum="40" />
+	                <h:inputTextarea class="form-control" id="obs" value="#{consultaControlador.consulta.obs}" validatorMessage="As observações podem ter no máximo 150 caracteres!">
+	                    <f:validateLength minimum="0" maximum="150" />
 	                </h:inputTextarea>
 	                    
 	                <small class="form-text text-danger">
 	                    <h:message for="sintomas"/>
 	                </small>
 	            </div>
+	            
+	            <h:panelGroup layout="block" id="conteudoDinamico">
+	                <div class="row">
+	                    <div class="col">
+                            <div class="card">
+                                <h5 class="card-header">
+                                    Procedimentos
+                                    <h:commandLink value="Novo" class="btn btn-success">
+                                        <f:ajax event="click" render="formConsulta:conteudoDinamico" execute="formConsulta:conteudoDinamico" listener="#{consultaControlador.adicionarProcedimento()}"/>
+                                    </h:commandLink>
+                                </h5>
+                                <div class="card-body">
+                                    <h:outputText value="Não há procedimentos!" class="h4 text-danger" rendered="#{empty consultaControlador.consulta.procedimentos}"/>
+                                
+                                    <ui:repeat var="procedimento" value="#{consultaControlador.consulta.procedimentos}" varStatus="status">
+	                                    <div class='row'>
+                                           <div class='col-sm-3'>  
+                                                <div class="form-group">
+                                                    <h:outputLabel for="nome#{status.index}" value="Nome:">
+                                                       <h:commandLink value="X" class="badge badge-danger ml-2">
+                                                           <f:ajax event="click" render=":formConsulta:conteudoDinamico" execute=":formConsulta:conteudoDinamico" listener="#{consultaControlador.removerProcedimento(procedimento)}"/>
+                                                       </h:commandLink>
+                                                    </h:outputLabel>
+                                                    <h:inputText class="form-control" id="nome#{status.index}" value="#{procedimento.nome}" validatorMessage="O nome do procedimento pode ter no máximo 20 caracteres.">
+                                                       <f:validateLength minimum="2" maximum="20" />
+                                                   </h:inputText>  
+                                                        
+                                                    <small class="form-text text-danger">
+                                                        <h:message for="nome#{status.index}"/>
+                                                    </small>
+                                                </div>
+                                           </div>
+	                                       <div class='col-sm-2'>  
+                                                <div class="form-group">
+                                                    <h:outputLabel for="tipo#{status.index}" value="Tipo:"/>
+                                                    <h:selectOneMenu class="form-control" id="tipo#{status.index}" value="#{procedimento.tipo}">
+                                                        <f:selectItem noSelectionOption="true" itemDisabled="true" itemLabel="-- Selecione --"/>
+                                                        <f:selectItem itemValue="Exame" itemLabel="Exame"/>
+                                                        <f:selectItem itemValue="Medicamento" itemLabel="Medicamento"/>
+                                                        <f:selectItem itemValue="Cirurgia" itemLabel="Cirurgia"/>
+                                                    </h:selectOneMenu>  
+                                                        
+                                                    <small class="form-text text-danger">
+                                                        <h:message for="tipo#{status.index}"/>
+                                                    </small>
+                                                </div>
+                                            </div>
+	                                       <div class='col-sm-7'>  
+	                                           <div class="form-group">
+										           <h:outputLabel for="descricao#{status.index}" value="Descrição:">
+											           
+										           </h:outputLabel>
+										           <h:inputText class="form-control" id="descricao#{status.index}" value="#{procedimento.descricao}" validatorMessage="A descrição pode ter no máximo 70 caracteres.">
+                                                       <f:validateLength minimum="2" maximum="70" />
+                                                   </h:inputText>
+	                
+										           <small class="form-text text-danger">
+										               <h:message for="descricao#{status.index}"/>
+										           </small>
+										        </div>
+	                                        </div>
+		                                </div> 
+	                                </ui:repeat>    
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+	            </h:panelGroup>
 	        </ui:insert>
             
             <h:link value="Cancelar" outcome="consultas" class="btn btn-danger"><i class="fas fa-trash-alt ml-1"></i></h:link>

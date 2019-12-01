@@ -52,36 +52,50 @@
 						<span>Dashboard</span>
 					</h:link>
 				</li>
-				<li class="nav-item" id="itemConsultas">
-					<h:link class="nav-link" outcome="consultas"> 
-						<i class="fas fa-fw fa-clinic-medical"></i> 
-						<span>Consultas</span>
-					</h:link>
-				</li>
-				<li class="nav-item" id="itemPacientes">
-					<h:link class="nav-link" outcome="pacientes"> 
-						<i class="fas fa-fw fa-users"></i> 
-						<span>Pacientes</span>
-					</h:link>
-				</li>
-				<li class="nav-item" id="itemMedicos">
-					<h:link class="nav-link" outcome="medicos"> 
-						<i class="fas fa-fw fa-user-md"></i> 
-						<span>Médicos</span>
-					</h:link>
-				</li>
-				<li class="nav-item" id="itemFuncionarios">
-					<h:link class="nav-link" outcome="funcionarios"> 
-						<i class="fas fa-fw fa-user-cog"></i> 
-						<span>Funcionários</span>
-					</h:link>
-				</li>
-				<li class="nav-item" id="itemMoldes">
-					<h:link class="nav-link" outcome="moldes"> 
-						<i class="fas fa-fw fa-cogs"></i> 
-						<span>Moldes</span>
-					</h:link>
-				</li>
+
+                <li class="nav-item" id="itemConsultas">
+                    <h:link class="nav-link" outcome="consultas"> 
+                        <i class="fas fa-fw fa-clinic-medical"></i> 
+                        <span>Consultas</span>
+                    </h:link>
+                </li>
+
+				<h:panelGroup layout="block" rendered="#{(usuarioControlador.usuarioLogado['class'].simpleName eq 'Funcionario')}">
+					<li class="nav-item" id="itemPacientes">
+						<h:link class="nav-link" outcome="pacientes"> 
+							<i class="fas fa-fw fa-users"></i> 
+							<span>Pacientes</span>
+						</h:link>
+					</li>
+				</h:panelGroup>
+				<h:panelGroup layout="block" rendered="#{(usuarioControlador.usuarioLogado['class'].simpleName eq 'Funcionario') and (usuarioControlador.usuarioLogado.permissao eq 2)}">
+					<li class="nav-item" id="itemMedicos">
+						<h:link class="nav-link" outcome="medicos"> 
+							<i class="fas fa-fw fa-user-md"></i> 
+							<span>Médicos</span>
+						</h:link>
+					</li>
+					<li class="nav-item" id="itemFuncionarios">
+						<h:link class="nav-link" outcome="funcionarios"> 
+							<i class="fas fa-fw fa-user-cog"></i> 
+							<span>Funcionários</span>
+						</h:link>
+					</li>
+					<li class="nav-item" id="itemMoldes">
+						<h:link class="nav-link" outcome="moldes"> 
+							<i class="fas fa-fw fa-cogs"></i> 
+							<span>Moldes</span>
+						</h:link>
+					</li>
+				</h:panelGroup>
+				<h:panelGroup layout="block" rendered="#{(usuarioControlador.usuarioLogado['class'].simpleName eq 'Medico')}">
+                    <li class="nav-item" id="itemMoldes">
+                        <h:link class="nav-link" outcome="moldes"> 
+                            <i class="fas fa-fw fa-cogs"></i> 
+                            <span>Moldes</span>
+                        </h:link>
+                    </li>
+                </h:panelGroup>
 			</ul>
 	
 			<div id="content-wrapper">

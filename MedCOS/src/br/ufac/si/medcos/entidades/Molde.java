@@ -104,9 +104,9 @@ public class Molde
 		return perguntas;
 	}
 
-	public void adicionarPergunta(Pergunta p)
+	public void adicionarPergunta(String descricao, int tipo)
 	{
-		this.perguntas.add(p);
+		this.perguntas.add(new Pergunta(descricao, tipo));
 	}
 
 	public void removerPergunta(Pergunta p)
